@@ -1,0 +1,711 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="GetPositions">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetPositionsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPositionsResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPositionsByDepartmentID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="did" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPositionsByDepartmentIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPositionsByDepartmentIDResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPositionByID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="id" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPositionByIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPositionByIDResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddPosition">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="departmentid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="positionname" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddPositionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AddPositionResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateDepartment">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="departmentid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="positionname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="id" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateDepartmentResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UpdateDepartmentResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExistsId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="positionname" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExistsIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ExistsIdResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DelDepartmentByID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="id" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DelDepartmentByIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DelDepartmentByIDResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPositionidByName">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPositionidByNameResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPositionidByNameResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DataTable" nillable="true">
+        <s:complexType>
+          <s:sequence>
+            <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+            <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="boolean" type="s:boolean" />
+      <s:element name="string" nillable="true" type="s:string" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetPositionsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPositions" />
+  </wsdl:message>
+  <wsdl:message name="GetPositionsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPositionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPositionsByDepartmentIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPositionsByDepartmentID" />
+  </wsdl:message>
+  <wsdl:message name="GetPositionsByDepartmentIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPositionsByDepartmentIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPositionByIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPositionByID" />
+  </wsdl:message>
+  <wsdl:message name="GetPositionByIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPositionByIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddPositionSoapIn">
+    <wsdl:part name="parameters" element="tns:AddPosition" />
+  </wsdl:message>
+  <wsdl:message name="AddPositionSoapOut">
+    <wsdl:part name="parameters" element="tns:AddPositionResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateDepartmentSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateDepartment" />
+  </wsdl:message>
+  <wsdl:message name="UpdateDepartmentSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateDepartmentResponse" />
+  </wsdl:message>
+  <wsdl:message name="ExistsIdSoapIn">
+    <wsdl:part name="parameters" element="tns:ExistsId" />
+  </wsdl:message>
+  <wsdl:message name="ExistsIdSoapOut">
+    <wsdl:part name="parameters" element="tns:ExistsIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="DelDepartmentByIDSoapIn">
+    <wsdl:part name="parameters" element="tns:DelDepartmentByID" />
+  </wsdl:message>
+  <wsdl:message name="DelDepartmentByIDSoapOut">
+    <wsdl:part name="parameters" element="tns:DelDepartmentByIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPositionidByNameSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPositionidByName" />
+  </wsdl:message>
+  <wsdl:message name="GetPositionidByNameSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPositionidByNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPositionsHttpGetIn" />
+  <wsdl:message name="GetPositionsHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetPositionsByDepartmentIDHttpGetIn">
+    <wsdl:part name="did" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPositionsByDepartmentIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetPositionByIDHttpGetIn">
+    <wsdl:part name="id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPositionByIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="AddPositionHttpGetIn">
+    <wsdl:part name="departmentid" type="s:string" />
+    <wsdl:part name="positionname" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddPositionHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="UpdateDepartmentHttpGetIn">
+    <wsdl:part name="departmentid" type="s:string" />
+    <wsdl:part name="positionname" type="s:string" />
+    <wsdl:part name="id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateDepartmentHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="ExistsIdHttpGetIn">
+    <wsdl:part name="positionname" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ExistsIdHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="DelDepartmentByIDHttpGetIn">
+    <wsdl:part name="id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DelDepartmentByIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="GetPositionidByNameHttpGetIn">
+    <wsdl:part name="name" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPositionidByNameHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPositionsHttpPostIn" />
+  <wsdl:message name="GetPositionsHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetPositionsByDepartmentIDHttpPostIn">
+    <wsdl:part name="did" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPositionsByDepartmentIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetPositionByIDHttpPostIn">
+    <wsdl:part name="id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPositionByIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="AddPositionHttpPostIn">
+    <wsdl:part name="departmentid" type="s:string" />
+    <wsdl:part name="positionname" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddPositionHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="UpdateDepartmentHttpPostIn">
+    <wsdl:part name="departmentid" type="s:string" />
+    <wsdl:part name="positionname" type="s:string" />
+    <wsdl:part name="id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateDepartmentHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="ExistsIdHttpPostIn">
+    <wsdl:part name="positionname" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ExistsIdHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="DelDepartmentByIDHttpPostIn">
+    <wsdl:part name="id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DelDepartmentByIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="GetPositionidByNameHttpPostIn">
+    <wsdl:part name="name" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPositionidByNameHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:portType name="PositionOfServiceSoap">
+    <wsdl:operation name="GetPositions">
+      <wsdl:input message="tns:GetPositionsSoapIn" />
+      <wsdl:output message="tns:GetPositionsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPositionsByDepartmentID">
+      <wsdl:input message="tns:GetPositionsByDepartmentIDSoapIn" />
+      <wsdl:output message="tns:GetPositionsByDepartmentIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPositionByID">
+      <wsdl:input message="tns:GetPositionByIDSoapIn" />
+      <wsdl:output message="tns:GetPositionByIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddPosition">
+      <wsdl:input message="tns:AddPositionSoapIn" />
+      <wsdl:output message="tns:AddPositionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDepartment">
+      <wsdl:input message="tns:UpdateDepartmentSoapIn" />
+      <wsdl:output message="tns:UpdateDepartmentSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ExistsId">
+      <wsdl:input message="tns:ExistsIdSoapIn" />
+      <wsdl:output message="tns:ExistsIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DelDepartmentByID">
+      <wsdl:input message="tns:DelDepartmentByIDSoapIn" />
+      <wsdl:output message="tns:DelDepartmentByIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPositionidByName">
+      <wsdl:input message="tns:GetPositionidByNameSoapIn" />
+      <wsdl:output message="tns:GetPositionidByNameSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="PositionOfServiceHttpGet">
+    <wsdl:operation name="GetPositions">
+      <wsdl:input message="tns:GetPositionsHttpGetIn" />
+      <wsdl:output message="tns:GetPositionsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPositionsByDepartmentID">
+      <wsdl:input message="tns:GetPositionsByDepartmentIDHttpGetIn" />
+      <wsdl:output message="tns:GetPositionsByDepartmentIDHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPositionByID">
+      <wsdl:input message="tns:GetPositionByIDHttpGetIn" />
+      <wsdl:output message="tns:GetPositionByIDHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddPosition">
+      <wsdl:input message="tns:AddPositionHttpGetIn" />
+      <wsdl:output message="tns:AddPositionHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDepartment">
+      <wsdl:input message="tns:UpdateDepartmentHttpGetIn" />
+      <wsdl:output message="tns:UpdateDepartmentHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ExistsId">
+      <wsdl:input message="tns:ExistsIdHttpGetIn" />
+      <wsdl:output message="tns:ExistsIdHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DelDepartmentByID">
+      <wsdl:input message="tns:DelDepartmentByIDHttpGetIn" />
+      <wsdl:output message="tns:DelDepartmentByIDHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPositionidByName">
+      <wsdl:input message="tns:GetPositionidByNameHttpGetIn" />
+      <wsdl:output message="tns:GetPositionidByNameHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="PositionOfServiceHttpPost">
+    <wsdl:operation name="GetPositions">
+      <wsdl:input message="tns:GetPositionsHttpPostIn" />
+      <wsdl:output message="tns:GetPositionsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPositionsByDepartmentID">
+      <wsdl:input message="tns:GetPositionsByDepartmentIDHttpPostIn" />
+      <wsdl:output message="tns:GetPositionsByDepartmentIDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPositionByID">
+      <wsdl:input message="tns:GetPositionByIDHttpPostIn" />
+      <wsdl:output message="tns:GetPositionByIDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddPosition">
+      <wsdl:input message="tns:AddPositionHttpPostIn" />
+      <wsdl:output message="tns:AddPositionHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDepartment">
+      <wsdl:input message="tns:UpdateDepartmentHttpPostIn" />
+      <wsdl:output message="tns:UpdateDepartmentHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ExistsId">
+      <wsdl:input message="tns:ExistsIdHttpPostIn" />
+      <wsdl:output message="tns:ExistsIdHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DelDepartmentByID">
+      <wsdl:input message="tns:DelDepartmentByIDHttpPostIn" />
+      <wsdl:output message="tns:DelDepartmentByIDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPositionidByName">
+      <wsdl:input message="tns:GetPositionidByNameHttpPostIn" />
+      <wsdl:output message="tns:GetPositionidByNameHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="PositionOfServiceSoap" type="tns:PositionOfServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetPositions">
+      <soap:operation soapAction="http://tempuri.org/GetPositions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPositionsByDepartmentID">
+      <soap:operation soapAction="http://tempuri.org/GetPositionsByDepartmentID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPositionByID">
+      <soap:operation soapAction="http://tempuri.org/GetPositionByID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddPosition">
+      <soap:operation soapAction="http://tempuri.org/AddPosition" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDepartment">
+      <soap:operation soapAction="http://tempuri.org/UpdateDepartment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExistsId">
+      <soap:operation soapAction="http://tempuri.org/ExistsId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DelDepartmentByID">
+      <soap:operation soapAction="http://tempuri.org/DelDepartmentByID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPositionidByName">
+      <soap:operation soapAction="http://tempuri.org/GetPositionidByName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="PositionOfServiceSoap12" type="tns:PositionOfServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetPositions">
+      <soap12:operation soapAction="http://tempuri.org/GetPositions" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPositionsByDepartmentID">
+      <soap12:operation soapAction="http://tempuri.org/GetPositionsByDepartmentID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPositionByID">
+      <soap12:operation soapAction="http://tempuri.org/GetPositionByID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddPosition">
+      <soap12:operation soapAction="http://tempuri.org/AddPosition" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDepartment">
+      <soap12:operation soapAction="http://tempuri.org/UpdateDepartment" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExistsId">
+      <soap12:operation soapAction="http://tempuri.org/ExistsId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DelDepartmentByID">
+      <soap12:operation soapAction="http://tempuri.org/DelDepartmentByID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPositionidByName">
+      <soap12:operation soapAction="http://tempuri.org/GetPositionidByName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="PositionOfServiceHttpGet" type="tns:PositionOfServiceHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="GetPositions">
+      <http:operation location="/GetPositions" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPositionsByDepartmentID">
+      <http:operation location="/GetPositionsByDepartmentID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPositionByID">
+      <http:operation location="/GetPositionByID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddPosition">
+      <http:operation location="/AddPosition" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDepartment">
+      <http:operation location="/UpdateDepartment" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExistsId">
+      <http:operation location="/ExistsId" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DelDepartmentByID">
+      <http:operation location="/DelDepartmentByID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPositionidByName">
+      <http:operation location="/GetPositionidByName" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="PositionOfServiceHttpPost" type="tns:PositionOfServiceHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="GetPositions">
+      <http:operation location="/GetPositions" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPositionsByDepartmentID">
+      <http:operation location="/GetPositionsByDepartmentID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPositionByID">
+      <http:operation location="/GetPositionByID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddPosition">
+      <http:operation location="/AddPosition" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDepartment">
+      <http:operation location="/UpdateDepartment" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExistsId">
+      <http:operation location="/ExistsId" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DelDepartmentByID">
+      <http:operation location="/DelDepartmentByID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPositionidByName">
+      <http:operation location="/GetPositionidByName" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="PositionOfService">
+    <wsdl:port name="PositionOfServiceSoap" binding="tns:PositionOfServiceSoap">
+      <soap:address location="http://221.130.108.114:8082/auto4serp/PositionOfService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="PositionOfServiceSoap12" binding="tns:PositionOfServiceSoap12">
+      <soap12:address location="http://221.130.108.114:8082/auto4serp/PositionOfService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="PositionOfServiceHttpGet" binding="tns:PositionOfServiceHttpGet">
+      <http:address location="http://221.130.108.114:8082/auto4serp/PositionOfService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="PositionOfServiceHttpPost" binding="tns:PositionOfServiceHttpPost">
+      <http:address location="http://221.130.108.114:8082/auto4serp/PositionOfService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

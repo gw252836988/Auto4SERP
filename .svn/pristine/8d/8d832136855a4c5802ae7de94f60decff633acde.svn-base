@@ -1,0 +1,87 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using Bll;
+using Model;
+using Bll.Sale;
+using Comm;
+namespace Auto4SErp.Report
+{
+    public partial class frmRCarSAnalysis : ifrmBase
+    {
+        private ICarSale mICarSale;
+        public frmRCarSAnalysis()
+        {
+            InitializeComponent();
+            mICarSale = BllFactory.GetCarSaleBll();
+       
+        }
+
+        private void frmRCarSAnalysis_Load(object sender, EventArgs e)
+        {
+            for (int i = 0; i < 12; i++)
+            {
+                cmbMonth.Items.Add((i + 1) + "月");
+            }
+            int month = DateTime.Now.Month;
+            cmbMonth.SelectedIndex = month - 1;
+            SetTButtonPng(toolStrip1);
+            cmbYear.Text = DateTime.Now.Year.ToString();
+            DoQuery();
+        }
+
+        private void btnQuery_Click(object sender, EventArgs e)
+        {
+            DoQuery();
+        }
+        protected override void DoQuery()
+        {
+            int year = int.Parse(cmbYear.Text);
+            int month;
+            month = cmbMonth.SelectedIndex + 1;
+
+
+            DataTable dt = mICarSale.GetCarAnalysis(year, month,txtSaler.Text,txtCarModel.Text);
+            dgCarSale.AutoGenerateColumns = false;
+            dgCarSale.DataSource = dt;
+            lblSum.Text = "数量:" + dt.Rows.Count.ToString();
+        }
+
+        private void btnFind_Click(object sender, EventArgs e)
+        {
+            Point pt = this.Location;
+            Auto4SErp.Sale.frmDlgCarSuperSel frm = new Auto4SErp.Sale.frmDlgCarSuperSel();
+           // Point NewPoint = new Point(pt.X + this.Width, pt.Y - 50);
+           // frm.Location = NewPoint;
+            frm.Layer = 2;
+            frm.setTransferDelegate(new TransferDelegate(this.DoResultFromSuperSel));
+            frm.ShowDialogEx();
+        }
+        private void DoResultFromSuperSel(object obj)
+        {
+            string result = (string)obj;
+            string[] strtempl = result.Split('_');
+        
+            txtCarModel.Text = strtempl[2];
+
+        }
+
+        private void btnOut_Click(object sender, EventArgs e)
+        {
+            ExcelInAndOut eio = new ExcelInAndOut("");
+            //eio.Title = "维修查询";
+            DataTable dt = dgCarSale.DataSource as DataTable;
+           // Comm.ExcelInAndOut io = new Comm.ExcelInAndOut("");
+           // dt.
+           
+            //eio.DTOutTo(dt,dgCarSale);
+            eio.NewDTOutTo((DataGridView)dgCarSale);
+        }
+
+    }
+}

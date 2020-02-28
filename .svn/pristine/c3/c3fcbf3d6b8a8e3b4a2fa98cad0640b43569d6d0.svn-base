@@ -1,0 +1,265 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using Model;
+using Bll.Repair;
+using Comm;
+
+
+namespace Auto4SErp.Repair
+{
+    public partial class frmClaim : ifrmBase
+    {
+        private IRepair mIRepair;
+        private IClaim mIClaim;
+        private List<SqlElement> mLstE;
+        private bool isSelect;
+        private bool isOut = false;
+        public bool IsSelect
+        {
+            get { return isSelect; }
+            set { isSelect = value; }
+        }
+
+      
+
+        public frmClaim()
+        {
+            InitializeComponent();
+            mIRepair = Bll.BllFactory.GetRepariBll();
+            mIClaim = Bll.BllFactory.GetClaimBll();
+
+            tsbFirst = bindingNavigatorMoveFirstItem;
+            tsbLast = bindingNavigatorMoveLastItem;
+            tsbPre = bindingNavigatorMovePreviousItem;
+            tsbNext = bindingNavigatorMoveNextItem;
+            tstbPageCount = bindingNavigatorCountItem;
+            tstbPageCurrent = bindingNavigatorPositionItem;
+            tstbRecordCount = bindingNavigatorRecordCount;
+        }
+
+        private void btnOpen_Click(object sender, EventArgs e)
+        {
+            //frmDlgRepTakeSel frm = new frmDlgRepTakeSel();
+            //frm.IsClaim = true;
+            //frm.setTransferDelegate(delegate(object o)
+            //{
+            //    //string dh = (string)o;
+            //    //RepairM obj = mIRepair.GetRepairByDH(dh);
+            //    //AssinByMobile(obj.Mobile);
+            //    //AssinByPlate(obj.PlateNum);
+            //    //txtRepType.Text = obj.RepType;
+            //    //txtMobile.Text = obj.Mobile;
+            //    //GetDiscount(obj.Mobile);
+            //    //txtReceptTime.Text = obj.ReceptTime;
+            //    //txtDH.Text = obj.DH;
+            //    //RefreshRepairItem();
+            //    //RefreshRepairAcc();
+            //     string dh = (string)o;
+            //     CreateClaim(dh);
+            //});
+            //frm.ShowDialogEx();
+            mIRepair.ExtractClaimsFromReps();
+            DoQuery();
+        }
+
+        private void CreateClaim(string dh)
+        {
+
+            RepairM obj = mIRepair.GetRepairByDH(dh);
+            List<SqlElement> lst = new List<SqlElement>();
+            lst.Add(new SqlElement("RepDH", obj.DH, true));
+           //lst.Add(new SqlElement("Mobile", obj.Mobile, true));
+            lst.Add(new SqlElement("CustName", obj.CustName, true));
+            lst.Add(new SqlElement("Vin", obj.Vin, true));
+            lst.Add(new SqlElement("PlateNum", obj.PlateNum, true));
+            float itemamount = mIRepair.GetForeItemAmountOfDH(dh);
+            float accamount = mIRepair.GetForeAccAmountOfDH(dh);
+            lst.Add(new SqlElement("ItemAmount", itemamount.ToString(), false));
+            lst.Add(new SqlElement("AccAmount", accamount.ToString(), false));
+            lst.Add(new SqlElement("ClaimAmount", (itemamount + accamount).ToString(), false));
+         //   lst.Add(new SqlElement("AccAmount", accamount.ToString(), false));
+            lst.Add(new SqlElement("ReceptMan", obj.ReceptMan, true));
+            lst.Add(new SqlElement("AccountDate", obj.AccountTime, true));
+            lst.Add(new SqlElement("PostMan", Comm.LoginInfoShare.getInstance().UserName, true));
+            mIClaim.CreateClaimH(lst);
+            mIClaim.SetRepToClaim(obj.DH);
+            DoQuery();
+        }
+
+
+        protected override void DoQuery()
+        {
+            DataTable dt;
+            string strBegin = "";
+            string strEnd = "";
+            int tmpRecordCount;
+            int tmpPageCount;
+            //if (txtDate.SelectedIndex!=0)
+            //{
+                strBegin = datBegin.Value.ToShortDateString() + " 00:00:00";
+                strEnd = datEnd.Value.ToShortDateString() + " 23:59:59";
+
+           // }
+                int index = txtDate.SelectedIndex;
+            if (isSelect)
+            {
+                if (mLstE == null)
+                {
+                    mLstE = new List<SqlElement>();
+                }
+                 mLstE.Add(new SqlElement() { IsFuzzy = false, IsStr = false, Name = "Status", Value = "1" });
+                // mLstE.Add(new SqlElement() { IsFuzzy = false, IsStr = false, Name = "BillDH", Value = "NULL" });
+            }
+
+            if (isOut)
+            {
+                DataTable dtout = mIClaim.GetOutClaimsOfQuery(mLstE, cmbStatus.Text, index,strBegin, strEnd, isSelect);
+                Comm.ExcelInAndOut io = new Comm.ExcelInAndOut("");
+                io.DTOutTo(dtout);
+
+                isOut = false;
+                return;
+            }
+
+            dt = mIClaim.GetClaimsOfQuery( mLstE,cmbStatus.Text, index,strBegin,strEnd,isSelect ,mPageInfo.PageCurrent, mPageInfo.PageSize, out tmpRecordCount, out tmpPageCount);
+            DataTable  sumdt = mIClaim.GetSumAccessAmountOfClaims(mLstE, cmbStatus.Text,index, strBegin, strEnd, isSelect);
+            //lblSum.Text = sum.ToString();
+            if (sumdt.Rows.Count > 0)
+            {
+                lblSum.Text = sumdt.Rows[0][0].ToString();
+                lblaccsum.Text = sumdt.Rows[0][1].ToString();
+                lblitemsum.Text = sumdt.Rows[0][2].ToString();
+
+            }
+            else
+            {
+                lblSum.Text = "0";
+                lblaccsum.Text = "0";
+                lblitemsum.Text = "0";
+
+            }
+            DataToControl(dt);
+            mPageInfo.RecordCount = tmpRecordCount;
+            mPageInfo.PageCount = tmpPageCount;
+            SetRoleNavigatorState();
+        }
+
+
+        private void DataToControl(DataTable dt)
+        {
+            dgClaim.AutoGenerateColumns = false;
+            dgClaim.DataSource = dt;
+             
+
+        }
+        private void btnQuery_Click(object sender, EventArgs e)
+        {
+            mLstE = CreateMedialSqlElement(AssginToListOfQuery());
+            DoQuery();
+        }
+
+        private void frmClaim_Load(object sender, EventArgs e)
+        {
+            mLstControls.Add(txtCustName);
+            mLstControls.Add(txtRepDH);
+            mLstControls.Add(txtPlateNum);
+            mLstControls.Add(txtVin);
+            if (isSelect)
+            {
+                btnOpen.Visible = false;
+                btnModify.Visible = false;
+                chbSel.Visible = true;
+                btnSelect.Visible = true;
+                btnAllSelect.Visible = true;
+            }
+            DateTime dtNow = DateTime.Now;
+            datBegin.Value = DateTime.Parse(dtNow.Year + "-" + dtNow.Month + "-01");
+            DoQuery();
+            SetTButtonPng(toolStrip1);
+        }
+
+        private void btnModify_Click(object sender, EventArgs e)
+        {
+            if (dgClaim.SelectedRows.Count != 0)
+            {
+                frmDlgClaimEdit frm = new frmDlgClaimEdit();
+                DataGridViewRow seldr = dgClaim.SelectedRows[0];
+                string id = seldr.Cells[3].Value.ToString();
+                frm.DH = id;
+                frm.setRefreshDelegate(delegate(bool isR)
+                {
+                    DoQuery();
+
+                });
+                frm.ShowDialogEx();
+
+            }
+        }
+
+        private void btnSelect_Click(object sender, EventArgs e)
+        {
+            txtRepDH.Focus();
+            List<string> mlst = new List<string>();
+            for (int i = 0; i < dgClaim.Rows.Count;i++)
+            {
+                DataGridViewCheckBoxCell chkcell = dgClaim[0, i] as DataGridViewCheckBoxCell;
+                
+                if (Convert.ToBoolean(chkcell.FormattedValue) == true)
+                {
+                   
+                    mlst.Add(dgClaim.Rows[i].Cells[3].Value.ToString());
+                }
+            }
+
+            if (mlst.Count > 0)
+            {
+                m_del(mlst);
+                this.Close();
+            }
+          
+        }
+
+        private void btnAllSelect_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < dgClaim.Rows.Count; i++)
+            {
+                DataGridViewCheckBoxCell chkcell = dgClaim[0, i] as DataGridViewCheckBoxCell;
+                chkcell.Value = true;
+                //if (Convert.ToBoolean(chkcell.FormattedValue) == true)
+                //{
+
+                //    mlst.Add(dgClaim.Rows[i].Cells[3].Value.ToString());
+                //}
+            }
+        }
+
+        private void btnOut_Click(object sender, EventArgs e)
+        {
+            isOut = true;
+            DoQuery();
+        }
+
+        private void btnOPen1_Click(object sender, EventArgs e)
+        {
+            
+             if (dgClaim.SelectedRows.Count != 0)
+            {
+                DataGridViewRow seldr = dgClaim.SelectedRows[0];
+               // string describe = seldr.Cells[4].Value.ToString();
+                string dh = seldr.Cells["RepDH"].Value.ToString().Trim();
+
+                frmRepair frm = new frmRepair();
+                frm.DH = dh;
+                frm.ShowDialogEx();
+
+
+             }
+        }
+    }
+}

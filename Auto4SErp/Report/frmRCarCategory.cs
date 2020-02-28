@@ -1,0 +1,61 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using Bll;
+using Model;
+using Bll.Sale;
+using Comm;
+namespace Auto4SErp.Report
+{
+    public partial class frmRCarCategory : ifrmBase
+    {
+        private ICarSale mICarSale;
+        public frmRCarCategory()
+        {
+            InitializeComponent();
+            mICarSale = BllFactory.GetCarSaleBll();
+        }
+
+        private void frmRCarCategory_Load(object sender, EventArgs e)
+        {
+            cmbYear.Text = DateTime.Now.Year.ToString();
+            SetTButtonPng(toolStrip1);
+            AddYearsToCmb(cmbYear);
+        }
+
+        private void btnQuery_Click(object sender, EventArgs e)
+        {
+            DoQuery();
+        }
+
+        protected override void DoQuery()
+        {
+            int year = int.Parse(cmbYear.Text);
+            string items = "";
+
+            // if (chbCarSer.Checked == true) items = items + "CarSer,";
+            if (chbCarModel.Checked == true) items = items + "CarModel,";
+            if (chbSaler.Checked == true) items = items + "SaleMan,";
+
+            if (items.Length > 0)
+                items = items.Remove(items.Length - 1);
+
+            DataTable dt = mICarSale.GetCarsByCategory(year, items);
+
+            dgCarSale.DataSource = dt;
+        }
+
+        private void btnOut_Click(object sender, EventArgs e)
+        {
+            ExcelInAndOut eio = new ExcelInAndOut("");
+            //eio.Title = "维修查询";
+
+            eio.NewDTOutTo((DataGridView)dgCarSale);
+        }
+    }
+}

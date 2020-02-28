@@ -1,0 +1,141 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using Bll;
+using Bll.Repair;
+using Auto4SErp.Repair;
+using Comm;
+namespace Auto4SErp.Report
+{
+    public partial class frmRRepReport : ifrmBase
+    {
+        private IRepair mIRepair;
+        public frmRRepReport()
+        {
+            InitializeComponent();
+            mIRepair = BllFactory.GetRepariBll();
+        }
+
+        private void frmRRepReport_Load(object sender, EventArgs e)
+        {
+            for (int i = 0; i < 12; i++)
+            {
+                cmbMonth.Items.Add((i + 1) + "月");
+            }
+            int month = DateTime.Now.Month;
+            cmbMonth.SelectedIndex = month - 1;
+            SetTButtonPng(toolStrip1);
+            cmbYear.Text = DateTime.Now.Year.ToString();
+            cmbRepChildType.Items.Add("一般维修");
+            cmbRepChildType.Items.Add("事故维修");
+            cmbRepChildType.Items.Add("总成大修");
+            cmbRepChildType.Items.Add("免费保养");
+            cmbRepChildType.Items.Add("常规保养");
+            cmbRepChildType.Items.Add("钣喷");
+            cmbRepChildType.Items.Add("索赔");
+            cmbRepChildType.Items.Add("PDI");
+            cmbRepChildType.Items.Add("免费检测");
+            DoQuery();
+            //if (Comm.LoginInfoShare.getInstance().PositionName == "销售顾问")
+        }
+
+
+        protected override void DoQuery()
+        {
+            int year =0;
+            int month;
+            string strBegin = "";
+            string strEnd = "";
+            if (chbIsDate.Checked)
+            {
+                strBegin = datBegin.Value.ToShortDateString() + " 00:00:00";
+                strEnd = datEnd.Value.ToShortDateString() + " 23:59:59";
+
+            }
+            else
+            {
+                year = int.Parse(cmbYear.Text);
+            }
+
+            month = cmbMonth.SelectedIndex + 1;
+            DataTable dt;
+
+            dt = mIRepair.GetRepProfits(strBegin, strEnd, year, month, chbIsSG.Checked,cmbRepChildType.Text ,txtReceptMan.Text);
+            dgRepair.DataSource = dt;
+           // dtSum = mIRepair.GetSumOfRepProfits(strBegin, strEnd, year, month,chbIsSG.Checked);
+            if (dt.Rows.Count > 0)
+            {
+
+               
+                decimal rate = 0;
+                decimal gamout = 0;
+                decimal ItemProfit = 0;
+                decimal accprofit = 0;
+                decimal GInprice = 0;
+                decimal GProfit = 0;
+
+                //rate = dt.AsEnumerable().Sum(r => decimal.Parse(Comm.ElseUtil.ReturnZero(r["PRate"].ToString())));
+                //rate = rate / (dt.Rows.Count);
+                //rate = Math.Round(rate,2);
+
+                gamout = dt.AsEnumerable().Sum(r => decimal.Parse(Comm.ElseUtil.ReturnZero(r["gamount"].ToString())));
+                ItemProfit = dt.AsEnumerable().Sum(r => decimal.Parse(Comm.ElseUtil.ReturnZero(r["ItemProfit"].ToString())));
+                accprofit = dt.AsEnumerable().Sum(r => decimal.Parse(Comm.ElseUtil.ReturnZero(r["accprofit"].ToString())));
+                GInprice = dt.AsEnumerable().Sum(r => decimal.Parse(Comm.ElseUtil.ReturnZero(r["GInprice"].ToString())));
+                GProfit = dt.AsEnumerable().Sum(r => decimal.Parse(Comm.ElseUtil.ReturnZero(r["GProfit"].ToString())));
+
+
+                rate = (gamout - GInprice) / gamout;
+                rate = Math.Round(rate, 2);
+                lblSum.Text = string.Format("结算金额合计:{4},项目费合计:{0},材料费合计:{1},材料成本合计:{2},利润合计:{3},毛利率:{5}", ItemProfit, accprofit, GInprice, GProfit, gamout,rate);
+
+            }
+
+
+
+        }
+
+        private void tbtnQuery_Click(object sender, EventArgs e)
+        {
+            DoQuery();
+        }
+
+        private void dgRepair_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            DrawGridID(e);
+        }
+
+        private void tbtnOpen_Click(object sender, EventArgs e)
+        {
+            if (dgRepair.SelectedRows.Count != 0)
+            {
+                DataGridViewRow seldr = dgRepair.SelectedRows[0];
+               
+                string dh = seldr.Cells["DH"].Value.ToString().Trim();
+          
+            
+                frmRepair frm = new frmRepair();
+                frm.DH = dh;
+                frm.ShowDialogEx();
+                 
+            }
+        }
+
+        private void btnOut_Click(object sender, EventArgs e)
+        {
+            ExcelInAndOut eio = new ExcelInAndOut("");
+            //eio.Title = "维修查询";
+            DataTable dt = dgRepair.DataSource as DataTable;
+            // Comm.ExcelInAndOut io = new Comm.ExcelInAndOut("");
+            // dt.
+
+            //eio.DTOutTo(dt,dgCarSale);
+            eio.NewDTOutTo((DataGridView)dgRepair);
+        }
+    }
+}

@@ -1,0 +1,34 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Data;
+using Model;
+namespace Bll
+{
+    public interface IFinance
+    {
+     
+        DataTable GetDetailsOfAmount(string dh);
+        bool AddAmount(Account obj);
+        DataTable GetAccounts(string strBegin, string strEnd, List<SqlElement> list, int dateType, int PageIndex, int PageSize, out int RecordCount, out int PageCount);
+        void AcceptAmount(Account obj);
+        Account GetAmountByID(int id);
+        void  DelAccount(string dh,int accountid,double amount,string type);
+        void RefundAmount(int id, string describes);
+        string IsCanRefund(string describes, string dh, int id);
+        void AfterRefund(int id);
+        void DelAccountOfRep(string dh);
+        DataTable  GetAccountStatistics(string items,List<SqlElement> lstE,string begindate, string enddate,int intype);
+        void AddP2PInfo(P2PUserInfo obj);
+        DataTable GetP2PAccounts(string strBegin, string strEnd, string mobile);
+        bool DeductPreRecv(string mobile,string custname, double prerecv);
+        bool AddAccountOfRec(Account obj);
+        void AddPreRecv(string mobile, string custname, Double amout);
+        decimal GetPreRecv(string mobile, string custname);
+        DataTable GetOutToAccounts(string strBegin, string strEnd, List<SqlElement> list, int dateType);
+        void UpdateInvoice(int id, string type, string num, double amount);
+     
+    }
+}

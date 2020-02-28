@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="gb2312"?>
+<AutoUpdater>
+  <description>Application autoUpdate</description>
+  <Updater>
+	<Url>http://172.16.1.2:8082/4SERPUpdate/</Url>
+	<LastUpdateTime>2005-09-05</LastUpdateTime>
+  </Updater>
+  <Application applicationId="xc">
+    <EntryPoint>Auto4SErp.exe</EntryPoint>
+    <Location>.</Location>
+	<Version>1.0.0.0</Version>
+  </Application>
+  <Files>
+	  <File Ver="1.0.0.3" Name="Auto4SErp.exe" />
+	  <File Ver="1.0.0.2" Name="DBUtil.dll" />
+          <File Ver="1.0.0.2" Name="Comm.dll" />
+          <File Ver="1.0.0.2" Name="Bll.dll" />
+          <File Ver="1.0.0.1" Name="Model.dll" />
+          <File Ver="1.0.0.1" Name="11.txt" />
+  </Files>
+</AutoUpdater>

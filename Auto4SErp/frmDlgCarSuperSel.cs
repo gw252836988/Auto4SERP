@@ -1,0 +1,150 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using Bll;
+using DevComponents.AdvTree;
+namespace Auto4SErp
+{
+    public partial class frmDlgCarSuperSel : ifrmBase
+    {
+
+
+        private int layer;
+
+        public int Layer
+        {
+            get { return layer; }
+            set { layer = value; }
+        }
+
+        private ICarDoc mICarDoc;
+
+        public frmDlgCarSuperSel()
+        {
+            InitializeComponent();
+        }
+
+        private void frmDlgCarSuperSel_Load(object sender, EventArgs e)
+        {
+            mICarDoc = BllFactory.GetCarDocBll();
+            LoadNodes();
+
+            switch(layer)
+            {
+                case 0:
+                    this.Text = "请选择车辆品牌";
+                    break;
+                case 1:
+                    this.Text = "请选择车系";
+                    break;
+                case 2:
+                    this.Text = "请选择车型";
+                    break;
+                default:
+                    break;
+
+            }
+        }
+
+
+        private void LoadNodes()
+        {
+
+
+            DataTable dtBrands = mICarDoc.GetCarBrands();
+            DataTable dtCarSers=null;
+            DataTable dtCarModels=null;
+            if(layer>0)
+                dtCarSers = mICarDoc.GetCarSers();
+            if(layer>1)
+                dtCarModels = mICarDoc.GetCarModels();
+
+
+            //DataView dvCarSers=dtCarSers.DefaultView;
+            foreach (DataRow drBrand in dtBrands.Rows)
+            {
+                Node nodeBrand = CreateNode(drBrand[1].ToString(), "brand_" + drBrand[0].ToString());
+
+                treeCarDoc.Nodes.Add(nodeBrand);
+
+
+
+                DataView dvCarSers = new DataView(dtCarSers);
+                dvCarSers.RowFilter = "carbrand=" + drBrand[0].ToString();
+                if (layer > 0)
+                {
+                    for (int i = 0; i < dvCarSers.Count; i++)
+                    {
+                        DataRowView drCarSer = dvCarSers[i];
+                        Node nodeSer = CreateNode(drCarSer["carser"].ToString(), "ser_" + drCarSer[0].ToString());
+                        nodeBrand.Nodes.Add(nodeSer);
+
+                        if (layer > 1)
+                        {
+                            DataView dvCarModels = new DataView(dtCarModels);
+                            dvCarModels.RowFilter = "carser=" + drCarSer[0].ToString();
+
+                            for (int j = 0; j < dvCarModels.Count; j++)
+                            {
+                                DataRowView drCarModel = dvCarModels[j];
+                                Node nodeModel = CreateNode(drCarModel["carmodel"].ToString(), "model_" + drCarModel[0].ToString());
+                                nodeSer.Nodes.Add(nodeModel);
+
+                            }
+                        }
+                    }
+                }
+            }
+            treeCarDoc.ExpandAll();
+
+        }
+
+
+        private Node CreateNode(string text, string key)
+        {
+
+            Node node = new Node();
+            node.Text = text;
+            node.DataKeyString = key;
+            return node;
+        }
+
+        private void treeCarDoc_NodeDoubleClick(object sender, TreeNodeMouseEventArgs e)
+        {
+            string[] strtmpl=e.Node.DataKeyString.Split('_');
+            if (layer == 0)
+            {
+                if (strtmpl[0] == "brand")
+                {
+                    m_del(e.Node.DataKeyString + "_" + e.Node.Text);
+                    this.Close();
+                }
+            }
+
+            if (layer == 1)
+            {
+                if (strtmpl[0] == "ser")
+                {
+                    m_del(e.Node.DataKeyString + "_" + e.Node.Text);
+                    this.Close();
+                }
+            }
+
+            if (layer == 2)
+            {
+                if (strtmpl[0] == "model")
+                {
+                    m_del(e.Node.DataKeyString + "_" + e.Node.Text);
+                    this.Close();
+                }
+            }
+
+        }
+    }
+}

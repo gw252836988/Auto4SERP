@@ -1,0 +1,460 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using Bll.Repair;
+using Model;
+using Bll;
+using Comm;
+namespace Auto4SErp.Repair
+{
+    public partial class frmAccIn : ifrmBase
+    {
+        private IAccessory mIAccessory;
+        private DataTable mDicOfAccInD;
+        private IAccessoryIn mIAccessoryIn;
+        private IExtend mIExtend;
+        private string dH;
+        private string mOperateMan = "";
+        public string DH
+        {
+            get { return dH; }
+            set { dH = value; }
+        }
+
+        public frmAccIn()
+        {
+            mIAccessory = BllFactory.GetAccessoryBll();
+            mIAccessoryIn = BllFactory.GetAccessoryInBll();
+            mIExtend = BllFactory.GetExtendBll();
+            InitializeComponent();
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            txtDH.Focus();
+            AccInH obj = AssginToModel();
+            if (obj != null)
+            {
+                obj.DH = txtDH.Text;
+                //mIAccessoryIn.UpdateAccIn(obj);
+            }
+            else
+                return;
+
+            if (string.IsNullOrEmpty(txtDH.Text))
+            {
+                obj.OperatorMan = LoginInfoShare.getInstance().UserName;
+                txtDH.Text = mIAccessoryIn.GetDHOfAddAccIn(obj);
+                txtCreateDate.Text = DateTime.Now.ToString();
+            }
+            else
+            {
+                 obj.Status = -1;
+                 obj.DH = txtDH.Text;
+                 obj.Amount = decimal.Parse(lblCount.Text);
+                 obj.GJE = decimal.Parse(lblsum.Text);
+                 mIAccessoryIn.UpdateAccIn(obj);
+                 
+               
+            }
+            IsModify = true;
+          
+        }
+
+        private AccInH AssginToModel()
+        {
+
+            List<Pair> lstPairs = AssginToList();
+            if (mFrmAssist.ValidIn(lstPairs)) return null;
+
+
+            AccInH entity = FrmAssist.PopulateEntityFromCollection<AccInH>(null, lstPairs);
+            return entity;
+        }
+
+        private void frmAccIn_Load(object sender, EventArgs e)
+        {
+            mLstControls.Add(txtDH);
+            mLstControls.Add(txtCreateDate);
+            mLstControls.Add(cmbInType);
+            mLstControls.Add(cmbSupplyUnit);
+            mLstControls.Add(cmbHouseName);
+            //mLstControls.Add(cmbAccountType);
+
+
+            LoadExtendContents("入库方式", cmbInType);
+            LoadExtendContents("仓库名称", cmbHouseName);
+            DataTable dt;
+            
+
+            dt = mIExtend.GetSupplyUnits("售后");
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                cmbSupplyUnit.Items.Add(dt.Rows[i][1].ToString());
+            }
+
+
+
+            SetStatus(0);
+            if (!string.IsNullOrEmpty(dH))
+            {
+                AccInH obj = mIAccessoryIn.GetAccInHByDH(dH);
+                if (obj != null)
+                {
+
+                    AssginModelToControl<AccInH>(obj);
+                    mOperateMan = obj.OperatorMan;
+                    SetStatus(obj.Status);
+                    RefreshAccessoryD();
+                }
+
+            }
+            SetTButtonPng(toolStrip1);
+        }
+
+        private void dgAccessory_CellValidated(object sender, DataGridViewCellEventArgs e)
+        {
+            //string str=dgAccessory.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+            //dgAccessory.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = "";
+          
+        }
+
+        private void AddToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (txtDH.Text != "")
+            {
+                frmAccessory frm = new frmAccessory();
+                frm.IsSelect = true;
+                frm.setTransferDelegate(delegate(object o)
+                {
+                    string result = (string)o;
+                    string[] strlst = result.Split(',');
+
+                    AccInH obj = mIAccessoryIn.GetAccInHByDH(txtDH.Text);
+                    if (obj.Status == 1)
+                    {
+                        ShowMessage("该入库单已入库，无法再进行操作");
+                        return;
+                    }
+                    mIAccessoryIn.AddAccInD(txtDH.Text, strlst[0],strlst[2]);
+                    RefreshAccessoryD();
+
+                });
+                frm.ShowDialogEx();
+               
+
+
+            }
+             
+             
+        }
+
+        private void RefreshAccessoryD()
+        {
+            DataTable dt = mIAccessoryIn.GetAccInDs(txtDH.Text);
+            FrmAssist.UpdateColumns(ref mDicOfAccInD,dt,16);
+            dgAccessory.DataSource = dt;
+            CalulateSum(dt);
+            dgAccessory.Columns[0].Visible = false;
+            //dgAccessory.Columns[1].ReadOnly = true;
+            //dgAccessory.Columns[2].ReadOnly = true;
+            //dgAccessory.Columns[5].ReadOnly = true;
+            dgAccessory.ReadOnly = true;
+       
+        }
+
+
+        private void CalulateSum(DataTable dt)
+        {
+            decimal d = dt.AsEnumerable().Sum(r => (decimal.Parse(r[3].ToString()) * decimal.Parse(r[4].ToString())));
+            //d = d + decimal.Parse("0.005");
+            //d = Math.Round(d, 3);
+            decimal c = dt.AsEnumerable().Sum(r => (decimal.Parse(r[3].ToString())));
+            lblsum.Text = d.ToString();
+            lblCount.Text = c.ToString();
+
+
+        }
+        private void dgAccessory_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+
+            //dgAccessory.Rows[e.RowIndex].ErrorText = "";
+            
+
+            //if (dgAccessory.Rows[e.RowIndex].IsNewRow) { return; }
+
+            //if (e.ColumnIndex == 3 || e.ColumnIndex == 4)
+            //{
+            //    double newDouble;
+            //    if (!double.TryParse(e.FormattedValue.ToString(),
+            //       out newDouble) || newDouble < 0)
+            //    {
+            //        e.Cancel = true;
+            //        dgAccessory.Rows[e.RowIndex].ErrorText = "the value must be a non-negative integer";
+            //    }
+
+
+            //}
+        }
+
+        private void dgAccessory_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+           // if (dgAccessory.Rows[e.RowIndex].IsNewRow) { return; }
+
+            //if (e.ColumnIndex == 3 || e.ColumnIndex == 4)
+            //{
+
+            //    if (dgAccessory.Rows[e.RowIndex].Cells[0].Value != null)
+            //    {
+            //        mIAccessoryIn.UpdateAccInD(txtDH.Text, dgAccessory.Rows[e.RowIndex].Cells[0].Value.ToString(), dgAccessory.Rows[e.RowIndex].Cells[3].Value.ToString(), dgAccessory.Rows[e.RowIndex].Cells[4].Value.ToString());
+            //        CalulateSum(dgAccessory.DataSource as DataTable);
+            //    }
+            //}
+       }
+
+        private void btnIn_Click(object sender, EventArgs e)
+        {
+            txtDH.Focus();
+            if (txtDH.Text != "")
+            {
+                if (dgAccessory.Rows.Count > 0)
+                {
+                    AccInH obj = AssginToModel();
+                   
+                    if (obj != null)
+                    {
+                        obj.DH = txtDH.Text;
+                        obj.Amount = decimal.Parse(lblCount.Text);
+                        obj.GJE = decimal.Parse(lblsum.Text);
+                        mIAccessoryIn.UpdateAccIn(obj);
+                        mIAccessory.InAcc(txtDH.Text);
+                        SetStatus(1);
+                        IsModify = true;
+                    }
+                }
+                
+            }
+        }
+
+        private void BackToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (txtDH.Text != "")
+            {
+                if (mIAccessory.BackInAcc(txtDH.Text) == 1)
+                {
+                    ShowMessage("无法回滚");
+                    return;
+                }
+                IsModify = true;
+                SetStatus(0);
+            }
+        }
+
+        private void SetStatus(int i)
+        {
+            if (i == 0)
+            {
+                btnIn.Enabled = true;
+                dgAccessory.ReadOnly = false;
+                BackToolStripMenuItem.Enabled = false;
+                cmenuAccessory.Enabled = true;
+
+
+            }
+            else if(i==1)
+            {
+                btnIn.Enabled = false;
+                dgAccessory.ReadOnly = true;
+                BackToolStripMenuItem.Enabled = true;
+                cmenuAccessory.Enabled = false;
+
+
+            }
+
+
+
+        }
+
+        private void DelAccInToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (txtDH.Text != "")
+            {
+                if (mIAccessoryIn.DelAccInH(txtDH.Text) == 1)
+                {
+
+                    ShowMessage("存在入库记录，无法删除该单据");
+                    return;
+                }
+                IsModify = true;
+                this.Close();
+
+            }
+        }
+
+        private void btnBatchIn_Click(object sender, EventArgs e)
+        {
+            if (txtDH.Text != "")
+            {
+                AccInH obj = AssginToModel();
+                if (obj != null)
+                {
+                    obj.DH = txtDH.Text;
+
+                    obj.Status = -1;
+                    mIAccessoryIn.UpdateAccIn(obj);
+                    frmBatchIn frm = new frmBatchIn();
+                    frm.TableName = "AccessoryIn";
+                    frm.Append = txtDH.Text +"," + cmbHouseName.Text ;
+                    frm.setRefreshDelegate(delegate(bool isr)
+                    {
+                        RefreshAccessoryD();
+                    });
+                    frm.ShowDialogEx();
+
+                }
+            }
+            else
+                ShowMessage("请先保存生成单号");
+           
+        }
+
+        private void DelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dgAccessory.SelectedCells.Count != 0)
+            {
+                DataGridViewCell cell = dgAccessory.SelectedCells[0];
+                int rowindex = cell.RowIndex;
+                string xh = dgAccessory.Rows[rowindex].Cells[0].Value.ToString();
+                mIAccessoryIn.DelAccInD(dH,xh);
+                RefreshAccessoryD();
+
+
+            }
+        }
+
+
+        private void AddXHTODt(DataTable dt)
+        {
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                dt.Rows[i][0] = i+1;
+
+            }
+
+
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtDH.Text)) return;
+            DataTable dt = mIAccessoryIn.GetAccInDs(txtDH.Text);
+            //dt.Columns.Add("XH", typeof(int));
+           // AddXHTODt(dt);
+            if (dt.Rows.Count <= 0)
+            {
+                ShowMessage("没有领料信息");
+                return;
+
+            }
+            DataTable dtAppend = new DataTable();
+            
+            dtAppend.Columns.Add("DH", typeof(string));
+            dtAppend.Columns.Add("DateTime", typeof(string));
+            dtAppend.Columns.Add("SupplyUnit", typeof(string));
+            dtAppend.Columns.Add("HouseName", typeof(string));
+            dtAppend.Columns.Add("OperateMan", typeof(string));
+            dtAppend.Columns.Add("TotalJE", typeof(string));
+            DataRow dr = dtAppend.NewRow();
+            dr[0] = txtDH.Text;
+            dr[1] = txtCreateDate.Text;
+            dr[2] = cmbSupplyUnit.Text;
+            dr[3] = cmbHouseName.Text;
+            dr[4] = mOperateMan;
+            dr[5] = lblsum.Text;
+            dtAppend.Rows.Add(dr);
+
+            Dictionary<string, DataTable> dic = new Dictionary<string, DataTable>();
+            AddXHTODt(dt);
+            dic.Add("RepAccessory", dt);
+            dic.Add("Append", dtAppend);
+        
+
+            frmPrint frm = new frmPrint();
+            //frm.DataSource = dt;
+            //frm.SourceName = "RepAccessory";
+            frm.DicTable = dic;
+            frm.ReportFile = "AccIn.rdlc";
+            frm.ShowDialog();
+        }
+
+        private void btnCustomerFind_Click(object sender, EventArgs e)
+        {
+            frmSupplyUnit frm = new frmSupplyUnit();
+            frm.ShowDialogEx();
+
+        }
+
+        private void dgAccessory_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            DrawGridID(e);
+        }
+
+        private void frmAccIn_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+
+        private void ModifyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dgAccessory.SelectedCells.Count != 0)
+            {
+                DataGridViewCell cell = dgAccessory.SelectedCells[0];
+                int rowindex = cell.RowIndex;
+                string xh = dgAccessory.Rows[rowindex].Cells[0].Value.ToString();
+                double amount = double.Parse(dgAccessory.Rows[rowindex].Cells[3].Value.ToString());
+                double inprice = double.Parse(dgAccessory.Rows[rowindex].Cells[4].Value.ToString());
+                frmDlgAccIn frm = new frmDlgAccIn();
+                frm.Amount = amount;
+                frm.InPrice = inprice;
+                string[] strlist=null;
+
+                if (xh == "-1")
+                {
+
+                    ShowMessage("导入的数据不能直接修改，请在导入文件中修改");
+                    return;
+
+                }
+                frm.setTransferDelegate(d =>
+                {
+                    strlist = d.ToString().Split(',');
+                    amount = double.Parse(strlist[0]);
+                    inprice = double.Parse(strlist[1]);
+                });
+                frm.ShowDialogEx();
+
+                if (strlist!=null)
+                {
+
+                    AccInH obj = mIAccessoryIn.GetAccInHByDH(txtDH.Text);
+                    if (obj.Status == 1)
+                    {
+                        ShowMessage("该入库单已入库，无法再进行操作");
+                        return;
+                    }
+                  
+                    mIAccessoryIn.UpdateAccInD(txtDH.Text, xh, amount.ToString(), inprice.ToString());
+                    RefreshAccessoryD();
+                }
+
+
+            }
+        }
+    }
+}

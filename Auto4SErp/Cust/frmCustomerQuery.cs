@@ -1,0 +1,499 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Bll;
+using Model;
+using System.Windows.Forms;
+namespace Auto4SErp.Cust
+{
+    public partial class frmCustomerQuery : ifrmBase
+    {
+
+        private ICustomer mICustomer;
+        private DataTable mDtDicOfCustomer = null;
+        private List<SqlElement> mSqlLst;
+        private string mobile;
+        private bool isRepair = false;
+        private List<SqlElement> mSqlLst1;
+        private bool mIsVip = false;
+
+        private bool mIsRefreshCar;
+        public bool IsRepair
+        {
+            get { return isRepair; }
+            set { isRepair = value; }
+        }
+        public string Mobile
+        {
+            get { return mobile; }
+            set { mobile = value; }
+        }
+        private bool isSelect = false;
+
+        public bool IsSelect
+        {
+            get { return isSelect; }
+            set { isSelect = value; }
+        }
+
+
+
+        public frmCustomerQuery()
+        {
+
+            InitializeComponent();
+            mICustomer = BllFactory.GetCustomerBll();
+
+            tsbFirst = bindingNavigatorMoveFirstItem;
+            tsbLast = bindingNavigatorMoveLastItem;
+            tsbPre = bindingNavigatorMovePreviousItem;
+            tsbNext = bindingNavigatorMoveNextItem;
+            tstbPageCount = bindingNavigatorCountItem;
+            tstbPageCurrent = bindingNavigatorPositionItem;
+            tstbRecordCount = bindingNavigatorRecordCount;
+        }
+
+        private void tbtnQuery_Click(object sender, EventArgs e)
+        {
+            frmDlgCustomerQuery frm = new frmDlgCustomerQuery();
+
+            frm.setTransferDelegate(delegate(object o)
+            {
+
+                mSqlLst = (List<SqlElement>)o;
+                //DataTable dtDest;
+                //if (mSqlLst.Count > 0)
+                //{
+
+                //    dtDest = mICustomer.GetCustomersByQuery(mSqlLst);
+
+
+                // // dgCustomer.Columns[0].Visible = false;
+                //}
+                //else
+                //{
+                //    dtDest = mICustomer.GetCustomersDefault();
+
+                //} 
+                //FrmAssist.UpdateColumns(mDtDicOfCustomer, dtDest, 2);
+                //dgCustomer.DataSource = dtDest;
+                mIsRefreshCar = true;
+                DoQuery();
+
+            });
+            frm.ShowDialogEx();
+        }
+
+        private void tbtnSel_Click(object sender, EventArgs e)
+        {
+            SelectCustomer();
+        }
+
+        private void dgCustomer_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (isSelect)
+                SelectCustomer();
+        }
+
+        private void SelectCustomer()
+        {
+            if (dgCustomer.SelectedRows.Count != 0)
+            {
+                string strRuturn;
+                DataGridViewRow seldr = dgCustomer.SelectedRows[0];
+                string strmobile = seldr.Cells[1].Value.ToString();
+                strRuturn = strmobile;
+                string strplate = "";
+                if (isRepair)
+                {
+
+                    if (dgCar.SelectedRows.Count != 0)
+                    {
+                        DataGridViewRow seldr1 = dgCar.SelectedRows[0];
+                        strplate = seldr1.Cells[2].Value.ToString();
+                    }
+                    strRuturn = strRuturn + "," + strplate;
+
+                }
+
+
+                //if (string.IsNullOrEmpty(strplate))
+                //{
+                //    ShowMessage("该客户没有选择车牌号");
+                //    return;
+
+                //}
+                if (m_del != null)
+                {
+                    m_del(strRuturn);
+                }
+
+                this.Close();
+            }
+
+        }
+
+
+
+        private void cMenuCustomer_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            if (dgCustomer.SelectedRows.Count != 0)
+            {
+                DataGridViewRow seldr = dgCustomer.SelectedRows[0];
+                string strid = seldr.Cells[2].Value.ToString();
+                string strmobile = seldr.Cells[1].Value.ToString();
+                if (e.ClickedItem.Text == "删除")
+                {
+                    mICustomer.DelCustomer(strid);
+                    mIsRefreshCar = true;
+                    DoQuery();
+                }
+                else if (e.ClickedItem.Text == "修改")
+                {
+
+                    frmCustomerEdit frm = new frmCustomerEdit();
+                    frm.Mobile = strmobile;
+                    frm.setRefreshDelegate(delegate(bool isR)
+                    {
+                        if (isR)
+                        {
+                            mIsRefreshCar = true;
+                            DoQuery();
+                        }
+
+                    });
+                    frm.ShowDialogEx();
+
+
+                }
+                else if (e.ClickedItem.Text == "升级会员")
+                {
+                    frmCustomerUPVip frm = new frmCustomerUPVip();
+                    frm.ID = strid;
+                    frm.Mobile = strmobile;
+                    frm.setRefreshDelegate(delegate(bool isR)
+                    {
+                        if (isR)
+                        {
+                            mIsRefreshCar = true;
+                            DoQuery();
+                        }
+
+                    });
+                    frm.ShowDialogEx();
+
+
+                }
+                else
+                {
+
+                    frmP2PBind frm = new frmP2PBind();
+                    frm.ID = strid;
+                    frm.setRefreshDelegate(delegate(bool isR)
+                    {
+                        if (isR)
+                        {
+                            mIsRefreshCar = true;
+                            DoQuery();
+                        }
+
+                    });
+                    frm.ShowDialogEx();
+
+
+                }
+
+
+            }
+        }
+
+        protected override void DoQuery()
+        {
+            DataTable dtDest;
+
+            int tmpRecordCount;
+            int tmpPageCount;
+
+            SqlElement eTmp = null;
+            if (mSqlLst != null && mSqlLst.Count > 0)
+            {
+                foreach (SqlElement e in mSqlLst)
+                {
+                    if (e.Name == "Vip")
+                    {
+                        mIsVip = true;
+                        eTmp = e;
+                        break;
+
+                    }
+                    else
+                        mIsVip = false;
+
+                }
+            }
+
+            if (eTmp != null)
+            {
+                mSqlLst.Remove(eTmp);
+
+            }
+            dtDest = mICustomer.GetCustomersByQuery(mSqlLst, mIsVip, mPageInfo.PageCurrent, mPageInfo.PageSize, out tmpRecordCount, out tmpPageCount);
+            mPageInfo.RecordCount = tmpRecordCount;
+            mPageInfo.PageCount = tmpPageCount;
+            SetRoleNavigatorState();
+
+
+            FrmAssist.UpdateColumns(ref mDtDicOfCustomer, dtDest, 2);
+            dgCustomer.DataSource = dtDest;
+            dgCustomer.Columns[2].Visible = false;
+
+            if (dtDest.Rows.Count > 0 && mIsRefreshCar)
+            {
+                mSqlLst1 = new List<SqlElement>();
+                mSqlLst1.Add(new SqlElement { Name = "Mobile", Value = dtDest.Rows[0][1].ToString(), IsFuzzy = true, IsStr = true });
+                dtDest = mICustomer.GetCarsOfCustomerByQuery(mSqlLst1);
+                dgCar.DataSource = dtDest;
+
+            }
+        }
+
+
+
+
+        private void frmCustomerQuery_Load(object sender, EventArgs e)
+        {
+
+
+            //if (isSelect)
+            //{
+            //    tbtnSel.Visible = true;
+            //    cMenuCustomer.Enabled = false;
+            //    btnCustIn.Visible = false;
+            //    btnCarIn.Visible = false;
+            //}
+            //else
+            //{
+            //    tbtnSel.Visible = false;
+
+            //}
+            mIsRefreshCar = true;
+            string positionname = Comm.LoginInfoShare.getInstance().PositionName;
+            //if (positionname.Contains("客服"))
+            //    toolStripMenuItem2.Enabled = true;
+            //else
+            //    toolStripMenuItem2.Enabled = false;
+            if (isSelect)
+                tbtnSel.Visible = true;
+            else
+                tbtnSel.Visible = false;
+            DoQuery();
+
+            SetTButtonPng(toolStrip1);
+
+        }
+
+        private void btnAddCar_Click(object sender, EventArgs e)
+        {
+            if (dgCustomer.SelectedRows.Count != 0)
+            {
+                DataGridViewRow seldr = dgCustomer.SelectedRows[0];
+                string strmobile = seldr.Cells[1].Value.ToString();
+                frmDlgCarOfCustomer frm = new frmDlgCarOfCustomer();
+                frm.Mobile = strmobile;
+                frm.ShowDialogEx();
+
+            }
+
+        }
+
+        private void dgCustomer_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgCustomer.SelectedRows.Count != 0)
+            {
+                DataGridViewRow seldr = dgCustomer.SelectedRows[0];
+                string strmobile = seldr.Cells[1].Value.ToString();
+                mSqlLst1 = new List<SqlElement>();
+                mSqlLst1.Add(new SqlElement { Name = "Mobile", Value = strmobile, IsFuzzy = true, IsStr = true });
+                DataTable dt = mICustomer.GetCarsOfCustomerByQuery(mSqlLst1);
+                dgCar.DataSource = dt;
+
+            }
+        }
+
+        private void ModifyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void DeleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ToVipToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //frmCustomerUPVip frm = new frmCustomerUPVip();
+            //frm.ShowDialogEx();
+        }
+
+        private void ModifyCarStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
+            if (dgCar.SelectedRows.Count != 0)
+            {
+                DataGridViewRow seldr = dgCar.SelectedRows[0];
+                string strid = seldr.Cells[0].Value.ToString();
+                frmDlgCarOfCustomer frm = new frmDlgCarOfCustomer();
+                frm.setRefreshDelegate(delegate(bool isR)
+                {
+                    if (dgCustomer.SelectedRows.Count != 0)
+                    {
+                        DataGridViewRow seldr1 = dgCustomer.SelectedRows[0];
+                        string strmobile = seldr1.Cells[1].Value.ToString();
+                        DataTable dt = mICustomer.GetCarOfCustomer(strmobile);
+                        dgCar.DataSource = dt;
+
+                    }
+
+
+                }
+                   );
+                frm.ID = strid;
+                frm.ShowDialogEx();
+
+            }
+        }
+
+        private void bindingNavigatorMoveFirstItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bindingNavigatorMovePreviousItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bindingNavigatorMoveNextItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bindingNavigatorMoveLastItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnCustIn_Click(object sender, EventArgs e)
+        {
+            frmBatchIn frm = new frmBatchIn();
+            frm.TableName = "Customer";
+            frm.ShowDialogEx();
+        }
+
+        private void btnCarIn_Click(object sender, EventArgs e)
+        {
+            frmBatchIn frm = new frmBatchIn();
+            frm.TableName = "CarOfCust";
+            frm.ShowDialogEx();
+        }
+
+        private void DeleteCarStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (dgCar.SelectedRows.Count != 0)
+            {
+                DataGridViewRow seldr = dgCar.SelectedRows[0];
+                string strid = seldr.Cells[0].Value.ToString();
+                mICustomer.DelCarOfCustomer(strid);
+
+                //DataGridViewRow seldr1 = dgCustomer.SelectedRows[0];
+                //string strmobile = seldr1.Cells[1].Value.ToString();
+                DataTable dt = mICustomer.GetCarsOfCustomerByQuery(mSqlLst1);
+                dgCar.DataSource = dt;
+
+
+            }
+        }
+
+        private void tbtnQueryOfCar_Click(object sender, EventArgs e)
+        {
+            frmDlgCarOfCustQuery frm = new frmDlgCarOfCustQuery();
+
+            frm.setTransferDelegate(delegate(object o)
+            {
+
+                mSqlLst = (List<SqlElement>)o;
+
+                QueryOfCar(mSqlLst);
+
+            });
+            frm.ShowDialogEx();
+        }
+
+        private void QueryOfCar(List<SqlElement> lstE)
+        {
+            DataTable dtDest;
+
+            //int tmpRecordCount;
+            //int tmpPageCount;
+
+            //dtDest = mICustomer.GetCustomersOfCarByQuery(mSqlLst, mPageInfo.PageCurrent, mPageInfo.PageSize, out tmpRecordCount, out tmpPageCount);
+            //mPageInfo.RecordCount = tmpRecordCount;
+            //mPageInfo.PageCount = tmpPageCount;
+            //SetRoleNavigatorState();
+
+
+            //FrmAssist.UpdateColumns(ref mDtDicOfCustomer, dtDest, 2);
+            //dgCustomer.DataSource = dtDest;
+            mSqlLst1 = lstE;
+            dtDest = mICustomer.GetCarsOfCustomerByQuery(mSqlLst1);
+            dgCar.DataSource = dtDest;
+
+            if (dtDest.Rows.Count > 0)
+            {
+                mSqlLst = new List<SqlElement>();
+                mSqlLst.Add(new SqlElement { Name = "Mobile", Value = dtDest.Rows[0][1].ToString(), IsFuzzy = true, IsStr = true });
+                mIsRefreshCar = false;
+                DoQuery();
+
+            }
+            //继续查询客户
+        }
+
+        private void dgCar_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgCar.SelectedRows.Count != 0)
+            {
+                DataGridViewRow seldr = dgCar.SelectedRows[0];
+                string strmobile = seldr.Cells[1].Value.ToString();
+                mSqlLst = new List<SqlElement>();
+                mSqlLst.Add(new SqlElement { Name = "Mobile", Value = strmobile, IsFuzzy = true, IsStr = true });
+                //DataTable dt = mICustomer(mSqlLst1);
+                //dgCar.DataSource = dt;
+                mIsRefreshCar = false;
+                DoQuery();
+
+            }
+        }
+
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            //frmP2PBind frm = new frmP2PBind();
+            //frm.ShowDialogEx();
+        }
+
+        private void btnAddCustomer_Click(object sender, EventArgs e)
+        {
+            frmCustomerEdit frm = new frmCustomerEdit();
+            frm.setRefreshDelegate(b => { if (b)DoQuery(); });
+            frm.ShowDialogEx();
+
+        }
+
+    }
+}

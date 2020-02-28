@@ -1,0 +1,99 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using Bll.Repair;
+using Model;
+namespace Auto4SErp.Repair
+{
+    public partial class frmClaimBillQuery : ifrmBase
+    {
+        private IClaim mIClaim;
+        private List<SqlElement> mLstE;
+        public frmClaimBillQuery()
+        {
+            InitializeComponent();
+            mIClaim = Bll.BllFactory.GetClaimBll();
+        }
+
+        private void btnQuery_Click(object sender, EventArgs e)
+        {
+            mLstE = CreateMedialSqlElement(AssginToListOfQuery());
+            DoQuery();
+        }
+
+        private void frmClaimBillQuery_Load(object sender, EventArgs e)
+        {
+            DateTime dtNow = DateTime.Now;
+            mLstControls.Add(txtDH);
+            datBegin.Value = DateTime.Parse(dtNow.Year + "-01-01");
+            DoQuery();
+            SetTButtonPng(toolStrip1);
+        }
+
+
+        protected override void DoQuery()
+        {
+            string strBegin = "";
+            string strEnd = "";
+
+         
+            if (chbIsDate.Checked)
+            {
+                strBegin = datBegin.Value.ToShortDateString() + " 00:00:00";
+                strEnd = datEnd.Value.ToShortDateString() + " 23:59:59";
+
+            }
+            dgClaim.AutoGenerateColumns = false;
+            dgClaim.DataSource = mIClaim.GetClaimBills(strBegin,strEnd,mLstE);
+
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            frmDlgClaimBill frm = new frmDlgClaimBill();
+            frm.setRefreshDelegate(b=>DoQuery());
+            frm.ShowDialogEx();
+        }
+
+        private void btnOpen_Click(object sender, EventArgs e)
+        {
+            //frmDlgClaimBill frm = new frmDlgClaimBill();
+            //frm.DH
+
+            if (dgClaim.SelectedRows.Count != 0)
+            {
+                frmDlgClaimBill frm = new frmDlgClaimBill();
+                DataGridViewRow seldr = dgClaim.SelectedRows[0];
+                string strdh = seldr.Cells[1].Value.ToString();
+                frm.DH = strdh;
+                frm.setRefreshDelegate(delegate(bool isR)
+                {
+
+                    DoQuery();
+
+                });
+                frm.ShowDialogEx();
+
+            }
+        }
+
+        private void btnDel_Click(object sender, EventArgs e)
+        {
+           
+                frmDlgClaimBill frm = new frmDlgClaimBill();
+                DataGridViewRow seldr = dgClaim.SelectedRows[0];
+                string strdh = seldr.Cells[1].Value.ToString();
+                if (!mIClaim.DelClaimBill(strdh))
+                    ShowMessage("已经添加索赔，无法删除");
+                else
+                    DoQuery();
+
+           
+        }
+    }
+}

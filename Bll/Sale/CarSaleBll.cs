@@ -1,0 +1,907 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Model;
+using Comm;
+using DBUtil;
+using System.Data;
+using System.Data.SqlClient;
+namespace Bll.Sale
+{
+    public  class CarSaleBll :ICarSale
+    {
+        private DBHelper mDB;
+        public CarSaleBll()
+        {
+            mDB = DBHelperShare.getInstance();
+        }
+
+
+        public string GetDHOfAddCarOrder( List<SqlElement> lst)
+        {
+
+            string sql = CreateSqlUtil.CreateInsertSql(lst, "carorder");
+            sql = sql + " SELECT @@IDENTITY AS Id ";
+
+            DataTable dt = mDB.ExecuteDataTable(sql);
+            string id = dt.Rows[0][0].ToString();
+            sql = "select dh from carorder where id =" + id;
+            dt = mDB.ExecuteDataTable(sql);
+            string dh = dt.Rows[0][0].ToString();
+            return dh;
+
+        }
+
+        public string GetDHOfAddCarAllot(List<SqlElement> lst)
+        {
+            string sql = CreateSqlUtil.CreateInsertSql(lst, "carallot");
+            sql = sql + " SELECT @@IDENTITY AS Id ";
+
+            DataTable dt = mDB.ExecuteDataTable(sql);
+            string id = dt.Rows[0][0].ToString();
+            sql = "select dh from carallot where id =" + id;
+            dt = mDB.ExecuteDataTable(sql);
+            string dh = dt.Rows[0][0].ToString();
+            return dh;
+
+        }
+
+
+        public string GetDHOfAddCarSale(List<SqlElement> lst)
+        {
+
+
+            string sql = CreateSqlUtil.CreateInsertSql(lst, "carsale");
+            sql = sql + " SELECT @@IDENTITY AS Id ";
+
+            DataTable dt = mDB.ExecuteDataTable(sql);
+            string id = dt.Rows[0][0].ToString();
+            sql = "select dh from carsale where id =" + id;
+            dt = mDB.ExecuteDataTable(sql);
+            string dh = dt.Rows[0][0].ToString();
+            return dh;
+
+        }
+
+        public string GetDHOfAddAllotSale(List<SqlElement> lst)
+        {
+
+
+            string sql = CreateSqlUtil.CreateInsertSql(lst, "carsale");
+            sql = sql + " SELECT @@IDENTITY AS Id ";
+
+            DataTable dt = mDB.ExecuteDataTable(sql);
+            string id = dt.Rows[0][0].ToString();
+            sql = "select dh from carsale where id =" + id;
+            dt = mDB.ExecuteDataTable(sql);
+            string dh = dt.Rows[0][0].ToString();
+            return dh;
+
+        }
+
+
+
+        public bool PostOrderAmount(double amount,string dh)
+        {
+            string sql=string.Format("update carorder set AmountSum=AmountSum+{0} where dh ='{1}'",amount ,dh) ;
+            int k = mDB.ExecuteNonQuery(sql);
+            if (k > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+       
+
+        public DataTable CarOrderByDH(string dh)
+        {
+            string sql = "select DH,CustName ,Mobile,AmountSum,AmountReceive,OrderDate,Address,CarDetailID,Status,AutoNumber,SalePrice,CustNameM from v_carorder where ";
+            sql = sql + string.Format("dh='{0}'",dh);
+
+            DataTable dt = mDB.ExecuteDataTable(sql);
+            if (dt != null && dt.Rows.Count > 0)
+                return dt;
+            else
+                return null;
+        }
+
+
+        public void BindCarSaleToOrder(string orderdh,string saledh)
+        {
+            string sql;
+            if(!string.IsNullOrEmpty(saledh))
+                sql = string.Format("update carorder set saledh='{0}' where dh='{1}'",saledh ,orderdh);
+            else
+                sql = string.Format("update carorder set saledh=null where dh='{0}'", orderdh);
+            mDB.ExecuteNonQuery(sql);
+
+        }
+        public double BindOrderFromSale(string mobile, string dh)
+        {
+            string sql = "select AmountReceive,dh from carorder where mobile ='" + mobile + "' and len(isnull(saledh,''))<=1  and AmountReceive>0";
+             DataTable dt = mDB.ExecuteDataTable(sql);
+           
+             if (dt != null && dt.Rows.Count > 0)
+             { 
+                 CarSale obj = new CarSale();
+                 double amount = double.Parse(dt.Rows[0][0].ToString());
+                 string orderdh = dt.Rows[0][1].ToString();
+                 sql = string.Format("update carsale set orderdh='{0}' ,OrderReceive={2} where dh ='{1}'", orderdh, dh, amount);
+                 mDB.ExecuteNonQuery(sql);
+                 sql = string.Format("update carorder set saledh='{0}',status=1 where dh ='{1}'", dh, orderdh);
+                 mDB.ExecuteNonQuery(sql);
+
+                 return amount;
+             }
+             else
+                 return 0;
+        }
+
+        public bool IsOrderBinded(string mobile)
+        {
+            string sql = "select AmountReceive,dh from carorder where mobile ='" + mobile + "' and len(isnull(saledh,''))<=0  and AmountReceive>0";
+            DataTable dt = mDB.ExecuteDataTable(sql);
+            if (dt != null && dt.Rows.Count > 0)
+                return false;
+            else
+                return true;
+
+        }
+
+
+        public double GetCarOrderJEByMobile(string mobile)
+        {
+            string sql = string.Format("select Isnull(AmountReceive,0) from carorder where mobile ='{0}' and status=0 and AmountReceive>0", mobile);
+            DataTable dt = mDB.ExecuteDataTable(sql);
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                 double amount = double.Parse(dt.Rows[0][0].ToString());
+                 return amount;
+            }
+             else
+                return 0;
+        }
+
+        //public bool IsCanAddCarOrder(string mobile)
+        //{
+        //    bool isCan = true;
+        //    bool isCan1, isCan2;
+        //    string sql="";
+        //    isCan=IsOrderBinded(mobile);
+        //    if (isCan == false) return isCan;
+
+
+        //    sql = "select * from carsale where mobile ='{0}' and status<3";
+        //    isCan1 = mDB.IsExists(sql);
+        //    return isCan;
+
+        //}
+
+        public bool IsOrderBindedByDH(string dh)
+        {
+            string sql = "select AmountReceive,dh from carorder where  dh ='" + dh + "' and len(isnull(saledh,''))<=0  and AmountReceive>0";
+            DataTable dt = mDB.ExecuteDataTable(sql);
+            if (dt != null && dt.Rows.Count > 0)
+                return false;
+            else
+                return true;
+
+        }
+
+
+        public double GetOrderAmountByDH(string dh)
+        {
+            string sql = string.Format("select AmountReceive from carorder where saledh='{0}'",dh);
+            DataTable dt = mDB.ExecuteDataTable(sql);
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                 double amount = double.Parse(dt.Rows[0][0].ToString());
+                 sql = string.Format("update carsale set OrderReceive={1} where dh ='{0}'", dh,  amount);
+                 mDB.ExecuteNonQuery(sql);
+
+                 return amount;
+
+            }
+            else
+                return 0;
+
+        }
+
+        public void RelieveOrderFromSale(string dh)
+        {
+            SqlParameter[] parameters = {
+					new SqlParameter("@vDH", SqlDbType.Char,15)
+				
+					};
+            parameters[0].Value = dh;
+            mDB.ExecuteNonQueryByPro("RelieveOrderFromSale", parameters);
+        }
+
+
+     
+
+        public DataTable GetCarSaleByDH(string dh)
+        {
+            string sql = "select * from v_carsale where dh='" + dh + "'";
+            DataTable dt = mDB.ExecuteDataTable(sql);
+            return dt;
+
+        }
+
+
+        public bool UpdateSaleManageDate(CarSale obj)
+        {
+            List<SqlElement> list = new List<SqlElement>();
+
+            list.Add(new SqlElement("OutFee", obj.OutFee.ToString(), false));
+          //  list.Add(new SqlElement("LoanIncome", obj.LoanIncome.ToString(), false));
+            list.Add(new SqlElement("ChangeIncome", obj.ChangeIncome.ToString(), false));
+            list.Add(new SqlElement("ElseIncome", obj.ElseIncome.ToString(), false));
+            list.Add(new SqlElement("PlateFee", obj.PlateFee.ToString(), false));
+     
+            list.Add(new SqlElement("DecorPrice", obj.DecorPrice.ToString(), false));
+            list.Add(new SqlElement("TotalPrice", obj.TotalPrice.ToString(), false));
+            list.Add(new SqlElement("UpKeepCharge", obj.UpKeepCharge.ToString(), false));
+            list.Add(new SqlElement("OilCharge", obj.OilCharge.ToString(), false));
+            string sql = CreateSqlUtil.CreateUpdateSql(list, "carsale");
+
+            sql = sql + " where dh='" + obj.DH + "'";
+
+
+             mDB.ExecuteNonQuery(sql);
+
+            // sql = "update carsale settotalprice";
+            //if (k > 0)
+            //{
+            //    return true;
+            //}
+            return false;
+
+
+
+
+        }
+
+
+        public bool PostToCheck(CarSale obj)
+        {
+            List<SqlElement> list = new List<SqlElement>();
+            list.Add(new SqlElement("TotalPrice", obj.TotalPrice.ToString(), false));
+            list.Add(new SqlElement("CarPrice", obj.CarPrice.ToString(), false));       
+            list.Add(new SqlElement("LoanAmount", obj.LoanAmount.ToString(), false));
+            list.Add(new SqlElement("InsurancePrice", obj.InsurancePrice.ToString(), false));
+            list.Add(new SqlElement("ReceivableAmount", obj.ReceivableAmount.ToString(), false));
+            list.Add(new SqlElement("Vin", obj.Vin.ToString(), true));
+            list.Add(new SqlElement("AutoNumber", obj.AutoNumber, true));
+            list.Add(new SqlElement("Status", "1", false));
+            list.Add(new SqlElement("CarDetailID", obj.DetailID.ToString(), false));
+            list.Add(new SqlElement("Mobile", obj.Mobile, true));
+            list.Add(new SqlElement("CheckMan", obj.CheckMan, true));
+            list.Add(new SqlElement("IsSpecial", obj.IsSpecial.ToString(), false));
+            list.Add(new SqlElement("SaleType", obj.SaleType, true));
+            list.Add(new SqlElement("BTPrice", obj.BTPrice.ToString(), false));
+
+         
+            //list.Add(new SqlElement("OutFee", obj.OutFee.ToString(), false));
+            //list.Add(new SqlElement("LoanIncome", obj.LoanIncome.ToString(), false));
+            //list.Add(new SqlElement("ChangeIncome", obj.ChangeIncome.ToString(), false));
+            //list.Add(new SqlElement("ElseIncome", obj.ElseIncome.ToString(), false));
+            //list.Add(new SqlElement("InCompany", obj.InCompany, true));
+
+            string sql = CreateSqlUtil.CreateUpdateSql(list,"carsale");
+
+            sql = sql + " where dh='" + obj.DH + "'";
+
+            int k = mDB.ExecuteNonQuery(sql);
+            if (k > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+
+        public int GetCarSaleStatus(string dh)
+        {
+            string sql = "select status from carsale where dh='" + dh + "'";
+            DataTable dt=  mDB.ExecuteDataTable(sql);
+            int status = int.Parse(dt.Rows[0][0].ToString());
+            return status;
+
+        }
+
+
+        public DataTable  GetAmountOfOrderRecv(string dh)
+        {
+            string sql = "select isnull(AmountReceive,0),isnull(AmountSum,0) from carorder where dh='" + dh + "'";
+          //  decimal amount = 0;
+            DataTable dt = mDB.ExecuteDataTable(sql);
+            //if(dt.Rows.Count>0)
+            //{
+            //    amount = decimal.Parse(dt.Rows[0][0].ToString());
+            //}
+            //return amount;
+            return dt;
+
+        }
+        public void UpdateCarSaleStatus(string dh,int status,string checkman)
+        {
+            string sql = string.Format("update carsale set status={0} ,checkman='{2}' where dh='{1}'",status,dh,checkman);
+            mDB.ExecuteNonQuery(sql);
+        }
+
+
+        public void AddCarSaleDecorateDH(string dh,string decoratedh)
+        {
+            string sql = string.Format("update carsale set decoratedh='{0}' where dh='{1}'", decoratedh, dh);
+            mDB.ExecuteNonQuery(sql);
+
+
+        }
+
+
+        public void UpdateCarSaleAmountPost(string dh, double  amount)
+        {
+            string sql = string.Format("update carsale set AmountPost=AmountPost+{0} where dh='{1}'", amount, dh);
+            mDB.ExecuteNonQuery(sql);
+        }
+
+        public DataTable  GetCarAnalysis(string strBegin, string strEnd,int year, int month, string saler,string carmodel)
+        {
+          //  string sql = "select  DH,SaleMan,AccountDate,CustName,Mobile,CarModel,TotalPrice,CarPrice,CostPrice,SalePrice,InsurancePrice*0.15 as InsurancePrice  ,InCompany,LoanAmount,Gamount*0.2 as Gamount ,DirectPrice,IsNull(OutFee,0) as outfee,IsNull(LoanAmount,0)*0.01 as loanincome,IsNull(ChangeIncome,0) as ChangeIncome,IsNull(ElseIncome,0) as elseincome,(carprice-saleprice+IsNull(OutFee,0)+IsNull(Gamount,0)*0.2+IsNull(InsurancePrice,0)*0.15+IsNull(LoanAmount,0)*0.01+IsNull(ElseIncome,0)) as profit  from v_carsale where";
+            string sql = "select  DH,SaleType,SaleMan,AccountDate,CustName,Mobile,CarSer,CarModel,Vin,TotalPrice,DirectPrice,CarPrice,PlateFee,UpKeepCharge,OilCharge,OutFee,ChangeIncome,ElseIncome,IsNull(Gamount,0) as Gamount,IsNull(InPrice,0) as InPrice,(PureCarPrice -IsNull(InPrice,0)) as Profit ,PureCarPrice,PresentDecorPrice,BTPrice  from v_carsalerep where";
+            string begindate = string.Format("{0}-{1}-1", year, month);
+
+            if (month == 12)
+            {
+                month = 1;
+                year = year + 1;
+            }
+            else
+                month = month + 1;
+            string enddate = string.Format("{0}-{1}-1", year, month);
+
+            if (strBegin != "")
+                sql = sql + string.Format("  accountdate>='{0}' and accountdate<='{1}'  and status=3", strBegin, strEnd);
+            else
+                sql = sql + string.Format(" accountdate>='{0}' and accountdate<'{1}' and status=3", begindate, enddate);
+
+           // sql = sql + string.Format(" accountdate>='{0}' and accountdate<'{1}' and status=3", begindate, enddate);
+            sql = sql + " and  saleman like '%" +saler +  "%'";
+            sql = sql + " and  carmodel like '%" + carmodel + "%'";
+            return mDB.ExecuteDataTable(sql);
+
+
+        }
+
+
+
+        public DataTable GetCarAveragePrice(string strBegin, string strEnd, int year, int month)
+        {
+            string sql = "select avg(carprice + isnull(BTPrice,0)) as avg,max(carser) as carser,max(carmodel) as carmodel from v_carsalerep where  saletype !='二网' and saleman not like '%二网%' and ";
+
+            string begindate = string.Format("{0}-{1}-1", year, month);
+            if (month == 12)
+            {
+                month = 1;
+                year = year + 1;
+            }
+            else
+                month = month + 1;
+            string enddate = string.Format("{0}-{1}-1", year, month);
+            //  sql = sql + string.Format(" accountdate>='{0}' and accountdate<'{1}' and status=3", begindate, enddate);
+
+            if (strBegin != "")
+                sql = sql + string.Format("  accountdate>='{0}' and accountdate<='{1}'  and status=3", strBegin, strEnd);
+            else
+                sql = sql + string.Format(" accountdate>='{0}' and accountdate<'{1}' and status=3", begindate, enddate);
+
+            sql = sql + " group by carser,carmodel";
+            return mDB.ExecuteDataTable(sql);
+
+        }
+
+        public DataTable GetCarSalesOfMonth(string strBegin, string strEnd,int year ,int month,string saler,string carser)
+        {
+            string  outFeeRate="";
+            if(Comm.LoginInfoShare.getInstance().OrganId=="608")
+                outFeeRate="0.08";
+            else
+                outFeeRate="0.08";
+
+            string sql = string.Format("select  DH,SaleMan,SaleType,OrderDate,CONVERT(varchar(100), AccountDate, 111) as AccountDate,CustName,Mobile,CarSer,CarModel,Vin,Color,TotalPrice,CarPrice,isnull(gamount,0) as gamount,DATEDIFF(DAY,CarInDate,AccountDate) as days ,0 as greward,0 as award,InsurancePrice * 0.01 as InsuranceReward, isnull(DecorateAward,0) as DecorateAward, PlateFee*0.02 as ServiceReward ,OutFee*{0} as LoanReward,ChangeIncome *0.1 as ChangeReward,IsPass,DecorateCost,PresentDecorPrice,InsurancePrice from v_carsalerep where", outFeeRate);
+            string begindate = string.Format("{0}-{1}-1",year,month);
+           
+            if (month == 12)
+            {
+                month = 1;
+                year = year + 1;
+            }
+            else
+                month = month + 1;
+            string enddate = string.Format("{0}-{1}-1", year, month);
+          //  sql = sql + string.Format(" accountdate>='{0}' and accountdate<'{1}' and status=3", begindate, enddate);
+           
+            if (strBegin != "")
+                sql = sql + string.Format("  accountdate>='{0}' and accountdate<='{1}'  and status=3", strBegin, strEnd);
+            else
+                 sql = sql + string.Format(" accountdate>='{0}' and accountdate<'{1}' and status=3", begindate, enddate);
+           
+            
+            sql = sql + " and  saleman like '%" + saler + "%'";
+            if(carser!="")
+               sql = sql + " and  CarSer like '%" + carser + "%'";
+            return mDB.ExecuteDataTable(sql);
+        }
+
+        public DataTable GetCarSalesByQuery(string strBegin, string strEnd, List<SqlElement> list, int PageIndex, int PageSize, out int RecordCount, out int PageCount,bool isSaler)
+        {
+            string IndexField = "DH";
+            string AllFields = "DH,Saletype,case when status=0 then '开单' when status=1 then '待审核' when status=2 then '结算' else '完成' end  as Status,CreateDate,OrderDate,AccountDate,CustName,Mobile,SaleMan,Vin,CarSer,CarModel,Color,Displacement,Transmission,CheckMan,TotalPrice,CarPrice,AmountReceive,CustNameM";
+            string Condition = "v_carsale where ";
+            string OrderFields = "order by CreateDate desc";
+            if (list != null && list.Count > 0)
+                Condition = Condition + CreateSqlUtil.CreateQuerySqlOfCondition(list, true);
+            else
+                Condition = Condition + "1=1";
+
+            if (isSaler)
+                Condition += " and SaleMan='" + Comm.LoginInfoShare.getInstance().UserName + "'";
+            if (strBegin != "")
+                Condition = Condition + string.Format(" and CreateDate>='{0}' and CreateDate<='{1}'", strBegin, strEnd);
+
+            //string sql = "select  top 30 DH,case when status=0 then '开单' when status=1 then '待审核' when status=2 then '结算' else '完成' end  as Status,NewDate,CustName,Mobile,CarModel,Color,Displacement,Transmission,CheckMan,TotalPrice,CarPrice,AmountReceive from v_carsale where ";
+
+            //if (list != null)
+            //    sql = sql + CreateSqlUtil.CreateQuerySqlOfCondition(list, true);
+            //else
+            //    sql = sql + "1=1";
+            //if (strBegin != "")
+            //    sql = sql + string.Format(" and NewDate>='{0}' and NewDate<='{1}'", strBegin, strEnd);
+            DataTable dt = mDB.ExecuteDataTableByPage(AllFields, Condition, IndexField, OrderFields, PageIndex, PageSize, out RecordCount, out PageCount);
+            return dt;
+
+        }
+
+
+        public DataTable GetCarAllotsByQuery(string strBegin, string strEnd, List<SqlElement> list, int PageIndex, int PageSize, out int RecordCount, out int PageCount)
+        {
+            string IndexField = "DH";
+            string AllFields = "DH,Vin,AllotPrice,AllotUnit,AllotDate,OperatorMan,case when status=1 then '未提交'  else '已提交' end  as Status";
+            string Condition = "carallot where ";
+            string OrderFields = "order by AllotDate desc";
+            if (list != null && list.Count > 0)
+                Condition = Condition + CreateSqlUtil.CreateQuerySqlOfCondition(list, true);
+            else
+                Condition = Condition + "1=1";
+            if (strBegin != "")
+                Condition = Condition + string.Format(" and AllotDate>='{0}' and AllotDate<='{1}'", strBegin, strEnd);
+            DataTable dt = mDB.ExecuteDataTableByPage(AllFields, Condition, IndexField, OrderFields, PageIndex, PageSize, out RecordCount, out PageCount);
+            return dt;
+
+        }
+
+
+        public DataTable GetOutCarOrdersByQuery(string strBegin, string strEnd, bool IsSelect, List<SqlElement> list, string saler)
+        {
+            string sql;
+            string Condition="";
+            sql = "select DH,OrderDate,CustName ,Mobile,CustNameM,AutoNumber,CarSer,CarModel,SalePrice,OperatorMan,AmountSum,AmountReceive,SaleDH  from v_carorder where ";
+
+            if (list != null && list.Count > 0)
+                Condition = Condition + CreateSqlUtil.CreateQuerySqlOfCondition(list, true);
+            else
+                Condition = Condition + "1=1";
+
+            if (strBegin != "")
+                Condition = Condition + string.Format(" and OrderDate>='{0}' and OrderDate<='{1}'", strBegin, strEnd);
+
+            if (!string.IsNullOrEmpty(saler))
+            {
+                Condition = Condition + " and  OperatorMan='" + saler + "'";
+
+            }
+            if (IsSelect)
+                Condition = Condition + " and SaleDH is NULL";
+
+            sql = sql + Condition + " order by OrderDate desc";
+            return mDB.ExecuteDataTable(sql);
+        }
+
+        public DataTable GetCarOrdersByQuery(string strBegin, string strEnd, bool IsSelect,List<SqlElement> list, int PageIndex, int PageSize, out int RecordCount, out int PageCount,string saler)
+        {
+
+            string IndexField = "DH";
+            string AllFields = "DH,CustName ,Mobile,OperatorMan,AutoNumber,CarSer,CarModel,SalePrice,AmountSum,AmountReceive,OrderDate,SaleDH,CustNameM ";
+            string Condition = "v_carorder where ";
+            string OrderFields = "order by OrderDate desc";
+
+
+         //   string sql = "select top 30 DH,CustName ,Mobile,AmountSum,AmountReceive,OrderDate,SaleDH,case when status=0 then '未绑定' else '已绑定' end as Status from v_carorder where ";
+            if (list != null && list.Count >0)
+                Condition = Condition + CreateSqlUtil.CreateQuerySqlOfCondition(list, true);
+            else
+                Condition = Condition + "1=1";
+
+            if (strBegin != "")
+                Condition = Condition + string.Format(" and OrderDate>='{0}' and OrderDate<='{1}'", strBegin, strEnd);
+
+            if (!string.IsNullOrEmpty(saler))
+            {
+                Condition = Condition + " and  OperatorMan='" + saler + "'"; 
+
+            }
+            if(IsSelect)
+                Condition = Condition + " and SaleDH is NULL";
+            DataTable dt = mDB.ExecuteDataTableByPage(AllFields, Condition, IndexField, OrderFields, PageIndex, PageSize, out RecordCount, out PageCount);
+            return dt;
+
+        }
+        //public DataTable GetCarSalesOfDefault()
+        //{
+        //    string sql = "select top 30 DH,case when status=0 then '开单' when status=1 then '审核' when status=2 then '结算' else '完成' end  as Status,CustName,Mobile,CarModel,Color,Displacement,Transmission,TotalPrice,CarPrice,AmountReceive from v_carsale order by id desc";
+        //    DataTable dt = mDB.ExecuteDataTable(sql);
+        //    return dt;
+        //}
+
+        public void UpdateCarOrderReceive(double amount,string dh)
+        {
+            string sql = string.Format("update carorder set AmountReceive=AmountReceive+ {0} where dh='{1}'", amount, dh);
+            mDB.ExecuteNonQuery(sql);
+
+        }
+
+        public void UpdateCarSaleReceive(double amount, string dh)
+        {
+            string sql = string.Format("update carsale set AmountReceive=AmountReceive+ {0} where dh='{1}'", amount, dh);
+            mDB.ExecuteNonQuery(sql);
+            sql = string.Format("SELECT * FROM carsale WHERE (DH = '{0}') AND (TotalPrice = AmountReceive + OrderReceive)",dh);
+            bool b = mDB.IsExists(sql);
+            if (b)
+            {
+                sql = string.Format("update carsale set status=3 where dh='{1}'", amount, dh);
+                mDB.ExecuteNonQuery(sql);
+
+            }
+
+        }
+
+
+        public bool IsExistAmountOfPost(string dh)
+        {
+            string sql = string.Format("select * from carsale where dh='{0}' and amountpost>0",dh);
+            bool b = mDB.IsExists(sql);
+            return b;
+
+        }
+
+        public DataTable GetPrintInfo(string dh,string carInfo)
+        {
+
+
+            DataTable dt=new DataTable();
+            DataTable dtCompany = GetCompanyInfo();
+            DataTable dtCarSale = GetCarSaleByDH(dh);
+            dt.Merge(dtCompany);
+            dt.Merge(dtCarSale);
+            for (int i = 0; i < 5; i++)
+            {
+                dt.Rows[1][i] = dt.Rows[0][i];
+
+
+            }
+            dt.Rows.RemoveAt(0);
+            dt.Columns.Add(new DataColumn("carinfo", typeof(string)));
+            dt.Rows[0]["carinfo"] = carInfo;
+             return dt;
+
+        }
+
+        public DataTable GetCompanyInfo()
+        {
+            string sql = "select * from company";
+            DataTable dt = mDB.ExecuteDataTable(sql);
+            return dt;
+        }
+
+
+        public bool DelCarOrder(string dh)
+        {
+            string sql = "select * from carorder where amountreceive>0 and dh='" + dh + "'";
+            bool b = mDB.IsExists(sql);
+            if (!b)
+           
+            {
+                sql = string.Format("delete from carorder where  dh='{0}';delete from financeaccounts  where  dhfrom='{0}'", dh);
+                mDB.ExecuteNonQuery(sql);
+                
+            }
+            return b;
+        }
+
+
+        public bool DelCarSale(string dh)
+        {
+            string sql = "select * from CarSale where status<1 and dh='" + dh + "'";
+            bool b = mDB.IsExists(sql);
+            sql=string.Format("select dh from repair where decoratedh='{0}'" ,dh);
+            bool a = mDB.IsExists(sql);
+            bool isDel = false;
+            if (b && !a)
+            {
+                sql = "delete from CarSale where  dh='" + dh + "'";
+                mDB.ExecuteNonQuery(sql);
+                isDel = true;
+            }
+            return isDel;
+        }
+
+
+        public int GetCountOfCarOutInMonth(int year ,int month)
+        {
+            DateTime begindate = DateTime.Parse(year+"-"+month+ "-1");
+            DateTime endDate = begindate.AddMonths(1);
+            string sql;
+            sql = string.Format("select isnull(count(*),0) from carsale where status=3 and accountdate>='{0}' and accountdate<'{1}'",begindate,endDate);
+
+            DataTable dt = mDB.ExecuteDataTable(sql);
+            int count = 0;
+            if(dt.Rows.Count >0)
+            {
+                count = int.Parse(dt.Rows[0][0].ToString());
+
+            }
+            return count;
+        }
+
+        public int GetCountOfCarStockInMonth(int year, int month)
+        {
+
+            DateTime begindate = DateTime.Parse(year + "-" + month + "-1");
+            DateTime endDate = begindate.AddMonths(1);
+            int incount=0;
+            int outcount = 0;
+            string sql;
+            sql = string.Format("select count(*) from carstock where CarinDate<'{0}'",endDate);
+               DataTable dt = mDB.ExecuteDataTable(sql);
+            if (dt.Rows.Count > 0)
+            {
+                incount = int.Parse(dt.Rows[0][0].ToString());
+
+            }
+            sql = string.Format("select isnull(count(*),0) from carsale where status=3 and accountdate<'{0}'", endDate);
+            dt = mDB.ExecuteDataTable(sql);
+            if (dt.Rows.Count > 0)
+            {
+                outcount = int.Parse(dt.Rows[0][0].ToString());
+
+            }
+            return incount-outcount;
+        }
+
+
+        public bool CarOrderSaveAgain(string dh,List<SqlElement> lst)
+        {
+            string sql;
+            sql = string.Format("select * from carorder where dh='{0}' and saledh is null",dh);
+            bool result;
+            result = mDB.IsExists(sql);
+            if (result)
+            {
+                sql = CreateSqlUtil.CreateUpdateSql(lst, "carorder");
+                sql += " where dh='" + dh + "'";
+                mDB.ExecuteNonQuery(sql);
+
+            }
+            return result;
+
+        }
+
+
+
+        public void ModifyCustNameOfOrder(string dh, string newname, string mobile, bool ism)
+        {
+            string sql;
+            sql =string.Format("update carorder set CustNameM='{0}' where dh='{1}' ",newname,dh);
+            mDB.ExecuteNonQuery(sql);
+            sql = string.Format("update financeaccounts set CustName='{0}' where dhfrom='{1}'",newname,dh);
+            mDB.ExecuteNonQuery(sql);
+           // mDB.ExecuteNonQuery(sql);
+            if (ism)
+            {
+                sql = string.Format("update customer set CustName='{0}' where mobile='{1}'", newname, mobile);
+                mDB.ExecuteNonQuery(sql);
+
+            }
+        }
+
+        public void ModifyCustNameOfSale(string dh, string newname,string mobile,bool ism)
+        {
+            string sql;
+            sql = string.Format("update carsale set CustNameM='{0}' where dh='{1}' ", newname, dh);
+            mDB.ExecuteNonQuery(sql);
+            sql = string.Format("update financeaccounts set CustName='{0}' where dhfrom='{1}'", newname, dh);
+            mDB.ExecuteNonQuery(sql);
+            if (ism)
+            {
+                sql = string.Format("update customer set CustName='{0}' where mobile='{1}'",newname,mobile);
+                mDB.ExecuteNonQuery(sql);
+
+            }
+        }
+
+
+     
+
+        public void UpdateCarPurePrice(string dh, double pureprice, double decorprice)
+        {
+            string sql = "";
+
+            List<SqlElement> list = new List<SqlElement>();
+            list.Add(new SqlElement("PureCarPrice", pureprice.ToString(), false));
+            list.Add(new SqlElement("PresentDecorPrice", decorprice.ToString(), false));
+
+            sql = CreateSqlUtil.CreateUpdateSql(list, "carsale");
+            sql = sql + " where dh='" + dh + "'";
+            mDB.ExecuteNonQuery(sql);
+
+        }
+
+        public DataTable GetCarAllot(string dh)
+        {
+            string sql = "select * from carallot where dh='" + dh + "'";
+            return mDB.ExecuteDataTable(sql);
+        }
+
+
+        public void SetCarAllotStatus(string dh,int status)
+        {
+            string sql = string.Format("update carallot set status={0} where dh='{1}'",status,dh);
+            mDB.ExecuteNonQuery(sql);
+
+        }
+
+
+        public bool DelCarAllot(string dh)
+        {
+            string sql = "select * from carallot where dh='" + dh + "' and status<2";
+            if (mDB.IsExists(sql))
+            {
+                mDB.ExecuteNonQuery("delete from carallot  where dh='" + dh + "'");
+                return true;
+            }
+            else
+                return false;
+
+        }
+
+
+        public void ModifySalerOfCarSale(string dh,string newsaler)
+        {
+            string sql = string.Format("update carorder set OperatorMan='{0}' where saledh='{1}';",newsaler,dh);
+            sql += string.Format("update carsale set SaleMan='{0}' where dh='{1}';", newsaler, dh);
+            sql += string.Format("update repair set ReceptMan='{0}' where DecorateDH='{1}';", newsaler, dh);
+            mDB.ExecuteNonQuery(sql);
+
+        }
+
+
+        public void ChangeTypeOfCarsale(string dh,string type)
+        {
+            string sql = "";
+            sql = string.Format("update carsale set saletype='{0}' where dh='{1}'",type,dh);
+            mDB.ExecuteNonQuery(sql);
+
+        }
+
+        public bool IsExistCarSaleInOrder(string dh)
+        {
+
+            string sql = "select * from carorder where dh='" + dh + "' and saledh is null";
+
+            return mDB.IsExists(sql);
+
+        }
+
+        public string  CheckBuyFormHere(string mobile)
+        {
+            string sql =string.Format("select vin from carsale where mobile='{0}' and status=3",mobile);
+            string vin="";
+
+            DataTable dt = mDB.ExecuteDataTable(sql);
+            if (dt.Rows.Count > 0)
+            {
+
+                vin = dt.Rows[0][0].ToString();
+
+            }
+            return vin;
+
+        }
+
+
+        public void CarSaleToBack(string dh,string vin)
+        {
+            string sql = string.Format("delete from financeaccounts where dhfrom='{0}'",dh);
+            mDB.ExecuteNonQuery(sql);
+            sql = string.Format("update carsale set status=0,amountreceive=0,amountpost=0,receivableamount=0 where dh='{0}'",dh);
+            mDB.ExecuteNonQuery(sql);
+            sql = string.Format("update carstock set status=0 where vin='{0}'",vin);
+            mDB.ExecuteNonQuery(sql);
+        }
+
+
+        public void CarSaleToBackNomal(string dh, string vin)
+        {
+            string sql ;
+            sql = string.Format("delete from financeaccounts where dhfrom='{0}'", dh);
+            mDB.ExecuteNonQuery(sql);
+            sql = string.Format("update carsale set status=0,amountreceive=0,amountpost=0,receivableamount=0 where dh='{0}'", dh);
+            mDB.ExecuteNonQuery(sql);
+            sql = string.Format("update carstock set status=0 where vin='{0}'", vin);
+            mDB.ExecuteNonQuery(sql);
+        }
+
+
+        public void updateInsuranceJE(double insurance,double btprice,string dh)
+        {
+
+            string sql = string.Format("update carsale set InsurancePrice={0} ,btprice={2} where dh='{1}'", insurance, dh,btprice);
+            mDB.ExecuteNonQuery(sql);
+        }
+
+        public DataTable GetCarsByCategory(int year, string items)
+        {
+            string sqlItem = "select count(*) as 数量";
+            string begindate = string.Format("{0}-1-1", year);
+            string enddate = string.Format("{0}-1-1", year+1);
+            string[] lstitems;
+            StringBuilder sql = new StringBuilder();
+            sql.Append(sqlItem);
+            string sqlGroup = " group by CarSer ";
+            sql.Append(",Max( CarSer ) as 车系");
+            if (items.Length > 0)
+            {
+                lstitems = items.Split(',');
+                foreach (string str in lstitems)
+                {
+
+                    sql.Append(",Max(" + str + ") as ");
+                    if (str == "CarModel")
+                        sql.Append("车型");
+                    if (str == "SaleMan")
+                        sql.Append("业务员");
+                    sqlGroup = sqlGroup + "," + str;
+                 
+                }
+            }
+            sql.Append(" from v_carsale where status=3 ");
+
+            if (begindate != "")
+            {
+                sql.Append(string.Format("and Accountdate>='{0}' and Accountdate<'{1}'", begindate, enddate));
+            }
+
+            sql.Append(sqlGroup);
+
+
+            return mDB.ExecuteDataTable(sql.ToString());
+
+        }
+
+        public void CarSaleRwardToggle(int status,string dh)
+        {
+            string sql;
+            if (status == 1)
+                sql = "update carsale set IsPass=1 where dh='" + dh +"'";
+            else
+                sql = "update carsale set IsPass=0 where dh='" + dh + "'";
+
+            mDB.ExecuteNonQuery(sql);
+
+        }
+    }
+}

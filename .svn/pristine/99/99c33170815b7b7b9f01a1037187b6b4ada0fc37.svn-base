@@ -1,0 +1,753 @@
+﻿namespace Auto4SErp.Sale
+{
+    partial class frmCarSaleQuery
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCarSaleQuery));
+            this.dgCarSale = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblVin = new DevComponents.DotNetBar.LabelX();
+            this.txtVin = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.datBegin = new System.Windows.Forms.DateTimePicker();
+            this.datEnd = new System.Windows.Forms.DateTimePicker();
+            this.lblSaleMan = new DevComponents.DotNetBar.LabelX();
+            this.txtSaleMan = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.txtDH = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.lblDH = new DevComponents.DotNetBar.LabelX();
+            this.chbIsDate = new System.Windows.Forms.CheckBox();
+            this.labelX1 = new DevComponents.DotNetBar.LabelX();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cmbStatus = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.comboItem2 = new DevComponents.Editors.ComboItem();
+            this.comboItem3 = new DevComponents.Editors.ComboItem();
+            this.comboItem4 = new DevComponents.Editors.ComboItem();
+            this.comboItem1 = new DevComponents.Editors.ComboItem();
+            this.lblStatus = new DevComponents.DotNetBar.LabelX();
+            this.lblMobile = new DevComponents.DotNetBar.LabelX();
+            this.lblCustName = new DevComponents.DotNetBar.LabelX();
+            this.txtCustName = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.txtMobile = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.tbtnQuery = new System.Windows.Forms.ToolStripButton();
+            this.tbtnAdd = new System.Windows.Forms.ToolStripButton();
+            this.tbtnOpen = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigator1 = new System.Windows.Forms.BindingNavigator(this.components);
+            this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
+            this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
+            this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.bindingNavigatorRecordCount = new System.Windows.Forms.ToolStripLabel();
+            this.dataSet11 = new Auto4SErp.DataSet1();
+            this.dataSet12 = new Auto4SErp.DataSet1();
+            this.dataSet13 = new Auto4SErp.DataSet1();
+            this.DH = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SaleType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Status1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OrderDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CreateDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CustName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CustNameM = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Mobile = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SaleMan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Vin = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CarSer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CarModel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Color = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Displacement = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Transmission = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CheckMan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TotalPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AmountReceive = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.dgCarSale)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
+            this.bindingNavigator1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSet11)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSet12)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSet13)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // dgCarSale
+            // 
+            this.dgCarSale.AllowUserToAddRows = false;
+            this.dgCarSale.AllowUserToDeleteRows = false;
+            this.dgCarSale.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgCarSale.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.DH,
+            this.SaleType,
+            this.Status1,
+            this.OrderDate,
+            this.CreateDate,
+            this.CustName,
+            this.CustNameM,
+            this.Mobile,
+            this.SaleMan,
+            this.Vin,
+            this.CarSer,
+            this.CarModel,
+            this.Color,
+            this.Displacement,
+            this.Transmission,
+            this.CheckMan,
+            this.TotalPrice,
+            this.AmountReceive});
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgCarSale.DefaultCellStyle = dataGridViewCellStyle1;
+            this.dgCarSale.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgCarSale.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
+            this.dgCarSale.Location = new System.Drawing.Point(0, 118);
+            this.dgCarSale.MultiSelect = false;
+            this.dgCarSale.Name = "dgCarSale";
+            this.dgCarSale.RowTemplate.Height = 23;
+            this.dgCarSale.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgCarSale.Size = new System.Drawing.Size(918, 288);
+            this.dgCarSale.TabIndex = 37;
+            this.dgCarSale.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgCarSale_CellDoubleClick);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.lblVin);
+            this.groupBox1.Controls.Add(this.txtVin);
+            this.groupBox1.Controls.Add(this.datBegin);
+            this.groupBox1.Controls.Add(this.datEnd);
+            this.groupBox1.Controls.Add(this.lblSaleMan);
+            this.groupBox1.Controls.Add(this.txtSaleMan);
+            this.groupBox1.Controls.Add(this.txtDH);
+            this.groupBox1.Controls.Add(this.lblDH);
+            this.groupBox1.Controls.Add(this.chbIsDate);
+            this.groupBox1.Controls.Add(this.labelX1);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.cmbStatus);
+            this.groupBox1.Controls.Add(this.lblStatus);
+            this.groupBox1.Controls.Add(this.lblMobile);
+            this.groupBox1.Controls.Add(this.lblCustName);
+            this.groupBox1.Controls.Add(this.txtCustName);
+            this.groupBox1.Controls.Add(this.txtMobile);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox1.Location = new System.Drawing.Point(0, 25);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(918, 93);
+            this.groupBox1.TabIndex = 38;
+            this.groupBox1.TabStop = false;
+            // 
+            // lblVin
+            // 
+            this.lblVin.AutoSize = true;
+            this.lblVin.Location = new System.Drawing.Point(697, 55);
+            this.lblVin.Name = "lblVin";
+            this.lblVin.Size = new System.Drawing.Size(37, 16);
+            this.lblVin.TabIndex = 37;
+            this.lblVin.Text = "V i n";
+            // 
+            // txtVin
+            // 
+            // 
+            // 
+            // 
+            this.txtVin.Border.Class = "TextBoxBorder";
+            this.txtVin.Location = new System.Drawing.Point(740, 53);
+            this.txtVin.Name = "txtVin";
+            this.txtVin.Size = new System.Drawing.Size(128, 21);
+            this.txtVin.TabIndex = 38;
+            this.txtVin.Tag = "F1S1";
+            // 
+            // datBegin
+            // 
+            this.datBegin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.datBegin.Location = new System.Drawing.Point(114, 23);
+            this.datBegin.Name = "datBegin";
+            this.datBegin.Size = new System.Drawing.Size(108, 21);
+            this.datBegin.TabIndex = 36;
+            // 
+            // datEnd
+            // 
+            this.datEnd.Checked = false;
+            this.datEnd.CustomFormat = "";
+            this.datEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.datEnd.Location = new System.Drawing.Point(251, 23);
+            this.datEnd.Name = "datEnd";
+            this.datEnd.Size = new System.Drawing.Size(104, 21);
+            this.datEnd.TabIndex = 35;
+            // 
+            // lblSaleMan
+            // 
+            this.lblSaleMan.AutoSize = true;
+            this.lblSaleMan.Location = new System.Drawing.Point(612, 24);
+            this.lblSaleMan.Name = "lblSaleMan";
+            this.lblSaleMan.Size = new System.Drawing.Size(56, 18);
+            this.lblSaleMan.TabIndex = 27;
+            this.lblSaleMan.Text = "业 务 员";
+            // 
+            // txtSaleMan
+            // 
+            // 
+            // 
+            // 
+            this.txtSaleMan.Border.Class = "TextBoxBorder";
+            this.txtSaleMan.Location = new System.Drawing.Point(668, 22);
+            this.txtSaleMan.Name = "txtSaleMan";
+            this.txtSaleMan.Size = new System.Drawing.Size(128, 21);
+            this.txtSaleMan.TabIndex = 28;
+            this.txtSaleMan.Tag = "F1S1";
+            // 
+            // txtDH
+            // 
+            // 
+            // 
+            // 
+            this.txtDH.Border.Class = "TextBoxBorder";
+            this.txtDH.Location = new System.Drawing.Point(459, 21);
+            this.txtDH.Name = "txtDH";
+            this.txtDH.Size = new System.Drawing.Size(128, 21);
+            this.txtDH.TabIndex = 26;
+            this.txtDH.Tag = "F1S1";
+            // 
+            // lblDH
+            // 
+            this.lblDH.AutoSize = true;
+            this.lblDH.Location = new System.Drawing.Point(413, 24);
+            this.lblDH.Name = "lblDH";
+            this.lblDH.Size = new System.Drawing.Size(44, 18);
+            this.lblDH.TabIndex = 25;
+            this.lblDH.Text = "单  号";
+            // 
+            // chbIsDate
+            // 
+            this.chbIsDate.AutoSize = true;
+            this.chbIsDate.Checked = true;
+            this.chbIsDate.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chbIsDate.Location = new System.Drawing.Point(368, 25);
+            this.chbIsDate.Name = "chbIsDate";
+            this.chbIsDate.Size = new System.Drawing.Size(15, 14);
+            this.chbIsDate.TabIndex = 24;
+            this.chbIsDate.UseVisualStyleBackColor = true;
+            this.chbIsDate.CheckedChanged += new System.EventHandler(this.chbIsDate_CheckedChanged);
+            // 
+            // labelX1
+            // 
+            this.labelX1.AutoSize = true;
+            this.labelX1.Location = new System.Drawing.Point(52, 24);
+            this.labelX1.Name = "labelX1";
+            this.labelX1.Size = new System.Drawing.Size(56, 18);
+            this.labelX1.TabIndex = 23;
+            this.labelX1.Text = "开单日期";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(228, 27);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(17, 12);
+            this.label1.TabIndex = 22;
+            this.label1.Text = "至";
+            // 
+            // cmbStatus
+            // 
+            this.cmbStatus.DisplayMember = "Text";
+            this.cmbStatus.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cmbStatus.FormattingEnabled = true;
+            this.cmbStatus.ItemHeight = 15;
+            this.cmbStatus.Items.AddRange(new object[] {
+            this.comboItem2,
+            this.comboItem3,
+            this.comboItem4,
+            this.comboItem1});
+            this.cmbStatus.Location = new System.Drawing.Point(546, 53);
+            this.cmbStatus.Name = "cmbStatus";
+            this.cmbStatus.Size = new System.Drawing.Size(128, 21);
+            this.cmbStatus.TabIndex = 19;
+            this.cmbStatus.Tag = "F1S1B1";
+            // 
+            // comboItem2
+            // 
+            this.comboItem2.Text = "开单";
+            // 
+            // comboItem3
+            // 
+            this.comboItem3.Text = "待审核";
+            // 
+            // comboItem4
+            // 
+            this.comboItem4.Text = "结算";
+            // 
+            // comboItem1
+            // 
+            this.comboItem1.Text = "完成";
+            // 
+            // lblStatus
+            // 
+            this.lblStatus.AutoSize = true;
+            this.lblStatus.Location = new System.Drawing.Point(489, 56);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(56, 18);
+            this.lblStatus.TabIndex = 18;
+            this.lblStatus.Text = "单据状态";
+            // 
+            // lblMobile
+            // 
+            this.lblMobile.AutoSize = true;
+            this.lblMobile.Location = new System.Drawing.Point(52, 56);
+            this.lblMobile.Name = "lblMobile";
+            this.lblMobile.Size = new System.Drawing.Size(56, 18);
+            this.lblMobile.TabIndex = 17;
+            this.lblMobile.Text = "手 机 号";
+            // 
+            // lblCustName
+            // 
+            this.lblCustName.AutoSize = true;
+            this.lblCustName.Location = new System.Drawing.Point(271, 57);
+            this.lblCustName.Name = "lblCustName";
+            this.lblCustName.Size = new System.Drawing.Size(56, 18);
+            this.lblCustName.TabIndex = 13;
+            this.lblCustName.Text = "客户姓名";
+            // 
+            // txtCustName
+            // 
+            // 
+            // 
+            // 
+            this.txtCustName.Border.Class = "TextBoxBorder";
+            this.txtCustName.Location = new System.Drawing.Point(328, 55);
+            this.txtCustName.Name = "txtCustName";
+            this.txtCustName.Size = new System.Drawing.Size(128, 21);
+            this.txtCustName.TabIndex = 14;
+            this.txtCustName.Tag = "F1S1";
+            // 
+            // txtMobile
+            // 
+            // 
+            // 
+            // 
+            this.txtMobile.Border.Class = "TextBoxBorder";
+            this.txtMobile.ForeColor = System.Drawing.Color.Red;
+            this.txtMobile.Location = new System.Drawing.Point(113, 55);
+            this.txtMobile.Name = "txtMobile";
+            this.txtMobile.Size = new System.Drawing.Size(128, 21);
+            this.txtMobile.TabIndex = 16;
+            this.txtMobile.Tag = "F1S1";
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tbtnQuery,
+            this.tbtnAdd,
+            this.tbtnOpen});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(918, 25);
+            this.toolStrip1.TabIndex = 35;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // tbtnQuery
+            // 
+            this.tbtnQuery.Image = ((System.Drawing.Image)(resources.GetObject("tbtnQuery.Image")));
+            this.tbtnQuery.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tbtnQuery.Name = "tbtnQuery";
+            this.tbtnQuery.Size = new System.Drawing.Size(52, 22);
+            this.tbtnQuery.Tag = "query";
+            this.tbtnQuery.Text = "查询";
+            this.tbtnQuery.Click += new System.EventHandler(this.tbtnQuery_Click);
+            // 
+            // tbtnAdd
+            // 
+            this.tbtnAdd.Image = ((System.Drawing.Image)(resources.GetObject("tbtnAdd.Image")));
+            this.tbtnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tbtnAdd.Name = "tbtnAdd";
+            this.tbtnAdd.Size = new System.Drawing.Size(52, 22);
+            this.tbtnAdd.Tag = "add";
+            this.tbtnAdd.Text = "新增";
+            this.tbtnAdd.Click += new System.EventHandler(this.tbtnAdd_Click);
+            // 
+            // tbtnOpen
+            // 
+            this.tbtnOpen.Image = ((System.Drawing.Image)(resources.GetObject("tbtnOpen.Image")));
+            this.tbtnOpen.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tbtnOpen.Name = "tbtnOpen";
+            this.tbtnOpen.Size = new System.Drawing.Size(52, 22);
+            this.tbtnOpen.Tag = "open";
+            this.tbtnOpen.Text = "打开";
+            this.tbtnOpen.Click += new System.EventHandler(this.tbtnOpen_Click);
+            // 
+            // bindingNavigator1
+            // 
+            this.bindingNavigator1.AddNewItem = this.bindingNavigatorAddNewItem;
+            this.bindingNavigator1.CountItem = this.bindingNavigatorCountItem;
+            this.bindingNavigator1.DeleteItem = this.bindingNavigatorDeleteItem;
+            this.bindingNavigator1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.bindingNavigator1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.bindingNavigatorMoveFirstItem,
+            this.bindingNavigatorMovePreviousItem,
+            this.bindingNavigatorSeparator,
+            this.bindingNavigatorPositionItem,
+            this.bindingNavigatorCountItem,
+            this.bindingNavigatorSeparator1,
+            this.bindingNavigatorMoveNextItem,
+            this.bindingNavigatorMoveLastItem,
+            this.bindingNavigatorSeparator2,
+            this.bindingNavigatorAddNewItem,
+            this.bindingNavigatorDeleteItem,
+            this.bindingNavigatorRecordCount});
+            this.bindingNavigator1.Location = new System.Drawing.Point(0, 406);
+            this.bindingNavigator1.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
+            this.bindingNavigator1.MoveLastItem = this.bindingNavigatorMoveLastItem;
+            this.bindingNavigator1.MoveNextItem = this.bindingNavigatorMoveNextItem;
+            this.bindingNavigator1.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
+            this.bindingNavigator1.Name = "bindingNavigator1";
+            this.bindingNavigator1.PositionItem = this.bindingNavigatorPositionItem;
+            this.bindingNavigator1.Size = new System.Drawing.Size(918, 25);
+            this.bindingNavigator1.TabIndex = 47;
+            this.bindingNavigator1.Text = "bindingNavigator1";
+            // 
+            // bindingNavigatorAddNewItem
+            // 
+            this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
+            this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
+            this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorAddNewItem.Text = "新添";
+            this.bindingNavigatorAddNewItem.Visible = false;
+            // 
+            // bindingNavigatorCountItem
+            // 
+            this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
+            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(32, 22);
+            this.bindingNavigatorCountItem.Text = "/ {0}";
+            this.bindingNavigatorCountItem.ToolTipText = "总项数";
+            // 
+            // bindingNavigatorDeleteItem
+            // 
+            this.bindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
+            this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
+            this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorDeleteItem.Text = "删除";
+            this.bindingNavigatorDeleteItem.Visible = false;
+            // 
+            // bindingNavigatorMoveFirstItem
+            // 
+            this.bindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem.Image")));
+            this.bindingNavigatorMoveFirstItem.Name = "bindingNavigatorMoveFirstItem";
+            this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMoveFirstItem.Text = "移到第一条记录";
+            // 
+            // bindingNavigatorMovePreviousItem
+            // 
+            this.bindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMovePreviousItem.Image")));
+            this.bindingNavigatorMovePreviousItem.Name = "bindingNavigatorMovePreviousItem";
+            this.bindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMovePreviousItem.Text = "移到上一条记录";
+            // 
+            // bindingNavigatorSeparator
+            // 
+            this.bindingNavigatorSeparator.Name = "bindingNavigatorSeparator";
+            this.bindingNavigatorSeparator.Size = new System.Drawing.Size(6, 25);
+            // 
+            // bindingNavigatorPositionItem
+            // 
+            this.bindingNavigatorPositionItem.AccessibleName = "位置";
+            this.bindingNavigatorPositionItem.AutoSize = false;
+            this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
+            this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 23);
+            this.bindingNavigatorPositionItem.Text = "0";
+            this.bindingNavigatorPositionItem.ToolTipText = "当前位置";
+            // 
+            // bindingNavigatorSeparator1
+            // 
+            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
+            this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // bindingNavigatorMoveNextItem
+            // 
+            this.bindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveNextItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveNextItem.Image")));
+            this.bindingNavigatorMoveNextItem.Name = "bindingNavigatorMoveNextItem";
+            this.bindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveNextItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMoveNextItem.Text = "移到下一条记录";
+            // 
+            // bindingNavigatorMoveLastItem
+            // 
+            this.bindingNavigatorMoveLastItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveLastItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveLastItem.Image")));
+            this.bindingNavigatorMoveLastItem.Name = "bindingNavigatorMoveLastItem";
+            this.bindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMoveLastItem.Text = "移到最后一条记录";
+            // 
+            // bindingNavigatorSeparator2
+            // 
+            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
+            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // bindingNavigatorRecordCount
+            // 
+            this.bindingNavigatorRecordCount.Name = "bindingNavigatorRecordCount";
+            this.bindingNavigatorRecordCount.Size = new System.Drawing.Size(15, 22);
+            this.bindingNavigatorRecordCount.Text = "0";
+            // 
+            // dataSet11
+            // 
+            this.dataSet11.DataSetName = "DataSet1";
+            this.dataSet11.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // dataSet12
+            // 
+            this.dataSet12.DataSetName = "DataSet1";
+            this.dataSet12.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // dataSet13
+            // 
+            this.dataSet13.DataSetName = "DataSet1";
+            this.dataSet13.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // DH
+            // 
+            this.DH.DataPropertyName = "DH";
+            this.DH.HeaderText = "单号";
+            this.DH.Name = "DH";
+            // 
+            // SaleType
+            // 
+            this.SaleType.DataPropertyName = "SaleType";
+            this.SaleType.HeaderText = "类型";
+            this.SaleType.Name = "SaleType";
+            // 
+            // Status1
+            // 
+            this.Status1.DataPropertyName = "Status";
+            this.Status1.HeaderText = "状态";
+            this.Status1.Name = "Status1";
+            // 
+            // OrderDate
+            // 
+            this.OrderDate.DataPropertyName = "OrderDate";
+            this.OrderDate.HeaderText = "订单日期";
+            this.OrderDate.Name = "OrderDate";
+            this.OrderDate.Visible = false;
+            // 
+            // CreateDate
+            // 
+            this.CreateDate.DataPropertyName = "CreateDate";
+            this.CreateDate.HeaderText = "开单日期";
+            this.CreateDate.Name = "CreateDate";
+            // 
+            // CustName
+            // 
+            this.CustName.DataPropertyName = "CustName";
+            this.CustName.HeaderText = "客户姓名";
+            this.CustName.Name = "CustName";
+            // 
+            // CustNameM
+            // 
+            this.CustNameM.DataPropertyName = "CustNameM";
+            this.CustNameM.HeaderText = "变更客户名";
+            this.CustNameM.Name = "CustNameM";
+            // 
+            // Mobile
+            // 
+            this.Mobile.DataPropertyName = "Mobile";
+            this.Mobile.HeaderText = "手机号";
+            this.Mobile.Name = "Mobile";
+            // 
+            // SaleMan
+            // 
+            this.SaleMan.DataPropertyName = "SaleMan";
+            this.SaleMan.HeaderText = "业务员";
+            this.SaleMan.Name = "SaleMan";
+            // 
+            // Vin
+            // 
+            this.Vin.DataPropertyName = "Vin";
+            this.Vin.HeaderText = "Vin";
+            this.Vin.Name = "Vin";
+            // 
+            // CarSer
+            // 
+            this.CarSer.DataPropertyName = "CarSer";
+            this.CarSer.HeaderText = "车系";
+            this.CarSer.Name = "CarSer";
+            // 
+            // CarModel
+            // 
+            this.CarModel.DataPropertyName = "CarModel";
+            this.CarModel.HeaderText = "车型";
+            this.CarModel.Name = "CarModel";
+            // 
+            // Color
+            // 
+            this.Color.DataPropertyName = "Color";
+            this.Color.HeaderText = "车身颜色";
+            this.Color.Name = "Color";
+            // 
+            // Displacement
+            // 
+            this.Displacement.DataPropertyName = "Displacement";
+            this.Displacement.HeaderText = "排气量";
+            this.Displacement.Name = "Displacement";
+            this.Displacement.Visible = false;
+            // 
+            // Transmission
+            // 
+            this.Transmission.DataPropertyName = "Transmission";
+            this.Transmission.HeaderText = "变速器";
+            this.Transmission.Name = "Transmission";
+            this.Transmission.Visible = false;
+            // 
+            // CheckMan
+            // 
+            this.CheckMan.DataPropertyName = "CheckMan";
+            this.CheckMan.HeaderText = "审核人";
+            this.CheckMan.Name = "CheckMan";
+            // 
+            // TotalPrice
+            // 
+            this.TotalPrice.DataPropertyName = "TotalPrice";
+            this.TotalPrice.HeaderText = "总价";
+            this.TotalPrice.Name = "TotalPrice";
+            // 
+            // AmountReceive
+            // 
+            this.AmountReceive.DataPropertyName = "AmountReceive";
+            this.AmountReceive.HeaderText = "已收车款";
+            this.AmountReceive.Name = "AmountReceive";
+            // 
+            // frmCarSaleQuery
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(918, 431);
+            this.Controls.Add(this.dgCarSale);
+            this.Controls.Add(this.bindingNavigator1);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.toolStrip1);
+            this.Name = "frmCarSaleQuery";
+            this.Text = "销售单据查询";
+            this.Load += new System.EventHandler(this.frmDlgCarSaleQuery_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgCarSale)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).EndInit();
+            this.bindingNavigator1.ResumeLayout(false);
+            this.bindingNavigator1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSet11)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSet12)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSet13)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton tbtnQuery;
+        private DevComponents.DotNetBar.Controls.DataGridViewX dgCarSale;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cmbStatus;
+        private DevComponents.Editors.ComboItem comboItem2;
+        private DevComponents.Editors.ComboItem comboItem3;
+        private DevComponents.Editors.ComboItem comboItem4;
+        private DevComponents.DotNetBar.LabelX lblStatus;
+        private DevComponents.DotNetBar.LabelX lblMobile;
+        private DevComponents.DotNetBar.LabelX lblCustName;
+        private DevComponents.DotNetBar.Controls.TextBoxX txtCustName;
+        private DevComponents.DotNetBar.Controls.TextBoxX txtMobile;
+        private System.Windows.Forms.ToolStripButton tbtnAdd;
+        private System.Windows.Forms.ToolStripButton tbtnOpen;
+        private DevComponents.DotNetBar.LabelX labelX1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox chbIsDate;
+        private DevComponents.DotNetBar.Controls.TextBoxX txtDH;
+        private DevComponents.DotNetBar.LabelX lblDH;
+        private DataSet1 dataSet11;
+        private DataSet1 dataSet12;
+        private DataSet1 dataSet13;
+        private System.Windows.Forms.BindingNavigator bindingNavigator1;
+        private System.Windows.Forms.ToolStripButton bindingNavigatorAddNewItem;
+        private System.Windows.Forms.ToolStripLabel bindingNavigatorCountItem;
+        private System.Windows.Forms.ToolStripButton bindingNavigatorDeleteItem;
+        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveFirstItem;
+        private System.Windows.Forms.ToolStripButton bindingNavigatorMovePreviousItem;
+        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator;
+        private System.Windows.Forms.ToolStripTextBox bindingNavigatorPositionItem;
+        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator1;
+        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveNextItem;
+        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
+        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
+        private System.Windows.Forms.ToolStripLabel bindingNavigatorRecordCount;
+        private DevComponents.DotNetBar.LabelX lblSaleMan;
+        private DevComponents.DotNetBar.Controls.TextBoxX txtSaleMan;
+        private System.Windows.Forms.DateTimePicker datBegin;
+        private System.Windows.Forms.DateTimePicker datEnd;
+        private DevComponents.DotNetBar.LabelX lblVin;
+        private DevComponents.DotNetBar.Controls.TextBoxX txtVin;
+        private DevComponents.Editors.ComboItem comboItem1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DH;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SaleType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Status1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn OrderDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CreateDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CustName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CustNameM;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Mobile;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SaleMan;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Vin;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CarSer;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CarModel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Color;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Displacement;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Transmission;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CheckMan;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TotalPrice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AmountReceive;
+    }
+}

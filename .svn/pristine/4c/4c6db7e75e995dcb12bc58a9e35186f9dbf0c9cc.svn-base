@@ -1,0 +1,218 @@
+﻿using Bll;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Auto4SErp
+{
+    public partial class frmExtend : ifrmBase
+    {
+        private IExtend mIExtend = BllFactory.GetExtendBll();
+        private string extendtype = "";
+
+        private string limitContent = "";
+
+        public string LimitContent
+        {
+            get { return limitContent; }
+            set { limitContent = value; }
+        }
+
+        public frmExtend()
+        {
+            this.StartPosition = FormStartPosition.CenterScreen;
+            InitializeComponent();
+        }
+
+
+        private void BindExtendType()
+        {
+            extendtype = this.txtType.Text.Trim();
+            DataTable dt = mIExtend.GetExtendtypes();
+ 
+            dt.Columns["extendname"].ColumnName = "类别";
+            DataView dv = new DataView(dt);
+            if (extendtype != "")
+            {
+                dv.RowFilter = " 类别 like '%" + extendtype + "%'";
+            }
+
+            dgvExtendType.DataSource = dv;
+            dgvExtendType.Columns["id"].Visible = false;
+            dgvExtendType.ClearSelection();
+            this.dgvContent.DataSource = null;
+        }
+
+        private void BindExtendContent(int typeid)
+        {
+
+            DataTable dt = mIExtend.GetExtendcontents();
+            dt.Columns.Remove("extendname");
+            dt.Columns["content"].ColumnName = "名称";
+
+            DataView dv = new DataView(dt);
+            dv.RowFilter = " typeid=" + typeid;
+            
+            this.dgvContent.DataSource=null;
+            this.dgvContent.DataSource = dv;
+            this.dgvContent.Columns["typeid"].Visible = false;
+            this.dgvContent.Columns["id"].Visible = false;
+           
+        }
+
+        private void frmExtend_Load(object sender, EventArgs e)
+        {
+            BindExtendType();
+            if (limitContent.Length > 0)
+            {
+                toolStrip1.Enabled = false;
+                ModifyToolStripMenuItem1.Enabled = false;
+                DelTypeToolStripMenuItem1.Enabled = false;
+            }
+        }
+
+
+
+        private void dgvExtendType_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                object obj=dgvExtendType.Rows[e.RowIndex].Cells["id"].Value;
+                if(obj!=null){
+                    BindExtendContent(Convert.ToInt32(obj));
+                }
+            }
+        }
+
+  
+  
+     
+
+        private void AddTypeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmDlgExtendType frm = new frmDlgExtendType();
+
+            frm.setRefreshDelegate(delegate(bool isR)
+            {
+                if (isR)
+                {
+                    BindExtendType();
+                   
+                }
+            });
+            frm.ShowDialogEx();
+
+        }
+
+       
+
+        private void UpdateTypeToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (dgvExtendType.Rows.Count > 0 && dgvExtendType.CurrentCell.RowIndex >= 0)
+            {
+                object obj = dgvExtendType.Rows[dgvExtendType.CurrentCell.RowIndex].Cells["id"].Value;
+                int typeid = Convert.ToInt32(obj);
+                frmDlgExtendType frm = new frmDlgExtendType();
+                frm.Typeid = typeid;
+                frm.setRefreshDelegate(delegate(bool isR)
+                {
+                    if (isR)
+                    {
+                        BindExtendType();
+                    }
+                });
+                frm.ShowDialogEx();
+
+
+        
+            }
+        }
+
+        private void DelTypeToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (dgvExtendType.Rows.Count > 0 && dgvExtendType.CurrentCell.RowIndex >= 0)
+            {
+                object obj = dgvExtendType.Rows[dgvExtendType.CurrentCell.RowIndex].Cells["id"].Value;
+
+                int typeid = Convert.ToInt32(obj);
+                if (MessageBox.Show("是否确认删除?", "提示", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    bool result = mIExtend.DelExtendtype(typeid);
+                    if (result)
+                    {
+                        BindExtendType();
+                    }
+                }
+            }
+        }
+
+        private void AddContentToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dgvExtendType.Rows.Count > 0 && dgvExtendType.CurrentCell.RowIndex >= 0)
+            {
+                object obj = dgvExtendType.Rows[dgvExtendType.CurrentCell.RowIndex].Cells["id"].Value;
+                int typeid = Convert.ToInt32(obj);
+                string strcontent = dgvExtendType.Rows[dgvExtendType.CurrentCell.RowIndex].Cells[1].Value.ToString();
+                if (!string.IsNullOrEmpty(limitContent))
+                {
+                    if (strcontent != limitContent)
+                        return;
+                }
+
+                frmDlgExtendcontent frm = new frmDlgExtendcontent();
+                frm.Extendtypeid = typeid;
+                frm.setRefreshDelegate(delegate(bool isR)
+                {
+                    if (isR)
+                    {
+                        BindExtendContent(typeid);
+                    }
+                });
+                frm.ShowDialogEx();
+            }
+        }
+
+        private void UpdateContentToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dgvContent.Rows.Count > 0 && dgvContent.CurrentCell.RowIndex >= 0)
+            {
+                object obj = dgvContent.Rows[dgvContent.CurrentCell.RowIndex].Cells["id"].Value;
+                int contentid = Convert.ToInt32(obj);
+                frmDlgExtendcontent frm = new frmDlgExtendcontent();
+                frm.Extendcontentid = contentid;
+                frm.Show();
+            }
+        }
+
+        private void DelContentToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dgvContent.Rows.Count > 0 && dgvContent.CurrentCell.RowIndex >= 0)
+            {
+                object obj = dgvContent.Rows[dgvContent.CurrentCell.RowIndex].Cells["id"].Value;
+                object obj2 = dgvContent.Rows[dgvContent.CurrentCell.RowIndex].Cells["typeid"].Value;
+                int contentid = Convert.ToInt32(obj);
+                int typeid = Convert.ToInt32(obj2);
+                if (MessageBox.Show("是否确认删除?", "提示", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    bool result = mIExtend.DelExtendcontent(contentid);
+                    if (result)
+                    {
+                        BindExtendContent(typeid);
+                    }
+                }
+            }
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            BindExtendType();
+        }
+
+    }
+}

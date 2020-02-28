@@ -1,0 +1,364 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{87746B58-0460-40E8-A1C4-95B152185C94}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Bll</RootNamespace>
+    <AssemblyName>Bll</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\..\Users\xc\Desktop\pdll\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ASSumInfo.cs" />
+    <Compile Include="BllFactory.cs" />
+    <Compile Include="CarOfCustBll.cs" />
+    <Compile Include="DataTask.cs" />
+    <Compile Include="Else\WeatherBll.cs" />
+    <Compile Include="FinanceBll.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ICarOfCust.cs" />
+    <Compile Include="IVisit.cs" />
+    <Compile Include="JsonData.cs" />
+    <Compile Include="P2P\IP2P.cs" />
+    <Compile Include="P2P\P2PBll.cs" />
+    <Compile Include="P2P\P2PWebTask.cs" />
+    <Compile Include="JsonPageInfo.cs" />
+    <Compile Include="Personnel\AwardBll.cs" />
+    <Compile Include="Personnel\DepartmentBllWS.cs" />
+    <Compile Include="Personnel\FunctionBllWS.cs" />
+    <Compile Include="IBatchIn.cs" />
+    <Compile Include="IVip.cs" />
+    <Compile Include="Personnel\IAward.cs" />
+    <Compile Include="Personnel\IOrgan.cs" />
+    <Compile Include="Personnel\ISenstive.cs" />
+    <Compile Include="Personnel\OrganBllWS.cs" />
+    <Compile Include="Personnel\PositionBllWS.cs" />
+    <Compile Include="Personnel\SenstiveBll.cs" />
+    <Compile Include="Personnel\StaffBllWS.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Repair\AccElseOutBll.cs" />
+    <Compile Include="Repair\AccessoryBll.cs" />
+    <Compile Include="Repair\AccessoryInBll.cs" />
+    <Compile Include="Repair\AccessoryMatchBll.cs" />
+    <Compile Include="Repair\ClaimBll.cs" />
+    <Compile Include="Repair\ConvertBll.cs" />
+    <Compile Include="Repair\IAccElseOut.cs" />
+    <Compile Include="Repair\IAccessory.cs" />
+    <Compile Include="Repair\IAccessoryIn.cs" />
+    <Compile Include="Repair\IAccessoryMatchBll.cs" />
+    <Compile Include="Repair\IClaim.cs" />
+    <Compile Include="Repair\IRepair.cs" />
+    <Compile Include="Repair\IRepairAccessory.cs" />
+    <Compile Include="Repair\IRepairItem.cs" />
+    <Compile Include="Repair\IRepItemPrice.cs" />
+    <Compile Include="Repair\RepairAccessoryBll.cs" />
+    <Compile Include="Repair\RepairBll.cs" />
+    <Compile Include="Repair\RepairItemBll.cs" />
+    <Compile Include="Repair\RepItemPriceBll.cs" />
+    <Compile Include="Sale\CarDocBll.cs" />
+    <Compile Include="Sale\CarModelBll.cs" />
+    <Compile Include="Sale\CarSaleBll.cs" />
+    <Compile Include="Sale\CarSerBll.cs" />
+    <Compile Include="Sale\CustVistBll.cs" />
+    <Compile Include="CustomerBll.cs" />
+    <Compile Include="DictionaryBll.cs" />
+    <Compile Include="ExtendBll.cs" />
+    <Compile Include="Sale\ICarDoc.cs" />
+    <Compile Include="Sale\CarStockBll.cs" />
+    <Compile Include="Sale\ICarSale.cs" />
+    <Compile Include="Sale\ICarStock.cs" />
+    <Compile Include="Sale\ICustVist.cs" />
+    <Compile Include="ICustomer.cs" />
+    <Compile Include="Personnel\IDepartment.cs" />
+    <Compile Include="IDiction.cs" />
+    <Compile Include="IExtend.cs" />
+    <Compile Include="IFinance.cs" />
+    <Compile Include="IFucntion.cs" />
+    <Compile Include="Personnel\IOperateMan.cs" />
+    <Compile Include="Personnel\IPosition.cs" />
+    <Compile Include="Personnel\IStaff.cs" />
+    <Compile Include="Personnel\OperateManBll.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServerCheckBll.cs" />
+    <Compile Include="SLSumInfo.cs" />
+    <Compile Include="Task\GFinanceTask.cs" />
+    <Compile Include="Task\GRepMonthTask.cs" />
+    <Compile Include="Task\GRepYearTask.cs" />
+    <Compile Include="Task\GSaleMonthTask.cs" />
+    <Compile Include="Task\GSaleYearTask.cs" />
+    <Compile Include="Task\GVisitMonthTask.cs" />
+    <Compile Include="Task\GVisitYearTask.cs" />
+    <Compile Include="VipBll.cs" />
+    <Compile Include="VisitBll.cs" />
+    <Compile Include="Web References\cn.com.webxml.www\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\departmentws\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\functionws\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\localhost\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\organws\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\positionws\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\senstivews\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="WebTask.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Comm\Comm.csproj">
+      <Project>{7c10eb0c-f689-470f-906b-b852edbabfc9}</Project>
+      <Name>Comm</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DBUtil\DBUtil.csproj">
+      <Project>{567c9ba6-6f04-4fb9-a607-001d8960214b}</Project>
+      <Name>DBUtil</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{c028e604-0975-4234-948d-71873c51ae17}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\cn.com.webxml.www\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\cn.com.webxml.www\WeatherWebService.wsdl" />
+    <None Include="Web References\departmentws\DepartmentOfService.wsdl" />
+    <None Include="Web References\departmentws\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\functionws\FunctionOfService.wsdl" />
+    <None Include="Web References\functionws\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\localhost\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\localhost\Staff.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\localhost\StaffOfService.wsdl" />
+    <None Include="Web References\organws\OrganOfService.wsdl" />
+    <None Include="Web References\organws\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\positionws\PositionOfService.wsdl" />
+    <None Include="Web References\positionws\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\senstivews\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\senstivews\SenstiveOfService.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://221.130.108.114:8082/Auto4SERP/OrganOfService.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\organws\</RelPath>
+      <UpdateFromURL>http://221.130.108.114:8082/Auto4SERP/OrganOfService.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Bll_organws_OrganOfService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://221.130.108.114:8082/Auto4SERP/PositionOfService.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\positionws\</RelPath>
+      <UpdateFromURL>http://221.130.108.114:8082/Auto4SERP/PositionOfService.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Bll_positionws_PositionOfService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://221.130.108.114:8082/Auto4SERP/SenstiveOfService.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\senstivews\</RelPath>
+      <UpdateFromURL>http://221.130.108.114:8082/Auto4SERP/SenstiveOfService.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Bll_senstivews_SenstiveOfService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://221.130.108.114:8082/Auto4SERP/StaffOfService.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\localhost\</RelPath>
+      <UpdateFromURL>http://221.130.108.114:8082/Auto4SERP/StaffOfService.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Bll_localhost_StaffOfService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://221.130.108.114:8082/Auto4SERP/DepartmentOfService.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\departmentws\</RelPath>
+      <UpdateFromURL>http://221.130.108.114:8082/Auto4SERP/DepartmentOfService.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Bll_departmentws_DepartmentOfService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://221.130.108.114:8082/Auto4SERP/FunctionOfService.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\functionws\</RelPath>
+      <UpdateFromURL>http://221.130.108.114:8082/Auto4SERP/FunctionOfService.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Bll_functionws_FunctionOfService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://www.webxml.com.cn/WebServices/WeatherWebService.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\cn.com.webxml.www\</RelPath>
+      <UpdateFromURL>http://www.webxml.com.cn/WebServices/WeatherWebService.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Bll_cn_com_webxml_www_WeatherWebService</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\cn.com.webxml.www\WeatherWebService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\departmentws\DepartmentOfService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\functionws\FunctionOfService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\localhost\StaffOfService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\organws\OrganOfService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\positionws\PositionOfService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\senstivews\SenstiveOfService.disco" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

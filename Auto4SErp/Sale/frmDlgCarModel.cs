@@ -1,0 +1,199 @@
+﻿using Bll;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using Bll.Sale;
+namespace Auto4SErp.Sale
+{
+    public partial class frmDlgCarModel : ifrmBase
+    {
+        private int carmodelId = 0;
+
+
+        private ICarDoc mICarDoc = BllFactory.GetCarDocBll();
+        private int mSerIDSeled = 0;
+
+        public int CarSer
+        {
+            get
+            {
+                return mSerIDSeled;
+            }
+            set
+            {
+
+                mSerIDSeled = value;
+            }
+
+        }
+
+
+        public frmDlgCarModel()
+        {
+            this.StartPosition = FormStartPosition.CenterScreen;
+            InitializeComponent();
+            //  dsAll = mICarDoc.GetCarBrandAll();
+        }
+
+        public int CarModelId
+        {
+            get { return carmodelId; }
+            set { carmodelId = value; }
+        }
+
+
+        //private void BindBrand()
+        //{
+        //    DataTable dt =dsAll.Tables["carbrand"];
+        //    if (dt.Rows.Count > 0)
+        //    {
+        //        this.cmbBrand.DataSource = null;
+        //        this.cmbBrand.DisplayMember = "brandname";
+        //        this.cmbBrand.ValueMember = "id";
+        //        this.cmbBrand.DataSource = dt;
+
+
+        //    }
+        //}
+
+        //private void BindCarSer(int brandid)
+        //{
+        //    DataView dv =new DataView( dsAll.Tables["carser"]);
+        //    dv.RowFilter ="carbrand="+brandid;
+        //    if (dv.Count > 0)
+        //    {
+        //        this.txtCarSer.DataSource=null;
+        //        this.txtCarSer.DisplayMember = "carser";
+        //        this.txtCarSer.ValueMember = "id";
+        //        this.txtCarSer.DataSource = dv;
+
+        //    }
+        //}
+        private void frmDlgCarModel_Load(object sender, EventArgs e)
+        {
+            // BindBrand();
+            //if (carmodelId > 0)
+            //{
+            //    DataTable dt = mICarDoc.GetCarModel(carmodelId);
+            //    if (dt.Rows.Count > 0)
+            //    {
+            //        DataRow dr=dt.Rows[0];
+            //        int carserid=Convert.ToInt32(dr["carser"]);
+
+            //        DataTable dtcarser = mICarDoc.GetCarSer(carserid);
+            //        if (dtcarser.Rows.Count > 0)
+            //        {
+
+            //            DataRow drcarser = dtcarser.Rows[0];
+            //            int brandid = Convert.ToInt32(drcarser["carbrand"]);
+            //            this.cmbBrand.SelectedValue = brandid;
+            //            //BindCarSer(brandid);
+            //            this.txtCarSer.SelectedValue = carserid;
+            //        }
+            //    }
+            //}
+
+
+            if (carmodelId > 0)
+            {
+
+                DataTable dt = mICarDoc.GetCarModel(carmodelId);
+                if (dt.Rows.Count > 0)
+                {
+                    DataRow dr = dt.Rows[0];
+                    this.txtCarModel.Text = dr["carmodel"].ToString();
+                    this.txtCarSer.Text = dr["carsername"].ToString();
+                    mSerIDSeled = int.Parse(dr["carser"].ToString());
+                }
+            }
+
+            //string maxid= mICarDoc.GetMaxCarModelID(CarSer);
+            //maxid = (int.Parse(maxid) + 1).ToString();
+            txtid.Text = getMaxID();
+        }
+
+
+        private string getMaxID()
+        {
+            string maxid = mICarDoc.GetMaxCarModelID(CarSer);
+            maxid = (int.Parse(maxid) + 1).ToString();
+            return maxid;
+
+        }
+
+        private void cmbBrand_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            //      int brandid = Convert.ToInt32(cmbBrand.SelectedValue);
+            //  BindCarSer(brandid);
+
+
+        }
+
+        private void btnSel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void DoResultFromSuperSel(object obj)
+        {
+            string result = (string)obj;
+            string[] strtempl = result.Split('_');
+            mSerIDSeled = int.Parse(strtempl[1]);
+            txtCarSer.Text = strtempl[2];
+
+        }
+
+        private void btnOK_Click(object sender, EventArgs e)
+        {
+            string carmodel = this.txtCarModel.Text.Trim();
+            if (carmodel != "")
+            {
+                bool result = false;
+
+                if (carmodelId > 0)
+                {
+
+                    result = mICarDoc.UpdateCarModel(carmodel, mSerIDSeled, carmodelId);
+                    IsModify = true;
+                    this.Close();
+                }
+                else
+                {
+                    if (mSerIDSeled > 0)
+                    {
+                        result = mICarDoc.AddCarModel(carmodel, mSerIDSeled, txtid.Text);
+                        IsModify = true;
+                        txtCarModel.Text = "";
+                        txtid.Text = getMaxID();
+                    }
+
+                }
+
+
+            }
+        }
+
+        private void btnCustSel_Click(object sender, EventArgs e)
+        {
+            Point pt = this.Location;
+            frmDlgCarSuperSel frm = new frmDlgCarSuperSel();
+            Point NewPoint = new Point(pt.X + this.Width, pt.Y - 50);
+            frm.Location = NewPoint;
+            frm.Layer = 1;
+            frm.setTransferDelegate(new TransferDelegate(this.DoResultFromSuperSel));
+            frm.ShowDialog();
+        }
+
+        private void labModel_Click(object sender, EventArgs e)
+        {
+
+        }
+    }
+}

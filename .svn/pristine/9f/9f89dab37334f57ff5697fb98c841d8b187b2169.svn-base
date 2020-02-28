@@ -1,0 +1,19 @@
+﻿using System;
+using System.Collections.Generic;
+using Model;
+namespace Bll.Repair
+{
+    public interface IAccessoryIn
+    {
+        void AddAccInD(string dh, string itemcode,string inprice);
+        int DelAccInH(string dh);
+        System.Data.DataTable GetAccInDs(string dh);
+        Model.AccInH GetAccInHByDH(string dh);
+        System.Data.DataTable GetAccInHsOfQuery(string strBegin, string strEnd, List<Model.SqlElement> list, int PageIndex, int PageSize, out int RecordCount, out int PageCount);
+        string GetDHOfAddAccIn(AccInH obj);
+        void UpdateAccIn(Model.AccInH obj);
+        void UpdateAccInD(string dh, string xh, string amount, string InPrice);
+        void DelAccInD(string dh, string xh);
+    
+    }
+}

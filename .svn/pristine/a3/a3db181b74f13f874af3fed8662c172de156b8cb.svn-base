@@ -1,0 +1,437 @@
+﻿namespace Auto4SErp.Repair
+{
+    partial class frmDlgRepItem
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            System.Windows.Forms.PictureBox btnAdd;
+            System.Windows.Forms.PictureBox btnFindItem;
+            System.Windows.Forms.PictureBox btnFindStaff;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmDlgRepItem));
+            this.dbiWorkHPrice = new DevComponents.Editors.DoubleInput();
+            this.cmbWorkMan = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.dbiActWorkH = new DevComponents.Editors.DoubleInput();
+            this.dbiEmpWorkH = new DevComponents.Editors.DoubleInput();
+            this.txtCarLevel = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.lblCarLevel = new DevComponents.DotNetBar.LabelX();
+            this.cmbTypeOfWork = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.comboItem1 = new DevComponents.Editors.ComboItem();
+            this.comboItem2 = new DevComponents.Editors.ComboItem();
+            this.comboItem3 = new DevComponents.Editors.ComboItem();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.btnOK = new System.Windows.Forms.ToolStripButton();
+            this.txtFaultReason = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.txtFaultDescribe = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.lblTypeOfWork = new DevComponents.DotNetBar.LabelX();
+            this.lblWorkMan = new DevComponents.DotNetBar.LabelX();
+            this.lblFaultReason = new DevComponents.DotNetBar.LabelX();
+            this.lblFaultDescribe = new DevComponents.DotNetBar.LabelX();
+            this.lblActWorkH = new DevComponents.DotNetBar.LabelX();
+            this.lblEmpWorkH = new DevComponents.DotNetBar.LabelX();
+            this.lblWorkHPrice = new DevComponents.DotNetBar.LabelX();
+            this.lblItemCode = new DevComponents.DotNetBar.LabelX();
+            this.txtItemCode = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.txtItemName = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.lblItemName = new DevComponents.DotNetBar.LabelX();
+            btnAdd = new System.Windows.Forms.PictureBox();
+            btnFindItem = new System.Windows.Forms.PictureBox();
+            btnFindStaff = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(btnAdd)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(btnFindItem)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(btnFindStaff)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dbiWorkHPrice)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dbiActWorkH)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dbiEmpWorkH)).BeginInit();
+            this.toolStrip1.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // btnAdd
+            // 
+            btnAdd.BackgroundImage = global::Auto4SErp.Properties.Resources.cadd;
+            btnAdd.Cursor = System.Windows.Forms.Cursors.Hand;
+            btnAdd.Location = new System.Drawing.Point(231, 189);
+            btnAdd.Name = "btnAdd";
+            btnAdd.Size = new System.Drawing.Size(16, 15);
+            btnAdd.TabIndex = 122;
+            btnAdd.TabStop = false;
+            btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            // 
+            // btnFindItem
+            // 
+            btnFindItem.BackgroundImage = global::Auto4SErp.Properties.Resources.smallquery;
+            btnFindItem.Cursor = System.Windows.Forms.Cursors.Hand;
+            btnFindItem.Location = new System.Drawing.Point(229, 47);
+            btnFindItem.Name = "btnFindItem";
+            btnFindItem.Size = new System.Drawing.Size(16, 16);
+            btnFindItem.TabIndex = 114;
+            btnFindItem.TabStop = false;
+            btnFindItem.Click += new System.EventHandler(this.btnFindItem_Click_1);
+            // 
+            // btnFindStaff
+            // 
+            btnFindStaff.BackgroundImage = global::Auto4SErp.Properties.Resources.smallquery;
+            btnFindStaff.Cursor = System.Windows.Forms.Cursors.Hand;
+            btnFindStaff.Location = new System.Drawing.Point(253, 189);
+            btnFindStaff.Name = "btnFindStaff";
+            btnFindStaff.Size = new System.Drawing.Size(16, 16);
+            btnFindStaff.TabIndex = 113;
+            btnFindStaff.TabStop = false;
+            btnFindStaff.Visible = false;
+            btnFindStaff.Click += new System.EventHandler(this.btnFindStaff_Click);
+            // 
+            // dbiWorkHPrice
+            // 
+            // 
+            // 
+            // 
+            this.dbiWorkHPrice.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.dbiWorkHPrice.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
+            this.dbiWorkHPrice.Enabled = false;
+            this.dbiWorkHPrice.Increment = 1D;
+            this.dbiWorkHPrice.Location = new System.Drawing.Point(97, 80);
+            this.dbiWorkHPrice.Name = "dbiWorkHPrice";
+            this.dbiWorkHPrice.ShowUpDown = true;
+            this.dbiWorkHPrice.Size = new System.Drawing.Size(128, 21);
+            this.dbiWorkHPrice.TabIndex = 123;
+            // 
+            // cmbWorkMan
+            // 
+            this.cmbWorkMan.DisplayMember = "Text";
+            this.cmbWorkMan.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cmbWorkMan.FormattingEnabled = true;
+            this.cmbWorkMan.ItemHeight = 15;
+            this.cmbWorkMan.Location = new System.Drawing.Point(97, 187);
+            this.cmbWorkMan.Name = "cmbWorkMan";
+            this.cmbWorkMan.Size = new System.Drawing.Size(128, 21);
+            this.cmbWorkMan.TabIndex = 119;
+            // 
+            // dbiActWorkH
+            // 
+            // 
+            // 
+            // 
+            this.dbiActWorkH.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.dbiActWorkH.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
+            this.dbiActWorkH.Enabled = false;
+            this.dbiActWorkH.Increment = 1D;
+            this.dbiActWorkH.Location = new System.Drawing.Point(97, 114);
+            this.dbiActWorkH.Name = "dbiActWorkH";
+            this.dbiActWorkH.ShowUpDown = true;
+            this.dbiActWorkH.Size = new System.Drawing.Size(128, 21);
+            this.dbiActWorkH.TabIndex = 118;
+            // 
+            // dbiEmpWorkH
+            // 
+            // 
+            // 
+            // 
+            this.dbiEmpWorkH.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.dbiEmpWorkH.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
+            this.dbiEmpWorkH.Enabled = false;
+            this.dbiEmpWorkH.Increment = 1D;
+            this.dbiEmpWorkH.Location = new System.Drawing.Point(358, 80);
+            this.dbiEmpWorkH.Name = "dbiEmpWorkH";
+            this.dbiEmpWorkH.ShowUpDown = true;
+            this.dbiEmpWorkH.Size = new System.Drawing.Size(128, 21);
+            this.dbiEmpWorkH.TabIndex = 117;
+            // 
+            // txtCarLevel
+            // 
+            // 
+            // 
+            // 
+            this.txtCarLevel.Border.Class = "TextBoxBorder";
+            this.txtCarLevel.Location = new System.Drawing.Point(358, 114);
+            this.txtCarLevel.Name = "txtCarLevel";
+            this.txtCarLevel.ReadOnly = true;
+            this.txtCarLevel.Size = new System.Drawing.Size(128, 21);
+            this.txtCarLevel.TabIndex = 116;
+            this.txtCarLevel.Tag = "N";
+            // 
+            // lblCarLevel
+            // 
+            this.lblCarLevel.AutoSize = true;
+            this.lblCarLevel.Location = new System.Drawing.Point(296, 117);
+            this.lblCarLevel.Name = "lblCarLevel";
+            this.lblCarLevel.Size = new System.Drawing.Size(56, 18);
+            this.lblCarLevel.TabIndex = 115;
+            this.lblCarLevel.Text = "车型分类";
+            // 
+            // cmbTypeOfWork
+            // 
+            this.cmbTypeOfWork.DisplayMember = "Text";
+            this.cmbTypeOfWork.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cmbTypeOfWork.FormattingEnabled = true;
+            this.cmbTypeOfWork.ItemHeight = 15;
+            this.cmbTypeOfWork.Items.AddRange(new object[] {
+            this.comboItem1,
+            this.comboItem2,
+            this.comboItem3});
+            this.cmbTypeOfWork.Location = new System.Drawing.Point(356, 186);
+            this.cmbTypeOfWork.Name = "cmbTypeOfWork";
+            this.cmbTypeOfWork.Size = new System.Drawing.Size(130, 21);
+            this.cmbTypeOfWork.TabIndex = 112;
+            // 
+            // comboItem1
+            // 
+            this.comboItem1.Text = "机电";
+            // 
+            // comboItem2
+            // 
+            this.comboItem2.Text = "钣喷";
+            // 
+            // comboItem3
+            // 
+            this.comboItem3.Text = "油漆";
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnOK});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(519, 25);
+            this.toolStrip1.TabIndex = 111;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // btnOK
+            // 
+            this.btnOK.Image = ((System.Drawing.Image)(resources.GetObject("btnOK.Image")));
+            this.btnOK.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnOK.Name = "btnOK";
+            this.btnOK.Size = new System.Drawing.Size(52, 22);
+            this.btnOK.Tag = "ok";
+            this.btnOK.Text = "确认";
+            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
+            // 
+            // txtFaultReason
+            // 
+            // 
+            // 
+            // 
+            this.txtFaultReason.Border.Class = "TextBoxBorder";
+            this.txtFaultReason.Location = new System.Drawing.Point(356, 150);
+            this.txtFaultReason.Name = "txtFaultReason";
+            this.txtFaultReason.Size = new System.Drawing.Size(130, 21);
+            this.txtFaultReason.TabIndex = 109;
+            this.txtFaultReason.Tag = "N";
+            // 
+            // txtFaultDescribe
+            // 
+            // 
+            // 
+            // 
+            this.txtFaultDescribe.Border.Class = "TextBoxBorder";
+            this.txtFaultDescribe.Location = new System.Drawing.Point(97, 153);
+            this.txtFaultDescribe.Name = "txtFaultDescribe";
+            this.txtFaultDescribe.Size = new System.Drawing.Size(128, 21);
+            this.txtFaultDescribe.TabIndex = 108;
+            this.txtFaultDescribe.Tag = "N";
+            // 
+            // lblTypeOfWork
+            // 
+            this.lblTypeOfWork.AutoSize = true;
+            this.lblTypeOfWork.Location = new System.Drawing.Point(306, 189);
+            this.lblTypeOfWork.Name = "lblTypeOfWork";
+            this.lblTypeOfWork.Size = new System.Drawing.Size(44, 18);
+            this.lblTypeOfWork.TabIndex = 20;
+            this.lblTypeOfWork.Text = "工  种";
+            // 
+            // lblWorkMan
+            // 
+            this.lblWorkMan.AutoSize = true;
+            this.lblWorkMan.ForeColor = System.Drawing.Color.Red;
+            this.lblWorkMan.Location = new System.Drawing.Point(36, 189);
+            this.lblWorkMan.Name = "lblWorkMan";
+            this.lblWorkMan.Size = new System.Drawing.Size(56, 18);
+            this.lblWorkMan.TabIndex = 18;
+            this.lblWorkMan.Text = "作业人员";
+            // 
+            // lblFaultReason
+            // 
+            this.lblFaultReason.AutoSize = true;
+            this.lblFaultReason.Location = new System.Drawing.Point(294, 151);
+            this.lblFaultReason.Name = "lblFaultReason";
+            this.lblFaultReason.Size = new System.Drawing.Size(56, 18);
+            this.lblFaultReason.TabIndex = 16;
+            this.lblFaultReason.Text = "故障原因";
+            // 
+            // lblFaultDescribe
+            // 
+            this.lblFaultDescribe.AutoSize = true;
+            this.lblFaultDescribe.Location = new System.Drawing.Point(35, 153);
+            this.lblFaultDescribe.Name = "lblFaultDescribe";
+            this.lblFaultDescribe.Size = new System.Drawing.Size(56, 18);
+            this.lblFaultDescribe.TabIndex = 14;
+            this.lblFaultDescribe.Text = "故障描述";
+            // 
+            // lblActWorkH
+            // 
+            this.lblActWorkH.AutoSize = true;
+            this.lblActWorkH.Location = new System.Drawing.Point(36, 118);
+            this.lblActWorkH.Name = "lblActWorkH";
+            this.lblActWorkH.Size = new System.Drawing.Size(56, 18);
+            this.lblActWorkH.TabIndex = 12;
+            this.lblActWorkH.Text = "结算工时";
+            // 
+            // lblEmpWorkH
+            // 
+            this.lblEmpWorkH.AutoSize = true;
+            this.lblEmpWorkH.Location = new System.Drawing.Point(296, 81);
+            this.lblEmpWorkH.Name = "lblEmpWorkH";
+            this.lblEmpWorkH.Size = new System.Drawing.Size(56, 18);
+            this.lblEmpWorkH.TabIndex = 10;
+            this.lblEmpWorkH.Text = "员工工时";
+            // 
+            // lblWorkHPrice
+            // 
+            this.lblWorkHPrice.AutoSize = true;
+            this.lblWorkHPrice.Location = new System.Drawing.Point(35, 83);
+            this.lblWorkHPrice.Name = "lblWorkHPrice";
+            this.lblWorkHPrice.Size = new System.Drawing.Size(56, 18);
+            this.lblWorkHPrice.TabIndex = 8;
+            this.lblWorkHPrice.Text = "工 时 费";
+            // 
+            // lblItemCode
+            // 
+            this.lblItemCode.AutoSize = true;
+            this.lblItemCode.Location = new System.Drawing.Point(296, 45);
+            this.lblItemCode.Name = "lblItemCode";
+            this.lblItemCode.Size = new System.Drawing.Size(56, 18);
+            this.lblItemCode.TabIndex = 7;
+            this.lblItemCode.Text = "项目编码";
+            // 
+            // txtItemCode
+            // 
+            // 
+            // 
+            // 
+            this.txtItemCode.Border.Class = "TextBoxBorder";
+            this.txtItemCode.Location = new System.Drawing.Point(358, 42);
+            this.txtItemCode.Name = "txtItemCode";
+            this.txtItemCode.ReadOnly = true;
+            this.txtItemCode.Size = new System.Drawing.Size(128, 21);
+            this.txtItemCode.TabIndex = 6;
+            this.txtItemCode.Tag = "N";
+            // 
+            // txtItemName
+            // 
+            // 
+            // 
+            // 
+            this.txtItemName.Border.Class = "TextBoxBorder";
+            this.txtItemName.Location = new System.Drawing.Point(97, 42);
+            this.txtItemName.Name = "txtItemName";
+            this.txtItemName.ReadOnly = true;
+            this.txtItemName.Size = new System.Drawing.Size(128, 21);
+            this.txtItemName.TabIndex = 5;
+            this.txtItemName.Tag = "N";
+            // 
+            // lblItemName
+            // 
+            this.lblItemName.AutoSize = true;
+            this.lblItemName.ForeColor = System.Drawing.Color.Red;
+            this.lblItemName.Location = new System.Drawing.Point(35, 45);
+            this.lblItemName.Name = "lblItemName";
+            this.lblItemName.Size = new System.Drawing.Size(56, 18);
+            this.lblItemName.TabIndex = 4;
+            this.lblItemName.Text = "项目名称";
+            // 
+            // frmDlgRepItem
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(519, 227);
+            this.Controls.Add(this.dbiWorkHPrice);
+            this.Controls.Add(btnAdd);
+            this.Controls.Add(this.cmbWorkMan);
+            this.Controls.Add(this.dbiActWorkH);
+            this.Controls.Add(this.dbiEmpWorkH);
+            this.Controls.Add(this.txtCarLevel);
+            this.Controls.Add(this.lblCarLevel);
+            this.Controls.Add(btnFindItem);
+            this.Controls.Add(btnFindStaff);
+            this.Controls.Add(this.cmbTypeOfWork);
+            this.Controls.Add(this.toolStrip1);
+            this.Controls.Add(this.txtFaultReason);
+            this.Controls.Add(this.txtFaultDescribe);
+            this.Controls.Add(this.lblTypeOfWork);
+            this.Controls.Add(this.lblWorkMan);
+            this.Controls.Add(this.lblFaultReason);
+            this.Controls.Add(this.lblFaultDescribe);
+            this.Controls.Add(this.lblActWorkH);
+            this.Controls.Add(this.lblEmpWorkH);
+            this.Controls.Add(this.lblWorkHPrice);
+            this.Controls.Add(this.lblItemCode);
+            this.Controls.Add(this.txtItemCode);
+            this.Controls.Add(this.txtItemName);
+            this.Controls.Add(this.lblItemName);
+            this.Name = "frmDlgRepItem";
+            this.Text = "维修项目编辑";
+            this.Load += new System.EventHandler(this.frmDlgRepItem_Load);
+            ((System.ComponentModel.ISupportInitialize)(btnAdd)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(btnFindItem)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(btnFindStaff)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dbiWorkHPrice)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dbiActWorkH)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dbiEmpWorkH)).EndInit();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private DevComponents.DotNetBar.Controls.TextBoxX txtItemName;
+        private DevComponents.DotNetBar.LabelX lblItemName;
+        private DevComponents.DotNetBar.Controls.TextBoxX txtItemCode;
+        private DevComponents.DotNetBar.LabelX lblItemCode;
+        private DevComponents.DotNetBar.LabelX lblWorkHPrice;
+        private DevComponents.DotNetBar.LabelX lblEmpWorkH;
+        private DevComponents.DotNetBar.LabelX lblActWorkH;
+        private DevComponents.DotNetBar.LabelX lblTypeOfWork;
+        private DevComponents.DotNetBar.LabelX lblFaultDescribe;
+        private DevComponents.DotNetBar.LabelX lblFaultReason;
+        private DevComponents.DotNetBar.LabelX lblWorkMan;
+        private DevComponents.DotNetBar.Controls.TextBoxX txtFaultDescribe;
+        private DevComponents.DotNetBar.Controls.TextBoxX txtFaultReason;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton btnOK;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cmbTypeOfWork;
+        private DevComponents.Editors.ComboItem comboItem1;
+        private DevComponents.Editors.ComboItem comboItem2;
+        private DevComponents.Editors.ComboItem comboItem3;
+        private DevComponents.DotNetBar.Controls.TextBoxX txtCarLevel;
+        private DevComponents.DotNetBar.LabelX lblCarLevel;
+        private DevComponents.Editors.DoubleInput dbiEmpWorkH;
+        private DevComponents.Editors.DoubleInput dbiActWorkH;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cmbWorkMan;
+        private DevComponents.Editors.DoubleInput dbiWorkHPrice;
+    }
+}

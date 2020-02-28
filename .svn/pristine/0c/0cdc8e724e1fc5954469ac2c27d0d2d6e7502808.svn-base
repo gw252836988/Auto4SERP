@@ -1,0 +1,49 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using Bll;
+namespace Auto4SErp.Report
+{
+    public partial class frmP2PStatistics : ifrmBase
+    {
+        private IFinance mIFinance;
+        public frmP2PStatistics()
+        {
+            mIFinance = BllFactory.GetFinanceBll();
+            InitializeComponent();
+        }
+
+        private void frmP2PStatistics_Load(object sender, EventArgs e)
+        {
+            DateTime dtNow = DateTime.Now;
+            datBegin.Value = DateTime.Parse(dtNow.Year + "/" + dtNow.Month + "/01 00:00");
+            SetTButtonPng(toolStrip1);
+            DoQuery();
+        }
+
+
+        protected override void DoQuery()
+        {
+            string strBegin = "";
+            string strEnd = "";
+         
+            strBegin = datBegin.Value.ToShortDateString() + " 00:00:00";
+            strEnd = datEnd.Value.ToShortDateString() + " 23:59:59";
+
+
+            DataTable dt = mIFinance.GetP2PAccounts(strBegin,strEnd,txtMobile.Text);
+            dgAccount.AutoGenerateColumns = false;
+            dgAccount.DataSource = dt;
+        }
+
+        private void tbtnQuery_Click(object sender, EventArgs e)
+        {
+            DoQuery();
+        }
+    }
+}

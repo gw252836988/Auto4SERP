@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="GetPowerList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="formname" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPowerListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPowerListResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetPowerTexts">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetPowerTextsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPowerTextsResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ArrayOfString" nillable="true" type="tns:ArrayOfString" />
+      <s:element name="DataTable" nillable="true">
+        <s:complexType>
+          <s:sequence>
+            <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+            <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetPowerListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPowerList" />
+  </wsdl:message>
+  <wsdl:message name="GetPowerListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPowerListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPowerTextsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPowerTexts" />
+  </wsdl:message>
+  <wsdl:message name="GetPowerTextsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPowerTextsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPowerListHttpGetIn">
+    <wsdl:part name="formname" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPowerListHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfString" />
+  </wsdl:message>
+  <wsdl:message name="GetPowerTextsHttpGetIn" />
+  <wsdl:message name="GetPowerTextsHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetPowerListHttpPostIn">
+    <wsdl:part name="formname" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPowerListHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfString" />
+  </wsdl:message>
+  <wsdl:message name="GetPowerTextsHttpPostIn" />
+  <wsdl:message name="GetPowerTextsHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:portType name="SenstiveOfServiceSoap">
+    <wsdl:operation name="GetPowerList">
+      <wsdl:input message="tns:GetPowerListSoapIn" />
+      <wsdl:output message="tns:GetPowerListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPowerTexts">
+      <wsdl:input message="tns:GetPowerTextsSoapIn" />
+      <wsdl:output message="tns:GetPowerTextsSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="SenstiveOfServiceHttpGet">
+    <wsdl:operation name="GetPowerList">
+      <wsdl:input message="tns:GetPowerListHttpGetIn" />
+      <wsdl:output message="tns:GetPowerListHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPowerTexts">
+      <wsdl:input message="tns:GetPowerTextsHttpGetIn" />
+      <wsdl:output message="tns:GetPowerTextsHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="SenstiveOfServiceHttpPost">
+    <wsdl:operation name="GetPowerList">
+      <wsdl:input message="tns:GetPowerListHttpPostIn" />
+      <wsdl:output message="tns:GetPowerListHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPowerTexts">
+      <wsdl:input message="tns:GetPowerTextsHttpPostIn" />
+      <wsdl:output message="tns:GetPowerTextsHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SenstiveOfServiceSoap" type="tns:SenstiveOfServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetPowerList">
+      <soap:operation soapAction="http://tempuri.org/GetPowerList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPowerTexts">
+      <soap:operation soapAction="http://tempuri.org/GetPowerTexts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SenstiveOfServiceSoap12" type="tns:SenstiveOfServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetPowerList">
+      <soap12:operation soapAction="http://tempuri.org/GetPowerList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPowerTexts">
+      <soap12:operation soapAction="http://tempuri.org/GetPowerTexts" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SenstiveOfServiceHttpGet" type="tns:SenstiveOfServiceHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="GetPowerList">
+      <http:operation location="/GetPowerList" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPowerTexts">
+      <http:operation location="/GetPowerTexts" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SenstiveOfServiceHttpPost" type="tns:SenstiveOfServiceHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="GetPowerList">
+      <http:operation location="/GetPowerList" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPowerTexts">
+      <http:operation location="/GetPowerTexts" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SenstiveOfService">
+    <wsdl:port name="SenstiveOfServiceSoap" binding="tns:SenstiveOfServiceSoap">
+      <soap:address location="http://221.130.108.114:8082/auto4serp/SenstiveOfService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SenstiveOfServiceSoap12" binding="tns:SenstiveOfServiceSoap12">
+      <soap12:address location="http://221.130.108.114:8082/auto4serp/SenstiveOfService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SenstiveOfServiceHttpGet" binding="tns:SenstiveOfServiceHttpGet">
+      <http:address location="http://221.130.108.114:8082/auto4serp/SenstiveOfService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SenstiveOfServiceHttpPost" binding="tns:SenstiveOfServiceHttpPost">
+      <http:address location="http://221.130.108.114:8082/auto4serp/SenstiveOfService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

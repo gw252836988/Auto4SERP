@@ -1,0 +1,139 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using Bll;
+using Comm;
+using Model;
+using Bll.Personnel;
+namespace Auto4SErp.Personnel
+{
+    public partial class frmOperateMan : ifrmBase
+    {
+        private List<SqlElement> mLstE;
+        private IOperateMan mIOperateMan;
+        private DataTable mStaff;
+
+        public frmOperateMan()
+        {
+            InitializeComponent();
+            mIOperateMan = BllFactory.GetOperateManBll();
+        }
+
+      
+
+        private void tsbSearch_Click(object sender, EventArgs e)
+        {
+            List<Pair> lst = AssginToListOfQuery();
+            mLstE = CreateMedialSqlElement(lst);
+            DoQuery();
+        }
+
+        private void frmOperateMan_Load(object sender, EventArgs e)
+        {
+            mLstControls.Add(txtStaffId);
+            mLstControls.Add(txtStaffName);
+            DoQuery();
+            SetTButtonPng(toolStrip1);
+        }
+
+
+        protected override void DoQuery()
+        {
+            //if (mLstE != null)
+            //{
+            //    if (mLstE.Count > 0)
+            //    {
+            DataTable dt;
+
+            dt = mIOperateMan.GetOperateMans(mLstE);
+
+            DataToControl(dt);
+            //        return;
+            //    }
+            //}
+            //DataToControl(mIStaff.GetStaffsByQuery(mLstE);
+
+
+        }
+
+
+        private void DataToControl(DataTable dt)
+        {
+            FrmAssist.UpdateColumns(ref mStaff, dt, 6);
+            dgStaff.DataSource = dt;
+            dgStaff.Columns["Id"].Visible = false;
+
+
+
+        }
+
+        private void btnPower_Click(object sender, EventArgs e)
+        {
+            if (dgStaff.SelectedRows.Count != 0)
+            {
+                DataGridViewRow seldr = dgStaff.SelectedRows[0];
+                string staffid = seldr.Cells[1].Value.ToString();
+
+                frmStaffFunction frm = new frmStaffFunction();
+                frm.IsStaff = false;
+                frm.Text = "员工权限(" + staffid + ")";
+                frm.StaffID = staffid;
+                frm.ShowDialogEx();
+
+
+
+            }
+        }
+
+        private void btnDel_Click(object sender, EventArgs e)
+        {
+            if (dgStaff.SelectedRows.Count != 0)
+            {
+                DataGridViewRow seldr = dgStaff.SelectedRows[0];
+                string staffid = seldr.Cells[1].Value.ToString();
+
+                mIOperateMan.DelOperateMan(staffid);
+                DoQuery();
+            }
+        }
+
+        private void SelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+       
+            frmStaff frm = new frmStaff();
+            frm.IsSelect = true;
+            frm.IsSelf = false;
+            frm.setTransferDelegate(delegate(object data)
+            {
+                string result = (string)data;
+                string[] strlst = result.Split(',');
+                if (!mIOperateMan.AddOperateMan(strlst[0]))
+                    ShowMessage("该人员已存在");
+                else
+                    DoQuery();
+
+            });
+            frm.ShowDialogEx();
+        }
+
+        private void AddToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmAddOperateMan frm = new frmAddOperateMan();
+            frm.setRefreshDelegate(delegate(bool isR)
+            {    
+                if(isR)
+                  DoQuery();
+
+            });
+            frm.ShowDialogEx();
+        }
+        
+
+    }
+}

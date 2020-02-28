@@ -1,0 +1,527 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using DevComponents.AdvTree;
+using Bll;
+using System.Collections;
+using Bll.Sale;
+namespace Auto4SErp.Sale
+{
+    public partial class frmCarDoc : ifrmBase
+    {
+
+        private ICarDoc mICarDoc;
+        //  private DataTable mDtDicOfCarDeital=null;
+        private bool isSelect = false;
+        private List<string> lstNodesSelected;
+        public bool IsSelect
+        {
+            get { return isSelect; }
+            set { isSelect = value; }
+        }
+
+        public frmCarDoc()
+        {
+            InitializeComponent();
+
+        }
+
+        private void contextMenuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            this.Text = treeCarDoc.SelectedNode.Text;
+        }
+
+        private void frmCarDoc_Load(object sender, EventArgs e)
+        {
+            mICarDoc = BllFactory.GetCarDocBll();
+
+            lstNodesSelected = new List<string>();
+            LoadNodes();
+
+            if (isSelect == true)
+            {
+                toolStrip1.Enabled = false;
+                cmenuCarDetail.Enabled = true;
+                cmenuCarDoc.Enabled = true;
+                AddDetailToolStripMenuItem.Enabled = true;
+                ModifytoolStripMenuItem2.Enabled = false;
+                DeltoolStripMenuItem1.Enabled = false;
+            }
+            SetTButtonPng(toolStrip1);
+
+            //if (Comm.LoginInfoShare.getInstance().UserId == "admin")
+            //    AddModelToolStripMenuItem.Enabled = true;
+        }
+
+
+        protected override void DoworkInBack(object sender, DoWorkEventArgs e)
+        {
+
+            DataSet ds = mICarDoc.GetCarDocAll();
+            e.Result = ds;
+        }
+
+
+        protected override void DoBackatCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+
+            DataSet ds = (DataSet)e.Result;
+            DataTable dtBrands = ds.Tables["CarBrand"];
+            DataTable dtCarSers = ds.Tables["CarSer"];
+            DataTable dtCarModels = ds.Tables["CarModel"];
+
+
+            //DataView dvCarSers=dtCarSers.DefaultView;
+            foreach (DataRow drBrand in dtBrands.Rows)
+            {
+                Node nodeBrand = CreateNode(drBrand[1].ToString(), "brand_" + drBrand[0].ToString());
+                string carbrand;
+                int ibrand;
+                carbrand = drBrand[0].ToString();
+                ibrand = int.Parse(carbrand);
+                if (ibrand < 8) continue;
+
+
+                treeCarDoc.Nodes.Add(nodeBrand);
+
+
+
+                DataView dvCarSers = new DataView(dtCarSers);
+
+
+                dvCarSers.RowFilter = "carbrand=" + drBrand[0].ToString();
+
+                for (int i = 0; i < dvCarSers.Count; i++)
+                {
+
+                    DataRowView drCarSer = dvCarSers[i];
+
+                    if (drCarSer["disabled"].ToString() == "1")
+                        continue;
+                    Node nodeSer = CreateNode(drCarSer["carser"].ToString(), "ser_" + drCarSer[0].ToString());
+                    nodeBrand.Nodes.Add(nodeSer);
+
+
+
+                    DataView dvCarModels = new DataView(dtCarModels);
+                    dvCarModels.RowFilter = "carser=" + drCarSer[0].ToString();
+
+
+                    for (int j = 0; j < dvCarModels.Count; j++)
+                    {
+                        DataRowView drCarModel = dvCarModels[j];
+
+                        if (drCarModel["disabled"].ToString() == "1")
+                            continue;
+                        Node nodeModel = CreateNode(drCarModel["carmodel"].ToString(), "model_" + drCarModel[0].ToString());
+                        nodeSer.Nodes.Add(nodeModel);
+
+                    }
+                    //nodeSer.ExpandAll();
+                }
+            }
+            //   treeCarDoc.ExpandAll();
+            ExpandSecondNodes();
+        }
+
+
+
+        private void ExpandSecondNodes()
+        {
+            if (treeCarDoc.Nodes.Count < 1) return;
+
+            foreach (Node rootnode in treeCarDoc.Nodes)
+            {
+                //foreach (Node secondnode in rootnode.Nodes)
+                //{
+                //    secondnode.Expand();
+
+                //}
+                rootnode.Expand();
+                foreach (Node secnod in rootnode.Nodes)
+                {
+                    if (lstNodesSelected.Contains(secnod.DataKeyString))
+                    {
+                        secnod.Expand();
+                    }
+                }
+            }
+
+        }
+
+        private void LoadNodes()
+        {
+            StartWork(null);
+
+
+
+        }
+
+
+        private void ReLoadNodes()
+        {
+            treeCarDoc.Nodes.Clear();
+            LoadNodes();
+        }
+
+        private Node CreateNode(string text, string key)
+        {
+
+            Node node = new Node();
+            node.Text = text;
+            node.DataKeyString = key;
+            node.ContextMenu = cmenuCarDoc;
+            return node;
+        }
+
+
+
+        private void cmenuCarDoc_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            Node selNode = treeCarDoc.SelectedNode;
+            string[] strLst = selNode.DataKeyString.Split('_');
+            switch (strLst[0])
+            {
+                case "brand":
+
+                    if (e.ClickedItem.Text == "删除")
+                    {
+
+                        if (ShowMessageOfWarning("删除车辆资料可能影响其它数据，确定吗") == DialogResult.OK)
+                        {
+                            mICarDoc.DelCarBrand(int.Parse(strLst[1]));
+                            ReLoadNodes();
+
+                        }
+                    }
+                    else
+                    {
+                        frmDlgCarBrand frmBrand = new frmDlgCarBrand();
+                        frmBrand.BrandID = int.Parse(strLst[1]);
+                        frmBrand.ShowDialogEx();
+                        ReLoadNodes();
+
+                    }
+                    break;
+
+                case "ser":
+                    if (e.ClickedItem.Text == "禁用")
+                    {
+                        if (ShowMessageOfWarning("禁用车辆资料可能影响其它数据，确定吗") == DialogResult.OK)
+                        {
+                            mICarDoc.DelCarSer(int.Parse(strLst[1]));
+                            ReLoadNodes();
+                        }
+                    }
+                    else if (e.ClickedItem.Text == "修改")
+                    {
+                        frmDlgCarSer frmSer = new frmDlgCarSer();
+                        frmSer.CarserId = int.Parse(strLst[1]);
+                        frmSer.setRefreshDelegate(delegate(bool isR)
+                        {
+                            if (isR)
+                                ReLoadNodes();
+
+                        });
+                        frmSer.ShowDialogEx();
+
+                    }
+                    else if (e.ClickedItem.Text == "增加车型")
+                    {
+                        frmDlgCarModel frm = new frmDlgCarModel();
+
+                        frm.CarSer = int.Parse(strLst[1]);
+                        frm.setRefreshDelegate(delegate(bool isR)
+                        {
+                            if (isR) ReLoadNodes();
+                        });
+                        frm.ShowDialogEx();
+
+                    }
+
+                    break;
+
+                case "model":
+                    if (e.ClickedItem.Text == "禁用")
+                    {
+                        if (ShowMessageOfWarning("禁用车辆资料可能影响其它数据，确定吗") == DialogResult.OK)
+                        {
+                            mICarDoc.DelCarModel(int.Parse(strLst[1]));
+                            ReLoadNodes();
+                        }
+                    }
+                    else if (e.ClickedItem.Text == "修改")
+                    {
+                        if (Comm.LoginInfoShare.getInstance().UserId != "admin")
+                            return;
+                        frmDlgCarModel frmModel = new frmDlgCarModel();
+                        frmModel.CarModelId = int.Parse(strLst[1]);
+
+                        frmModel.setRefreshDelegate(delegate(bool isR)
+                        {
+                            if (isR)
+                                ReLoadNodes();
+
+                        });
+                        frmModel.ShowDialogEx();
+                    }
+                    else if (e.ClickedItem.Text == "增加车辆资料")
+                    {
+                        frmDlgCarDetail frmDetail = new frmDlgCarDetail();
+                        frmDetail.ModelInfo = "model_" + strLst[1] + "_" + selNode.Text;
+                        frmDetail.setRefreshDelegate(delegate(bool isR)
+                        {
+                            if (isR)
+                                ReLoadNodes();
+
+                        });
+                        frmDetail.ShowDialogEx();
+                    }
+
+
+                    break;
+
+                default:
+
+                    break;
+
+
+            }
+
+
+
+        }
+
+
+        private void cmenuCarDetail_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            if (dgCarDetails.SelectedRows.Count != 0)
+            {
+
+                DataGridViewRow seldr = dgCarDetails.SelectedRows[0];
+                string strid = seldr.Cells[0].Value.ToString();
+                string strmodleid = seldr.Cells[seldr.Cells.Count - 1].Value.ToString();
+                if (e.ClickedItem.Text == "删除")
+                {
+                    mICarDoc.DelCarDetail(int.Parse(strid));
+                    RefreshCarDetails(int.Parse(strmodleid));
+                }
+                else
+                {
+                    frmDlgCarDetail frm = new frmDlgCarDetail();
+                    frm.CarDetailId = int.Parse(strid);
+                    frm.setRefreshDelegate(delegate(bool isR)
+                    {
+                        if (isR)
+                            RefreshCarDetails(int.Parse(strmodleid));
+
+                    });
+                    frm.ShowDialogEx();
+
+                }
+            }
+
+
+        }
+
+        private void RefreshCarDetails(int carmodel)
+        {
+            DataTable dt = mICarDoc.GetCarDetailByCarmodel(carmodel);
+            // dt.Columns.RemoveAt(dt.Columns.Count - 1);
+            //FrmAssist.UpdateColumns(ref mDtDicOfCarDeital, dt, 1);
+            dgCarDetails.AutoGenerateColumns = false;
+            dgCarDetails.DataSource = dt;
+            dgCarDetails.Columns[0].Visible = false;
+            dgCarDetails.Columns[dgCarDetails.Columns.Count - 1].Visible = false;
+
+
+        }
+
+        private void treeCarDoc_NodeClick(object sender, TreeNodeMouseEventArgs e)
+        {
+            Node node = e.Node;
+            string[] strLst = e.Node.DataKeyString.Split('_');
+            if (strLst[0] == "model")
+            {
+                RefreshCarDetails(Int32.Parse(strLst[1]));
+
+            }
+
+        }
+
+
+
+
+
+        private void dgCarDetails_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (isSelect)
+            {
+                if (dgCarDetails.SelectedRows.Count != 0)
+                {
+                    DataGridViewRow seldr = dgCarDetails.SelectedRows[0];
+                    string autonumber = seldr.Cells["AutoNumber"].Value.ToString();
+
+                    if (m_del != null)
+                    {
+                        m_del(autonumber);
+                    }
+                    this.Close();
+                }
+
+            }
+        }
+
+
+
+        private void AddCarBrandToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            frmDlgCarBrand frm = new frmDlgCarBrand();
+            frm.setRefreshDelegate(delegate(bool isR)
+            {
+                if (isR) ReLoadNodes();
+            });
+            frm.ShowDialogEx();
+        }
+
+        private void AddCarSerToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            frmDlgCarSer frm = new frmDlgCarSer();
+            frm.setRefreshDelegate(delegate(bool isR)
+            {
+                if (isR) ReLoadNodes();
+            });
+            frm.ShowDialogEx();
+        }
+
+        private void AddModelToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            frmDlgCarModel frm = new frmDlgCarModel();
+            frm.setRefreshDelegate(delegate(bool isR)
+            {
+                if (isR) ReLoadNodes();
+            });
+            frm.ShowDialogEx();
+        }
+
+        private void AddCarDetailToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            frmDlgCarDetail frm = new frmDlgCarDetail();
+            frm.setRefreshDelegate(delegate(bool isR)
+            {
+                if (isR) ReLoadNodes();
+            });
+            frm.ShowDialogEx();
+        }
+
+        private void btnAll_Click(object sender, EventArgs e)
+        {
+            RefreshCarDetails(-1);
+        }
+
+        private void 修改ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAllDetails_Click(object sender, EventArgs e)
+        {
+            RefreshCarDetails(-1);
+        }
+
+        private void btnQuery_Click(object sender, EventArgs e)
+        {
+            DataTable dt = mICarDoc.GetCarDetailByPrice(txtDirectPrice.Text);
+            // dt.Columns.RemoveAt(dt.Columns.Count - 1);
+            //FrmAssist.UpdateColumns(ref mDtDicOfCarDeital, dt, 1);
+            dgCarDetails.AutoGenerateColumns = false;
+            dgCarDetails.DataSource = dt;
+            dgCarDetails.Columns[0].Visible = false;
+            dgCarDetails.Columns[dgCarDetails.Columns.Count - 1].Visible = false;
+        }
+
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void treeCarDoc_AfterExpand(object sender, AdvTreeNodeEventArgs e)
+        {
+            if (e.Node.DataKeyString.Contains("ser"))
+            {
+                if (!lstNodesSelected.Contains(e.Node.DataKeyString))
+                {
+                    lstNodesSelected.Add(e.Node.DataKeyString);
+
+                }
+
+
+            }
+        }
+
+        private void treeCarDoc_AfterCollapse(object sender, AdvTreeNodeEventArgs e)
+        {
+            if (e.Node.DataKeyString.Contains("ser"))
+            {
+                if (lstNodesSelected.Contains(e.Node.DataKeyString))
+                {
+                    lstNodesSelected.Remove(e.Node.DataKeyString);
+                }
+
+            }
+        }
+
+        private void btnCarSer_Click(object sender, EventArgs e)
+        {
+            frmBatchIn frm = new frmBatchIn();
+            frm.TableName = "CarSer";
+            frm.ShowDialog();
+        }
+
+        private void btnCarModel_Click(object sender, EventArgs e)
+        {
+            frmBatchIn frm = new frmBatchIn();
+            frm.TableName = "CarModel";
+            frm.ShowDialog();
+        }
+
+        private void btnCarDetailIn_Click(object sender, EventArgs e)
+        {
+            frmBatchIn frm = new frmBatchIn();
+            frm.TableName = "CarDetail";
+            frm.ShowDialog();
+        }
+
+        private void btnOut_Click(object sender, EventArgs e)
+        {
+            DataTable dt = mICarDoc.GetCarSerAndModels();
+
+            Comm.ExcelInAndOut io = new Comm.ExcelInAndOut("");
+            io.DTOutTo(dt, null);
+
+
+        }
+
+        private void AddDetailToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void 增加车型ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void 删除ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+    }
+}

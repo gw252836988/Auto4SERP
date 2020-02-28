@@ -1,0 +1,347 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using Bll;
+using Comm;
+using Bll.Personnel;
+
+namespace Auto4SErp.Personnel
+{
+    public partial class frmStaff : ifrmBase
+    {
+        private IStaff mIStaff;
+        private List<Model.SqlElement> mLstE;
+        private DataTable mStaff;
+        private IOperateMan mIOperateMan;
+
+        private bool isSelect;
+
+        public bool IsSelect
+        {
+            get { return isSelect; }
+            set { isSelect = value; }
+        }
+
+
+        private bool isSelf = true;
+
+        public bool IsSelf
+        {
+            get { return isSelf; }
+            set { isSelf = value; }
+        }
+
+        public frmStaff()
+        {
+            InitializeComponent();
+
+            mIStaff = BllFactory.GetStaffBll();
+            mIOperateMan = BllFactory.GetOperateManBll();
+            // this.WindowState = FormWindowState.Maximized;
+            SetTButtonPng(toolStrip1);
+
+
+            tsbFirst = bindingNavigatorMoveFirstItem;
+            tsbLast = bindingNavigatorMoveLastItem;
+            tsbPre = bindingNavigatorMovePreviousItem;
+            tsbNext = bindingNavigatorMoveNextItem;
+            tstbPageCount = bindingNavigatorCountItem;
+            tstbPageCurrent = bindingNavigatorPositionItem;
+            tstbRecordCount = bindingNavigatorRecordCount;
+
+        }
+
+
+
+
+        private void frmStaff_Load(object sender, EventArgs e)
+        {
+
+
+            mLstControls.Add(txtStaffId);
+            mLstControls.Add(txtStaffName);
+
+            //   mIStaff.GetStaffs();
+            // cmbOrganName.Text= LoginInfoShare.getInstance().OrganName;
+            mLstE = new List<Model.SqlElement>();
+
+
+
+            if (isSelect)
+            {
+                tsbAdd.Visible = false;
+                btnIn.Visible = false;
+                btnPower.Visible = false;
+                btnModify.Visible = false;
+                btnDel.Visible = false;
+
+            }
+            else
+            {
+                tsbAdd.Visible = true;
+                btnPower.Visible = true;
+                //mLstE.Add(new Model.SqlElement() { Name = "OrganID", Value = LoginInfoShare.getInstance().OrganId, IsFuzzy = false, IsStr = true });
+            }
+
+
+
+
+
+
+            if (isSelect && !isSelf)
+            {
+                LoadOrgans(cmbOrganName, true);
+            }
+            else
+            {
+                LoadOrgans(cmbOrganName, false);
+                SetOrganSelected();
+                // DoQuery();
+
+            }
+            cmbOrganName.Nodes[0].ExpandAll();
+            //StartWork();
+        }
+
+
+
+        private void SetOrganSelected()
+        {
+            string organname = LoginInfoShare.getInstance().OrganName;
+
+            foreach (DevComponents.AdvTree.Node nd in cmbOrganName.Nodes)
+            {
+                foreach (DevComponents.AdvTree.Node nd1 in nd.Nodes)
+                {
+                    if (organname == nd1.Text)
+                    {
+                        cmbOrganName.SelectedNode = nd1;
+
+                    }
+                }
+            }
+
+        }
+
+
+        private void tsbSearch_Click(object sender, EventArgs e)
+        {
+
+            List<Model.Pair> lst = AssginToListOfQuery();
+            mLstE = CreateMedialSqlElement(lst);
+            // mLstE.Add(new Model.SqlElement() { Name = "OrganID", Value = LoginInfoShare.getInstance().OrganId,IsFuzzy=false,IsStr=true });
+            DoQuery();
+        }
+
+        protected override void DoQuery()
+        {
+            //if (mLstE != null)
+            //{
+            //    if (mLstE.Count > 0)
+            //    {
+            DataTable dt;
+
+            int tmpRecordCount;
+            int tmpPageCount;
+            //dt = mIStaff.GetStaffsByQuery(mLstE, mPageInfo.PageCurrent, mPageInfo.PageSize, out tmpRecordCount, out tmpPageCount);
+
+            string organinfo = "";
+            string organid = LoginInfoShare.getInstance().OrganId;
+            //if (cmbOrganName.SelectedNode != null)
+            //    organinfo = string.Format("organid ='{0}'", cmbOrganName.SelectedNode.DataKeyString);
+            //else
+            //    if(isSelect && !isSelf)
+            //    organinfo = string.Format("organid !='{0}'", organid);
+
+            if (cmbOrganName.SelectedNode != null)
+                organinfo = cmbOrganName.SelectedNode.DataKeyString;
+
+            dt = mIStaff.GetStaffsByQuery(mLstE, organinfo.Trim(), mPageInfo.PageCurrent, mPageInfo.PageSize, out tmpRecordCount, out tmpPageCount);
+
+            mPageInfo.RecordCount = tmpRecordCount;
+            mPageInfo.PageCount = tmpPageCount;
+            SetRoleNavigatorState();
+            DataToControl(dt);
+            //        return;
+            //    }
+            //}
+            //DataToControl(mIStaff.GetStaffsByQuery(mLstE);
+
+
+        }
+
+
+
+        private void DataToControl(DataTable dt)
+        {
+            FrmAssist.UpdateColumns(ref mStaff, dt, 6);
+            dgStaff.DataSource = dt;
+            dgStaff.Columns["Id"].Visible = false;
+
+
+
+        }
+
+        private void tsbAdd_Click(object sender, EventArgs e)
+        {
+            frmDlgStaff frm = new frmDlgStaff();
+            frm.setRefreshDelegate(delegate(bool isR)
+            {
+                if (isR)
+                    DoQuery();
+
+
+            });
+
+            frm.ShowDialogEx();
+        }
+
+        private void dgStaff_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+            if (isSelect)
+            {
+                if (dgStaff.SelectedRows.Count != 0)
+                {
+                    DataGridViewRow seldr = dgStaff.SelectedRows[0];
+                    string strbh = seldr.Cells[1].Value.ToString();
+                    string strname = seldr.Cells[2].Value.ToString();
+                    if (m_del != null)
+                    {
+                        m_del(strbh + "," + strname);
+                    }
+                    this.Close();
+                }
+
+            }
+
+
+        }
+
+        private void dgStaff_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            int top = dgStaff.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, false).Top;
+            int left = dgStaff.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, false).Left;
+            int height = dgStaff.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, false).Height;
+
+
+            DataGridViewTextBoxCell dc = (DataGridViewTextBoxCell)dgStaff.Rows[e.RowIndex].Cells[e.ColumnIndex];
+
+
+        }
+
+        private void dgStaff_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+
+
+        private void dgStaff_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dgStaff_KeyDown(object sender, KeyEventArgs e)
+        {
+
+        }
+
+        private void btnIn_Click(object sender, EventArgs e)
+        {
+            frmBatchIn frm = new frmBatchIn();
+            frm.TableName = "Staff";
+            frm.ShowDialogEx();
+
+        }
+
+
+
+        private void btnPower_Click(object sender, EventArgs e)
+        {
+
+            if (dgStaff.SelectedRows.Count != 0)
+            {
+                DataGridViewRow seldr = dgStaff.SelectedRows[0];
+                string staffid = seldr.Cells[1].Value.ToString();
+
+                frmStaffFunction frm = new frmStaffFunction();
+                frm.IsStaff = true;
+                frm.Text = "员工权限(" + staffid + ")";
+                frm.StaffID = staffid;
+                frm.ShowDialogEx();
+
+
+
+            }
+
+
+        }
+
+        private void btnModify_Click(object sender, EventArgs e)
+        {
+            if (dgStaff.SelectedRows.Count != 0)
+            {
+                DataGridViewRow seldr = dgStaff.SelectedRows[0];
+                string staffid = seldr.Cells[1].Value.ToString();
+                frmDlgStaff frm = new frmDlgStaff();
+                frm.StaffId = staffid;
+                frm.setRefreshDelegate(delegate(bool isR)
+                {
+                    if (isR)
+                        DoQuery();
+                });
+                frm.ShowDialogEx();
+
+
+            }
+        }
+
+        private void cmbOrganName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //if (isSelect && !isSelf)
+            //{
+            //    string organname = LoginInfoShare.getInstance().OrganName;
+            //    if (cmbOrganName.SelectedNode.Text == organname)
+            //    {
+            //        cmbOrganName.SelectedNode = null;
+
+
+            //    }
+
+
+            //}
+        }
+
+        private void btnDel_Click(object sender, EventArgs e)
+        {
+
+            if (dgStaff.SelectedRows.Count != 0)
+            {
+                DataGridViewRow seldr = dgStaff.SelectedRows[0];
+                string staffid = seldr.Cells[1].Value.ToString();
+                mIStaff.DeleteStaff(staffid);
+                mIOperateMan.DeleteFunctionsOfStaff(staffid);
+                DoQuery();
+
+
+            }
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            cmbOrganName.SelectedNode = null;
+        }
+
+
+
+
+
+    }
+}

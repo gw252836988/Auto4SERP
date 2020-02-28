@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<configuration>
+    <configSections>
+        <sectionGroup name="applicationSettings" type="System.Configuration.ApplicationSettingsGroup, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+            <section name="Bll.Properties.Settings" type="System.Configuration.ClientSettingsSection, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" requirePermission="false"/>
+        </sectionGroup>
+    </configSections>
+    <system.serviceModel>
+        <bindings/>
+        <client/>
+    </system.serviceModel>
+    <applicationSettings>
+        <Bll.Properties.Settings>
+            <setting name="Bll_localhost_StaffOfService" serializeAs="String">
+                <value>http://221.130.108.114:8082/auto4serp/StaffOfService.asmx</value>
+            </setting>
+            <setting name="Bll_functionws_FunctionOfService" serializeAs="String">
+                <value>http://221.130.108.114:8082/auto4serp/FunctionOfService.asmx</value>
+            </setting>
+            <setting name="Bll_positionws_PositionOfService" serializeAs="String">
+                <value>http://221.130.108.114:8082/auto4serp/PositionOfService.asmx</value>
+            </setting>
+            <setting name="Bll_departmentws_DepartmentOfService" serializeAs="String">
+                <value>http://221.130.108.114:8082/auto4serp/DepartmentOfService.asmx</value>
+            </setting>
+            <setting name="Bll_organws_OrganOfService" serializeAs="String">
+                <value>http://221.130.108.114:8082/auto4serp/OrganOfService.asmx</value>
+            </setting>
+            <setting name="Bll_senstivews_SenstiveOfService" serializeAs="String">
+                <value>http://221.130.108.114:8082/auto4serp/SenstiveOfService.asmx</value>
+            </setting>
+            <setting name="Bll_cn_com_webxml_www_WeatherWebService" serializeAs="String">
+                <value>http://www.webxml.com.cn/WebServices/WeatherWebService.asmx</value>
+            </setting>
+        </Bll.Properties.Settings>
+    </applicationSettings>
+<startup><supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.0"/></startup></configuration>

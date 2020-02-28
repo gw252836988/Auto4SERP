@@ -1,0 +1,250 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using Bll;
+using System.Reflection;
+using Model;
+using DevComponents.AdvTree;
+using Bll.Personnel;
+namespace Auto4SErp.Personnel
+{
+    public partial class frmPositionFunction : ifrmBase
+    {
+        private IFucntion mIFunction;
+        private IPosition mIPosition;
+        private DataTable mDtMenu;
+        private int mNowPosition = 0;
+        public frmPositionFunction()
+        {
+            InitializeComponent();
+            mIFunction = BllFactory.GetFunctionBll();
+            mIPosition = BllFactory.GetPositionBll();
+        }
+
+        private void frmPositionFunction_Load(object sender, EventArgs e)
+        {
+            StartWork(null);
+
+        }
+
+
+        private void LoadPositions()
+        {
+
+            DataTable dt = mIPosition.GetPositions();
+            dgPosition.DataSource = dt;
+
+
+        }
+
+        protected override void DoworkInBack(object sender, DoWorkEventArgs e)
+        {
+            DataTable dt = mIFunction.GetMenus();
+            e.Result = dt;
+        }
+
+
+        protected override void DoBackatCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+
+
+
+            mDtMenu = (DataTable)e.Result;
+
+
+            LoadPositions();
+
+        }
+
+
+        private void IsNodeEnable(string[] lstFuns, Node node)
+        {
+
+            string nodeid = node.DataKeyString;
+            if (lstFuns.Contains(nodeid))
+
+                node.Image = global::Auto4SErp.Properties.Resources.fselect;
+            else
+                node.Image = global::Auto4SErp.Properties.Resources.fcancel;
+
+
+        }
+
+        private Node CreateNode(string text, string key)
+        {
+
+            Node node = new Node();
+            node.Text = text;
+            node.DataKeyString = key;
+            // node.ContextMenu = cmenuCarDoc;
+            return node;
+        }
+
+        private void EnableToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Node selNode = treeFunction.SelectedNode;
+            if (selNode != null)
+            {
+
+                selNode.Image = global::Auto4SErp.Properties.Resources.fselect;
+
+                mIFunction.EnableFunction(mNowPosition, selNode.DataKeyString);
+
+            }
+        }
+
+        private void EnableAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Node selNode = treeFunction.SelectedNode;
+            if (selNode != null)
+            {
+
+                selNode.Image = global::Auto4SErp.Properties.Resources.fselect;
+
+
+                mIFunction.EnableFunctions(mNowPosition, selNode.DataKeyString);
+                EnableNode(selNode);
+            }
+        }
+
+
+        private void EnableNode(Node pNode)
+        {
+            if (pNode.Nodes.Count > 0)
+            {
+                foreach (Node n in pNode.Nodes)
+                {
+                    n.Image = global::Auto4SErp.Properties.Resources.fselect;
+                    EnableNode(n);
+
+                }
+
+            }
+
+        }
+
+        private void CancelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Node selNode = treeFunction.SelectedNode;
+            if (selNode != null)
+            {
+
+                selNode.Image = global::Auto4SErp.Properties.Resources.fcancel;
+
+                mIFunction.CancelFunction(mNowPosition, selNode.DataKeyString);
+
+            }
+        }
+
+        private void CancelAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Node selNode = treeFunction.SelectedNode;
+            if (selNode != null)
+            {
+
+                selNode.Image = global::Auto4SErp.Properties.Resources.fcancel;
+
+
+                mIFunction.CancelFunctions(mNowPosition, selNode.DataKeyString);
+                CancelNode(selNode);
+            }
+        }
+        private void CancelNode(Node pNode)
+        {
+            if (pNode.Nodes.Count > 0)
+            {
+                foreach (Node n in pNode.Nodes)
+                {
+                    n.Image = global::Auto4SErp.Properties.Resources.fcancel;
+                    CancelNode(n);
+
+                }
+
+            }
+
+        }
+
+        private void dgPosition_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+
+        private void LoadFunctionsOfPosition(int positionid)
+        {
+
+            string[] lstFuns = mIFunction.GetFunctionsOfPosition(positionid);
+            DataView dvFirst = new DataView(mDtMenu);
+            dvFirst.RowFilter = "ParentID=0";
+            dvFirst.Sort = "SortID";
+            for (int i = 0; i < dvFirst.Count; i++)
+            {
+                DataRowView drFirst = dvFirst[i];
+                //ToolStripMenuItem firstMenuItem = new ToolStripMenuItem();
+                //firstMenuItem.Name = "MenuItem" + drFirst["NodeID"].ToString().Trim();
+                //firstMenuItem.Text = drFirst["NodeName"].ToString();
+                //menuMain.Items.Add(firstMenuItem);
+
+
+                Node nodeFirst = CreateNode(drFirst["NodeName"].ToString(), drFirst["NodeID"].ToString().Trim());
+                treeFunction.Nodes.Add(nodeFirst);
+                IsNodeEnable(lstFuns, nodeFirst);
+                DataView dvSecond = new DataView(mDtMenu);
+                dvSecond.RowFilter = "ParentID=" + drFirst["NodeID"].ToString();
+                for (int j = 0; j < dvSecond.Count; j++)
+                {
+                    DataRowView drSecond = dvSecond[j];
+                    //ToolStripMenuItem secondMenuItem = new ToolStripMenuItem();
+                    //secondMenuItem.Name = "MenuItem" + drSecond["NodeID"].ToString().Trim(); ;
+                    //secondMenuItem.Text = drSecond["NodeName"].ToString();
+
+                    Node nodeSecond = CreateNode(drSecond["NodeName"].ToString(), drSecond["NodeID"].ToString().Trim());
+                    nodeFirst.Nodes.Add(nodeSecond);
+                    IsNodeEnable(lstFuns, nodeSecond);
+
+                    DataView dvThird = new DataView(mDtMenu);
+                    dvThird.RowFilter = "ParentID=" + drSecond["NodeID"].ToString();
+
+                    for (int k = 0; k < dvThird.Count; k++)
+                    {
+                        DataRowView drThird = dvThird[k];
+                        //ToolStripMenuItem thirdMenuItem = new ToolStripMenuItem();
+                        //thirdMenuItem.Name = "MenuItem" + drThird["NodeID"].ToString().Trim(); ;
+                        //thirdMenuItem.Text = drThird["NodeName"].ToString();
+                        //thirdMenuItem.Tag = drThird["WindowRelated"].ToString();
+                        //thirdMenuItem.Click += new EventHandler(DoItemClick);
+                        //secondMenuItem.DropDownItems.Add(thirdMenuItem);
+                        // thirdMenuItem.Enabled = false;
+                        Node nodeThird = CreateNode(drThird["NodeName"].ToString(), drThird["NodeID"].ToString().Trim());
+                        IsNodeEnable(lstFuns, nodeThird);
+                        nodeSecond.Nodes.Add(nodeThird);
+
+                    }
+
+                }
+
+            }
+
+
+
+        }
+
+        private void dgPosition_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgPosition.SelectedRows.Count != 0)
+            {
+                DataGridViewRow seldr = dgPosition.SelectedRows[0];
+                treeFunction.Nodes.Clear();
+                int positionid = int.Parse(seldr.Cells[0].Value.ToString());
+                mNowPosition = positionid;
+                LoadFunctionsOfPosition(positionid);
+            }
+        }
+    }
+}

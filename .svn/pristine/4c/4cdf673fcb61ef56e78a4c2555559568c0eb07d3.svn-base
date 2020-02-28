@@ -1,0 +1,506 @@
+﻿namespace Auto4SErp.Repair
+{
+    partial class frmRepairItem
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmRepairItem));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.treeRepariItem = new DevComponents.AdvTree.AdvTree();
+            this.cMenuRepairType = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmRoot = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmNode = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmModifty = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmDel = new System.Windows.Forms.ToolStripMenuItem();
+            this.nodeConnector1 = new DevComponents.AdvTree.NodeConnector();
+            this.elementStyle1 = new DevComponents.DotNetBar.ElementStyle();
+            this.dgRepairItem = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.ItemCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ItemName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ItemType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TypeOfWork = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SpellCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cMenuRepairItem = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ModifyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.DelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.btnAddItem = new System.Windows.Forms.ToolStripButton();
+            this.btnIn = new System.Windows.Forms.ToolStripButton();
+            this.btnInPrice = new System.Windows.Forms.ToolStripButton();
+            this.btnSelect = new System.Windows.Forms.ToolStripButton();
+            this.dgRepItemPrice = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ItemCode1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CarLevel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EmpWorkH = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ActWorkH = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.WorkHPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cMenuRepPrice = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.btnPriceAdd = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnPriceModify = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnPriceDel = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.btnQuery = new System.Windows.Forms.ToolStripButton();
+            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.txtItemCode = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
+            this.txtItemName = new System.Windows.Forms.ToolStripTextBox();
+            ((System.ComponentModel.ISupportInitialize)(this.treeRepariItem)).BeginInit();
+            this.cMenuRepairType.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgRepairItem)).BeginInit();
+            this.cMenuRepairItem.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgRepItemPrice)).BeginInit();
+            this.cMenuRepPrice.SuspendLayout();
+            this.toolStrip2.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // treeRepariItem
+            // 
+            this.treeRepariItem.AccessibleRole = System.Windows.Forms.AccessibleRole.Outline;
+            this.treeRepariItem.AllowDrop = true;
+            this.treeRepariItem.BackColor = System.Drawing.SystemColors.Window;
+            // 
+            // 
+            // 
+            this.treeRepariItem.BackgroundStyle.Class = "TreeBorderKey";
+            this.treeRepariItem.ContextMenuStrip = this.cMenuRepairType;
+            this.treeRepariItem.Dock = System.Windows.Forms.DockStyle.Left;
+            this.treeRepariItem.Location = new System.Drawing.Point(0, 0);
+            this.treeRepariItem.Name = "treeRepariItem";
+            this.treeRepariItem.NodesConnector = this.nodeConnector1;
+            this.treeRepariItem.NodeStyle = this.elementStyle1;
+            this.treeRepariItem.PathSeparator = ";";
+            this.treeRepariItem.Size = new System.Drawing.Size(252, 448);
+            this.treeRepariItem.Styles.Add(this.elementStyle1);
+            this.treeRepariItem.TabIndex = 2;
+            this.treeRepariItem.Text = "advTree1";
+            this.treeRepariItem.NodeClick += new DevComponents.AdvTree.TreeNodeMouseEventHandler(this.treeRepariItem_NodeClick);
+            this.treeRepariItem.NodeDoubleClick += new DevComponents.AdvTree.TreeNodeMouseEventHandler(this.treeRepariItem_NodeDoubleClick);
+            // 
+            // cMenuRepairType
+            // 
+            this.cMenuRepairType.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmRoot,
+            this.tsmNode,
+            this.tsmModifty,
+            this.tsmDel});
+            this.cMenuRepairType.Name = "contextMenuStrip1";
+            this.cMenuRepairType.Size = new System.Drawing.Size(137, 92);
+            // 
+            // tsmRoot
+            // 
+            this.tsmRoot.Name = "tsmRoot";
+            this.tsmRoot.Size = new System.Drawing.Size(136, 22);
+            this.tsmRoot.Text = "增加根目录";
+            this.tsmRoot.Click += new System.EventHandler(this.tsmRoot_Click);
+            // 
+            // tsmNode
+            // 
+            this.tsmNode.Name = "tsmNode";
+            this.tsmNode.Size = new System.Drawing.Size(136, 22);
+            this.tsmNode.Text = "增加子目录";
+            this.tsmNode.Click += new System.EventHandler(this.tsmNode_Click);
+            // 
+            // tsmModifty
+            // 
+            this.tsmModifty.Name = "tsmModifty";
+            this.tsmModifty.Size = new System.Drawing.Size(136, 22);
+            this.tsmModifty.Text = "修改";
+            this.tsmModifty.Click += new System.EventHandler(this.tsmModifty_Click);
+            // 
+            // tsmDel
+            // 
+            this.tsmDel.Name = "tsmDel";
+            this.tsmDel.Size = new System.Drawing.Size(136, 22);
+            this.tsmDel.Text = "删除";
+            this.tsmDel.Click += new System.EventHandler(this.tsmDel_Click);
+            // 
+            // nodeConnector1
+            // 
+            this.nodeConnector1.LineColor = System.Drawing.SystemColors.ControlText;
+            // 
+            // elementStyle1
+            // 
+            this.elementStyle1.Name = "elementStyle1";
+            this.elementStyle1.TextColor = System.Drawing.SystemColors.ControlText;
+            // 
+            // dgRepairItem
+            // 
+            this.dgRepairItem.AllowUserToAddRows = false;
+            this.dgRepairItem.AllowUserToDeleteRows = false;
+            this.dgRepairItem.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgRepairItem.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ItemCode,
+            this.ItemName,
+            this.ItemType,
+            this.TypeOfWork,
+            this.SpellCode});
+            this.dgRepairItem.ContextMenuStrip = this.cMenuRepairItem;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgRepairItem.DefaultCellStyle = dataGridViewCellStyle1;
+            this.dgRepairItem.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgRepairItem.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
+            this.dgRepairItem.Location = new System.Drawing.Point(252, 50);
+            this.dgRepairItem.MultiSelect = false;
+            this.dgRepairItem.Name = "dgRepairItem";
+            this.dgRepairItem.RowTemplate.Height = 23;
+            this.dgRepairItem.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgRepairItem.Size = new System.Drawing.Size(636, 254);
+            this.dgRepairItem.TabIndex = 41;
+            this.dgRepairItem.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgRepairItem_CellContentClick);
+            this.dgRepairItem.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgRepairItem_CellDoubleClick);
+            // 
+            // ItemCode
+            // 
+            this.ItemCode.DataPropertyName = "ItemCode";
+            this.ItemCode.HeaderText = "项目编码";
+            this.ItemCode.Name = "ItemCode";
+            // 
+            // ItemName
+            // 
+            this.ItemName.DataPropertyName = "ItemName";
+            this.ItemName.HeaderText = "项目名称";
+            this.ItemName.Name = "ItemName";
+            this.ItemName.Width = 200;
+            // 
+            // ItemType
+            // 
+            this.ItemType.DataPropertyName = "ItemType";
+            this.ItemType.HeaderText = "项目类型";
+            this.ItemType.Name = "ItemType";
+            // 
+            // TypeOfWork
+            // 
+            this.TypeOfWork.DataPropertyName = "TypeOfWork";
+            this.TypeOfWork.HeaderText = "工时周期";
+            this.TypeOfWork.Name = "TypeOfWork";
+            // 
+            // SpellCode
+            // 
+            this.SpellCode.DataPropertyName = "SpellCode";
+            this.SpellCode.HeaderText = "拼音码";
+            this.SpellCode.Name = "SpellCode";
+            // 
+            // cMenuRepairItem
+            // 
+            this.cMenuRepairItem.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ModifyToolStripMenuItem,
+            this.DelToolStripMenuItem});
+            this.cMenuRepairItem.Name = "cmenuCarDetail";
+            this.cMenuRepairItem.Size = new System.Drawing.Size(101, 48);
+            // 
+            // ModifyToolStripMenuItem
+            // 
+            this.ModifyToolStripMenuItem.Name = "ModifyToolStripMenuItem";
+            this.ModifyToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.ModifyToolStripMenuItem.Text = "修改";
+            this.ModifyToolStripMenuItem.Click += new System.EventHandler(this.ModifyToolStripMenuItem_Click);
+            // 
+            // DelToolStripMenuItem
+            // 
+            this.DelToolStripMenuItem.Name = "DelToolStripMenuItem";
+            this.DelToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.DelToolStripMenuItem.Text = "删除";
+            this.DelToolStripMenuItem.Click += new System.EventHandler(this.DelToolStripMenuItem_Click);
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnAddItem,
+            this.btnIn,
+            this.btnInPrice,
+            this.btnSelect});
+            this.toolStrip1.Location = new System.Drawing.Point(252, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(636, 25);
+            this.toolStrip1.TabIndex = 42;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // btnAddItem
+            // 
+            this.btnAddItem.Image = ((System.Drawing.Image)(resources.GetObject("btnAddItem.Image")));
+            this.btnAddItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnAddItem.Name = "btnAddItem";
+            this.btnAddItem.Size = new System.Drawing.Size(76, 22);
+            this.btnAddItem.Tag = "add";
+            this.btnAddItem.Text = "增加项目";
+            this.btnAddItem.Click += new System.EventHandler(this.btnAddItem_Click);
+            // 
+            // btnIn
+            // 
+            this.btnIn.Image = ((System.Drawing.Image)(resources.GetObject("btnIn.Image")));
+            this.btnIn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnIn.Name = "btnIn";
+            this.btnIn.Size = new System.Drawing.Size(52, 22);
+            this.btnIn.Tag = "in";
+            this.btnIn.Text = "导入";
+            this.btnIn.Click += new System.EventHandler(this.btnIn_Click);
+            // 
+            // btnInPrice
+            // 
+            this.btnInPrice.Image = ((System.Drawing.Image)(resources.GetObject("btnInPrice.Image")));
+            this.btnInPrice.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnInPrice.Name = "btnInPrice";
+            this.btnInPrice.Size = new System.Drawing.Size(104, 22);
+            this.btnInPrice.Tag = "in";
+            this.btnInPrice.Text = " 导入项目价格";
+            this.btnInPrice.Click += new System.EventHandler(this.btnInPrice_Click);
+            // 
+            // btnSelect
+            // 
+            this.btnSelect.Image = ((System.Drawing.Image)(resources.GetObject("btnSelect.Image")));
+            this.btnSelect.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSelect.Name = "btnSelect";
+            this.btnSelect.Size = new System.Drawing.Size(52, 22);
+            this.btnSelect.Tag = "select";
+            this.btnSelect.Text = "选择";
+            this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
+            // 
+            // dgRepItemPrice
+            // 
+            this.dgRepItemPrice.AllowUserToAddRows = false;
+            this.dgRepItemPrice.AllowUserToDeleteRows = false;
+            this.dgRepItemPrice.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgRepItemPrice.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ID,
+            this.ItemCode1,
+            this.CarLevel,
+            this.EmpWorkH,
+            this.ActWorkH,
+            this.WorkHPrice});
+            this.dgRepItemPrice.ContextMenuStrip = this.cMenuRepPrice;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgRepItemPrice.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgRepItemPrice.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.dgRepItemPrice.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
+            this.dgRepItemPrice.Location = new System.Drawing.Point(252, 304);
+            this.dgRepItemPrice.MultiSelect = false;
+            this.dgRepItemPrice.Name = "dgRepItemPrice";
+            this.dgRepItemPrice.RowTemplate.Height = 23;
+            this.dgRepItemPrice.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgRepItemPrice.Size = new System.Drawing.Size(636, 144);
+            this.dgRepItemPrice.TabIndex = 43;
+            // 
+            // ID
+            // 
+            this.ID.DataPropertyName = "ID";
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.Visible = false;
+            // 
+            // ItemCode1
+            // 
+            this.ItemCode1.DataPropertyName = "ItemCode";
+            this.ItemCode1.HeaderText = "项目编码";
+            this.ItemCode1.Name = "ItemCode1";
+            // 
+            // CarLevel
+            // 
+            this.CarLevel.DataPropertyName = "CarLevel";
+            this.CarLevel.HeaderText = "车型分类";
+            this.CarLevel.Name = "CarLevel";
+            // 
+            // EmpWorkH
+            // 
+            this.EmpWorkH.DataPropertyName = "EmpWorkH";
+            this.EmpWorkH.HeaderText = "员工工时";
+            this.EmpWorkH.Name = "EmpWorkH";
+            // 
+            // ActWorkH
+            // 
+            this.ActWorkH.DataPropertyName = "ActWorkH";
+            this.ActWorkH.HeaderText = "结算工时";
+            this.ActWorkH.Name = "ActWorkH";
+            // 
+            // WorkHPrice
+            // 
+            this.WorkHPrice.DataPropertyName = "WorkHPrice";
+            this.WorkHPrice.HeaderText = "工时价格";
+            this.WorkHPrice.Name = "WorkHPrice";
+            // 
+            // cMenuRepPrice
+            // 
+            this.cMenuRepPrice.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnPriceAdd,
+            this.btnPriceModify,
+            this.btnPriceDel});
+            this.cMenuRepPrice.Name = "cmenuCarDetail";
+            this.cMenuRepPrice.Size = new System.Drawing.Size(101, 70);
+            // 
+            // btnPriceAdd
+            // 
+            this.btnPriceAdd.Name = "btnPriceAdd";
+            this.btnPriceAdd.Size = new System.Drawing.Size(100, 22);
+            this.btnPriceAdd.Text = "增加";
+            this.btnPriceAdd.Click += new System.EventHandler(this.btnPriceAdd_Click);
+            // 
+            // btnPriceModify
+            // 
+            this.btnPriceModify.Name = "btnPriceModify";
+            this.btnPriceModify.Size = new System.Drawing.Size(100, 22);
+            this.btnPriceModify.Text = "修改";
+            this.btnPriceModify.Click += new System.EventHandler(this.btnPriceModify_Click);
+            // 
+            // btnPriceDel
+            // 
+            this.btnPriceDel.Name = "btnPriceDel";
+            this.btnPriceDel.Size = new System.Drawing.Size(100, 22);
+            this.btnPriceDel.Text = "删除";
+            this.btnPriceDel.Click += new System.EventHandler(this.btnPriceDel_Click);
+            // 
+            // toolStrip2
+            // 
+            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnQuery,
+            this.toolStripLabel1,
+            this.txtItemCode,
+            this.toolStripLabel2,
+            this.txtItemName});
+            this.toolStrip2.Location = new System.Drawing.Point(252, 25);
+            this.toolStrip2.Name = "toolStrip2";
+            this.toolStrip2.Size = new System.Drawing.Size(636, 25);
+            this.toolStrip2.TabIndex = 44;
+            this.toolStrip2.Text = "toolStrip2";
+            // 
+            // btnQuery
+            // 
+            this.btnQuery.Image = ((System.Drawing.Image)(resources.GetObject("btnQuery.Image")));
+            this.btnQuery.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnQuery.Name = "btnQuery";
+            this.btnQuery.Size = new System.Drawing.Size(52, 22);
+            this.btnQuery.Tag = "query";
+            this.btnQuery.Text = "查询";
+            this.btnQuery.Click += new System.EventHandler(this.btnQuery_Click);
+            // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(56, 22);
+            this.toolStripLabel1.Text = "项目编码";
+            // 
+            // txtItemCode
+            // 
+            this.txtItemCode.Name = "txtItemCode";
+            this.txtItemCode.Size = new System.Drawing.Size(100, 25);
+            // 
+            // toolStripLabel2
+            // 
+            this.toolStripLabel2.Name = "toolStripLabel2";
+            this.toolStripLabel2.Size = new System.Drawing.Size(56, 22);
+            this.toolStripLabel2.Text = "项目名称";
+            // 
+            // txtItemName
+            // 
+            this.txtItemName.Name = "txtItemName";
+            this.txtItemName.Size = new System.Drawing.Size(100, 25);
+            // 
+            // frmRepairItem
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(888, 448);
+            this.Controls.Add(this.dgRepairItem);
+            this.Controls.Add(this.toolStrip2);
+            this.Controls.Add(this.dgRepItemPrice);
+            this.Controls.Add(this.toolStrip1);
+            this.Controls.Add(this.treeRepariItem);
+            this.Name = "frmRepairItem";
+            this.Text = "服务项目";
+            this.Load += new System.EventHandler(this.frmRepairItem_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.treeRepariItem)).EndInit();
+            this.cMenuRepairType.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgRepairItem)).EndInit();
+            this.cMenuRepairItem.ResumeLayout(false);
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgRepItemPrice)).EndInit();
+            this.cMenuRepPrice.ResumeLayout(false);
+            this.toolStrip2.ResumeLayout(false);
+            this.toolStrip2.PerformLayout();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private DevComponents.AdvTree.AdvTree treeRepariItem;
+        private DevComponents.AdvTree.NodeConnector nodeConnector1;
+        private DevComponents.DotNetBar.ElementStyle elementStyle1;
+        private System.Windows.Forms.ContextMenuStrip cMenuRepairType;
+        private System.Windows.Forms.ToolStripMenuItem tsmRoot;
+        private System.Windows.Forms.ToolStripMenuItem tsmNode;
+        private System.Windows.Forms.ToolStripMenuItem tsmModifty;
+        private System.Windows.Forms.ToolStripMenuItem tsmDel;
+        private DevComponents.DotNetBar.Controls.DataGridViewX dgRepairItem;
+        private System.Windows.Forms.ContextMenuStrip cMenuRepairItem;
+        private System.Windows.Forms.ToolStripMenuItem DelToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ModifyToolStripMenuItem;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton btnAddItem;
+        private DevComponents.DotNetBar.Controls.DataGridViewX dgRepItemPrice;
+        private System.Windows.Forms.ToolStripButton btnIn;
+        private System.Windows.Forms.ToolStripButton btnInPrice;
+        private System.Windows.Forms.ToolStrip toolStrip2;
+        private System.Windows.Forms.ToolStripButton btnQuery;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
+        private System.Windows.Forms.ToolStripTextBox txtItemCode;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel2;
+        private System.Windows.Forms.ToolStripTextBox txtItemName;
+        private System.Windows.Forms.ToolStripButton btnSelect;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ItemCode1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CarLevel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn EmpWorkH;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ActWorkH;
+        private System.Windows.Forms.DataGridViewTextBoxColumn WorkHPrice;
+        private System.Windows.Forms.ContextMenuStrip cMenuRepPrice;
+        private System.Windows.Forms.ToolStripMenuItem btnPriceAdd;
+        private System.Windows.Forms.ToolStripMenuItem btnPriceModify;
+        private System.Windows.Forms.ToolStripMenuItem btnPriceDel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ItemCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ItemName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ItemType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TypeOfWork;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SpellCode;
+    }
+}

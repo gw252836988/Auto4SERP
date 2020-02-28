@@ -1,0 +1,39 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Data;
+using Model;
+namespace Bll.Sale
+{
+    public interface ICarStock
+    {
+       
+        bool AddCarInD(CarInD obj);
+        string GetDHOfAddCarInH(CarInH obj);
+        bool UpdateCarInH(CarInH obj);
+        DataTable GetCarInDs(string dh);
+        bool UpdateCarInD(CarInD obj);
+        DataTable GetCarInHsOfDefault();
+        CarInH GetCarInH(string dh);
+        //DataTable GetCarInHsOfQuery(string strBegin, string strEnd, CarInH obj);
+        DataTable GetCarsOfStockByQuery(List<SqlElement> list, int days);
+        void DoCarInStock(string dh);
+        bool IsInOfCarinH(string dh);
+        DataTable GetCarsOfStock();
+        DataTable GetCarInHsOfQuery(string strBegin, string strEnd, List<SqlElement> list, int PageIndex, int PageSize, out int RecordCount, out int PageCount);
+        bool UpdateCarStockInfo(CarStock obj);
+        void DeleteCarStock(string id, string itemId);
+        void UpdateStatus(string vin, int stauts);
+        int GetCarStockStatus(string vin);
+        bool IsExistOfVin(string vin);
+        int GetOverCountOfStock();
+        string GetCarStockAutoNumber(string vin);
+        void DelCarInD(string id);
+        bool DelCarInH(string dh);
+        void CarInHBack(string dh);
+        bool CarInHIsBack(string dh);
+        DataTable GetCarsOutAndInReport(string year);
+    }
+}

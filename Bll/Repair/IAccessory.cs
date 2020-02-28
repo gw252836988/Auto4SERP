@@ -1,0 +1,57 @@
+﻿using System;
+using System.Data;
+using Model;
+using System.Collections.Generic;
+namespace Bll.Repair
+{
+   public  interface IAccessory
+    {
+         bool AddAccessory(Model.Accessory obj);
+         DataTable GetAccessorys(List<SqlElement> lst, int PageIndex, int PageSize, out int RecordCount, out int PageCount);
+
+         Accessory GetAccessoryByCode(string accessorycode);
+         void UpdateAccessory(Accessory obj);
+
+
+         void UpdateAccessoryEnabled(string code);
+         void InAcc(string dh);
+         DataTable GetWareHouses();
+         int BackInAcc(string dh);
+
+         DataTable GetAccsInWareAsTake(string housename, string acccode, string accname, string append);
+         DataTable GetAccInWareAsTake(string id);
+         bool IsAccEnough(double amount, string acccode, string wareid);
+         void AccOutWare(string dh, int xh, float amount);
+         void AccessoryOutRecede(string dh, int xh);
+         void AccOutWareOfBatch(string dh, int xh, decimal amount, int wareid,string outtype);
+         bool IsCanRecede(string dh, int xh);
+         DataTable GetInWareRecs(string strBegin, string strEnd, List<SqlElement> list, int PageIndex, int PageSize, out int RecordCount, out int PageCount);
+         DataTable GetOutWareRecs(string strBegin, string strEnd, List<SqlElement> list, int PageIndex, int PageSize, out int RecordCount, out int PageCount, bool ishow, bool isPC);
+
+         DataTable GetSumOutWareRecs(string strBegin, string strEnd, List<SqlElement> list, bool isPC);
+         DataTable GetAccWareInfo(string items, List<SqlElement> lstE, string begindate, string enddate, int days);
+         bool CheckStore(string acccode, float amountDemmand);
+         System.Data.DataTable GetWareInfoOfDemamnd(string accessorycode);
+
+         float GetAccAmount(string accessorycode);
+         DataTable GetInWareRecsSum(string strBegin, string strEnd, List<SqlElement> list);
+         DataTable GetAccOutRank(string housename, string strBegin, string strEnd, int intype, bool isClaim,bool isReiar);
+         DataTable GetOutDtOfWareRecs(string strBegin, string strEnd, List<SqlElement> list, bool isAppend);
+         DataTable GetReRecord(string dh);
+         DataTable GetNormalAccOutRank(string housename, string acccode, string strBegin, string strEnd,bool isclaim);
+         decimal GetAmountOfAccOutInMonth(int year, int month);
+         decimal GetAmountOfAccStockInMonth(int year, int month);
+         decimal GetInPriceOfAcc(string AccessoryCode);
+         DataTable GetInDtOfWareRecs(string strBegin, string strEnd, List<SqlElement> list);
+         void AccOutWareOfNegative(string dh, int xh, decimal amount, int wareid, string outtype);
+         DataTable GetSumAccWare(List<SqlElement> lstE, string begindate, string enddate, int days);
+         DataTable GetOverStocks(string housename, string strBegin, string strEnd);
+         void DelAccessory(string AccessoryCode);
+         void AccessoryOutRecede(string dh, int xh, double amountre);
+         DataTable GetZHOutDetails(string housename, string strBegin, string strEnd);
+         decimal GetZHJEOfQuery(int index,string strBegin, string strEnd);
+         DataTable GetZHDemandsDetails(int index,string strBegin, string strEnd);
+         DataTable GetInWareRecs(string strBegin, string strEnd, List<SqlElement> list);
+         DataTable GetAccessorys();
+   }
+}

@@ -1,0 +1,91 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using Comm;
+namespace Auto4SErp
+{
+    public partial class frmPrint : Form
+    {
+        public frmPrint()
+        {
+            InitializeComponent();
+        }
+
+
+        private Dictionary<string, DataTable> dicTable;
+
+        public Dictionary<string, DataTable> DicTable
+        {
+            get { return dicTable; }
+            set { dicTable = value; }
+        }
+
+        private DataTable dataSource;
+
+        public DataTable DataSource
+        {
+            get { return dataSource; }
+            set { dataSource = value; }
+        }
+
+        private string reportFile;
+
+        public string ReportFile
+        {
+            get { return reportFile; }
+            set { reportFile = value; }
+        }
+        private string sourceName;
+
+        public string SourceName
+        {
+            get { return sourceName; }
+            set { sourceName = value; }
+        }
+
+        private void frmTest_Load(object sender, EventArgs e)
+        {
+            //DataTable dt = new DataTable();
+            //dt.Columns.Add(new DataColumn("a1", typeof(string)));
+            //dt.Columns.Add(new DataColumn("a2", typeof(string)));
+
+            //DataRow dr = dt.NewRow();
+            // dr[0] = "hello";
+            // dr[1] = "y";
+            //dt.Rows.Add(dr);
+            string tmp = AppDomain.CurrentDomain.BaseDirectory;
+            reportViewer1.LocalReport.ReportPath = tmp + ReportFile;
+            this.reportViewer1.LocalReport.DataSources.Clear();
+
+
+            foreach (KeyValuePair<string, DataTable> v in dicTable)
+            {
+
+                this.reportViewer1.LocalReport.DataSources.Add(new Microsoft.Reporting.WinForms.ReportDataSource(v.Key, v.Value));
+
+            }
+
+
+            this.reportViewer1.RefreshReport();
+
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //ExcelInAndOut inout = new ExcelInAndOut("D:\\123.xls");
+            //inout.InDataToDT();
+
+
+        }
+
+
+
+    }
+}

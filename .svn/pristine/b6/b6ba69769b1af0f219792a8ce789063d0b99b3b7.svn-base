@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="GetRegions">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetRegionsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRegionsResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOrgans">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetOrgansResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetOrgansResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DataTable" nillable="true">
+        <s:complexType>
+          <s:sequence>
+            <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+            <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetRegionsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRegions" />
+  </wsdl:message>
+  <wsdl:message name="GetRegionsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRegionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetOrgansSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOrgans" />
+  </wsdl:message>
+  <wsdl:message name="GetOrgansSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOrgansResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetRegionsHttpGetIn" />
+  <wsdl:message name="GetRegionsHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetOrgansHttpGetIn" />
+  <wsdl:message name="GetOrgansHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetRegionsHttpPostIn" />
+  <wsdl:message name="GetRegionsHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetOrgansHttpPostIn" />
+  <wsdl:message name="GetOrgansHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:portType name="OrganOfServiceSoap">
+    <wsdl:operation name="GetRegions">
+      <wsdl:input message="tns:GetRegionsSoapIn" />
+      <wsdl:output message="tns:GetRegionsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrgans">
+      <wsdl:input message="tns:GetOrgansSoapIn" />
+      <wsdl:output message="tns:GetOrgansSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="OrganOfServiceHttpGet">
+    <wsdl:operation name="GetRegions">
+      <wsdl:input message="tns:GetRegionsHttpGetIn" />
+      <wsdl:output message="tns:GetRegionsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrgans">
+      <wsdl:input message="tns:GetOrgansHttpGetIn" />
+      <wsdl:output message="tns:GetOrgansHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="OrganOfServiceHttpPost">
+    <wsdl:operation name="GetRegions">
+      <wsdl:input message="tns:GetRegionsHttpPostIn" />
+      <wsdl:output message="tns:GetRegionsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrgans">
+      <wsdl:input message="tns:GetOrgansHttpPostIn" />
+      <wsdl:output message="tns:GetOrgansHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="OrganOfServiceSoap" type="tns:OrganOfServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetRegions">
+      <soap:operation soapAction="http://tempuri.org/GetRegions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrgans">
+      <soap:operation soapAction="http://tempuri.org/GetOrgans" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="OrganOfServiceSoap12" type="tns:OrganOfServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetRegions">
+      <soap12:operation soapAction="http://tempuri.org/GetRegions" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrgans">
+      <soap12:operation soapAction="http://tempuri.org/GetOrgans" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="OrganOfServiceHttpGet" type="tns:OrganOfServiceHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="GetRegions">
+      <http:operation location="/GetRegions" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrgans">
+      <http:operation location="/GetOrgans" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="OrganOfServiceHttpPost" type="tns:OrganOfServiceHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="GetRegions">
+      <http:operation location="/GetRegions" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrgans">
+      <http:operation location="/GetOrgans" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="OrganOfService">
+    <wsdl:port name="OrganOfServiceSoap" binding="tns:OrganOfServiceSoap">
+      <soap:address location="http://221.130.108.114:8082/auto4serp/OrganOfService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="OrganOfServiceSoap12" binding="tns:OrganOfServiceSoap12">
+      <soap12:address location="http://221.130.108.114:8082/auto4serp/OrganOfService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="OrganOfServiceHttpGet" binding="tns:OrganOfServiceHttpGet">
+      <http:address location="http://221.130.108.114:8082/auto4serp/OrganOfService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="OrganOfServiceHttpPost" binding="tns:OrganOfServiceHttpPost">
+      <http:address location="http://221.130.108.114:8082/auto4serp/OrganOfService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

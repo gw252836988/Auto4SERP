@@ -1,0 +1,123 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Web;
+using System.Web.Services;
+using Bll.Personnel;
+using Model;
+using System.Data;
+namespace Auto4SErpWeb
+{
+    /// <summary>
+    /// StaffOfService 的摘要说明
+    /// </summary>
+    [WebService(Namespace = "http://tempuri.org/")]
+    [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
+    [System.ComponentModel.ToolboxItem(false)]
+
+    public class StaffOfService : System.Web.Services.WebService
+    {
+
+        [WebMethod]
+        public Staff GetStaff(string staffid)
+        {
+            StaffBll bll = new StaffBll();
+            //int RecordCount;
+            //int PageCount;
+            //GetStaffsByQuery(null, "101", 0, 30, out RecordCount, out PageCount);
+            return bll.GetStaff(staffid);
+
+        }
+
+        [WebMethod]
+        public DataTable GetStaffsByQuery(List<SqlElement> lst, string organid, int PageIndex, int PageSize, out int RecordCount, out int PageCount)
+        {
+            StaffBll bll = new StaffBll();
+            return bll.GetStaffsByQuery(lst,organid,PageIndex, PageSize ,out RecordCount,out PageCount);
+
+        }
+
+        [WebMethod]
+        public bool ValidateLogin(string staffid, string pwd)
+        {
+            StaffBll bll = new StaffBll();
+            return bll.ValidateLogin(staffid, pwd);
+        }
+
+        [WebMethod]
+        public bool AddStaff(Staff obj)
+        {
+
+            StaffBll bll = new StaffBll();
+            
+            return bll.AddStaff(obj);
+        }
+
+        [WebMethod]
+        public  string BatchInDB(DataTable dt, string append)
+        {
+            StaffBll bll = new StaffBll();
+            return bll.BatchInDB(dt,append );
+        }
+
+        [WebMethod]
+        public bool UpdateStaff(Staff obj)
+        {
+
+            StaffBll bll = new StaffBll();
+            return bll.UpdateStaff(obj);
+        }
+
+        [WebMethod]
+        public void  DeleteStaff(string  staffid)
+        {
+            StaffBll bll = new StaffBll();
+
+            //List<SqlElement> lst = new List<SqlElement>();
+            //lst.Add(new SqlElement { IsFuzzy = true, IsStr = true, Name = "staffid", Value = "2" });
+            ////int RecordCount;
+            ////int PageCount;
+            ////GetStaffsByQuery(lst, "organid ='152'", 0, 30, out RecordCount, out PageCount);
+            bll.DeleteStaff(staffid);
+        }
+
+        [WebMethod]
+        public void UpdateStaffPwd(string staffid, string newpwd)
+        {
+            StaffBll bll = new StaffBll();
+            bll.UpdateStaffPwd(staffid, newpwd);
+
+        }
+
+
+        [WebMethod]
+        public DataTable GetStaffNameOfOrgan(string organid)
+        {
+            StaffBll bll = new StaffBll();
+            return bll.GetStaffNameOfOrgan(organid);
+
+
+        }
+
+        [WebMethod]
+        public void AddInfo(string txt)
+        {
+            StaffBll bll = new StaffBll();
+            bll.AddInfo(txt);
+        }
+
+        [WebMethod]
+        public DataTable GetLatestInfos()
+        {
+            StaffBll bll = new StaffBll();
+            return bll.GetLatestInfos();
+        }
+
+
+        [WebMethod]
+        public DataTable GetSalersOfOrgan(string organid)
+        {
+            StaffBll bll = new StaffBll();
+            return bll.GetSalersOfOrgan(organid);
+        }
+    }
+}

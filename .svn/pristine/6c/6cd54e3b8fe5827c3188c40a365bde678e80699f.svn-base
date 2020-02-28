@@ -1,0 +1,80 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using Model;
+using Bll;
+namespace Auto4SErp
+{
+    public partial class frmDlgUnit : ifrmBase
+    {
+
+        private IExtend mIExtend;
+
+        private int iD = 0;
+
+        public int ID
+        {
+          get { return iD; }
+          set { iD = value; }
+        }
+
+   
+
+        public frmDlgUnit()
+        {
+            InitializeComponent();
+            mIExtend = Bll.BllFactory.GetExtendBll();
+        }
+
+        private void btnOK_Click(object sender, EventArgs e)
+        {
+            SupplyUnit obj = AssginToModel();
+           
+            if (obj != null)
+            { 
+                obj.ID = iD;
+
+                if (iD==0)
+                    mIExtend.AddSupplyUnit(obj);
+                else
+                    mIExtend.UpdateSuppyUnit(obj);
+
+
+                this.Close();
+            }
+        }
+
+        private void frmUnit_Load(object sender, EventArgs e)
+        {
+            mLstControls.Add(cmbUnitType);
+            mLstControls.Add(txtUnitName);
+            mLstControls.Add(txtUnitAddress);
+            mLstControls.Add(cmbPayType);
+            SetTButtonPng(toolStrip1);
+
+            if (iD != 0)
+            {
+
+                SupplyUnit obj = mIExtend.GetSuppyUnitByID(iD);
+                AssginModelToControl<SupplyUnit>(obj);
+            }
+        }
+
+
+        private SupplyUnit AssginToModel()
+        {
+
+            List<Pair> lstPairs = AssginToList();
+            if (mFrmAssist.ValidIn(lstPairs)) return null;
+
+
+            SupplyUnit entity = FrmAssist.PopulateEntityFromCollection<SupplyUnit>(null, lstPairs);
+            return entity;
+        }
+    }
+}

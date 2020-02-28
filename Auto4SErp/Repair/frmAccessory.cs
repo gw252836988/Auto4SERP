@@ -1,0 +1,338 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using Bll.Repair;
+using Model;
+namespace Auto4SErp.Repair
+{
+    public partial class frmAccessory : ifrmBase
+    {
+        private IAccessory mIAccessory = null;
+        private List<SqlElement> mLstE = null;
+        // private DataTable mDicOfAccessory;
+        private bool isSelect = false;
+        private bool isCheckAcc = false;
+        private IRepairAccessory mIRepairAccessory;
+        private string dH = "";
+
+        public string DH
+        {
+            get { return dH; }
+            set { dH = value; }
+        }
+
+        public bool IsCheckAcc
+        {
+            get { return isCheckAcc; }
+            set { isCheckAcc = value; }
+        }
+
+
+        public string RepChildType
+        {
+            get;
+            set;
+
+        }
+        public bool IsSelect
+        {
+            get { return isSelect; }
+            set { isSelect = value; }
+        }
+
+        public bool IsPresent
+        {
+            get;
+            set;
+
+        }
+        public frmAccessory()
+        {
+            InitializeComponent();
+            mIAccessory = Bll.BllFactory.GetAccessoryBll();
+            mIRepairAccessory = Bll.BllFactory.GetRepairAccessoryBll();
+            tsbFirst = bindingNavigatorMoveFirstItem;
+            tsbLast = bindingNavigatorMoveLastItem;
+            tsbPre = bindingNavigatorMovePreviousItem;
+            tsbNext = bindingNavigatorMoveNextItem;
+            tstbPageCount = bindingNavigatorCountItem;
+            tstbPageCurrent = bindingNavigatorPositionItem;
+            tstbRecordCount = bindingNavigatorRecordCount;
+        }
+
+        private void btnAddAccessory_Click(object sender, EventArgs e)
+        {
+            frmDlgAccesorry frm = new frmDlgAccesorry();
+            frm.setRefreshDelegate(delegate(bool isR)
+            {
+                DoQuery();
+            });
+            frm.ShowDialogEx();
+
+        }
+
+
+        protected override void DoQuery()
+        {
+
+            DataTable dt;
+            int tmpRecordCount;
+            int tmpPageCount;
+
+            dt = mIAccessory.GetAccessorys(mLstE, mPageInfo.PageCurrent, mPageInfo.PageSize, out tmpRecordCount, out tmpPageCount);
+            mPageInfo.RecordCount = tmpRecordCount;
+            mPageInfo.PageCount = tmpPageCount;
+            SetRoleNavigatorState();
+
+            DataToControl(dt);
+        }
+
+
+
+
+        private void DataToControl(DataTable dt)
+        {
+
+            dgAccessory.AutoGenerateColumns = false;
+            dgAccessory.DataSource = dt;
+            // FrmAssist.UpdateColumns(ref mDicOfAccessory, dt, 13);
+        }
+
+        private void frmAccessory_Load(object sender, EventArgs e)
+        {
+
+            mPageInfo.PageCurrent = 1;
+            bindingNavigatorPositionItem.Enabled = true;
+            bindingNavigatorCountItem.Enabled = true;
+
+            mLstControls.Add(txtAccessoryCode);
+            mLstControls.Add(txtAccessoryName);
+            mLstControls.Add(cmbAccessoryType);
+            mLstControls.Add(txtSmallType);
+            LoadExtendContents("配件类型", cmbAccessoryType);
+
+            if (isSelect == true)
+            {
+                btnAddAccessory.Visible = false;
+                if (!string.IsNullOrEmpty(dH))
+                {
+                    cmbAccessoryType.SelectedIndex = 1;
+                    //if (RepChildType == "销售装潢")
+                    //    cmbAccessoryType.Enabled = false;
+                    //else if (RepChildType == "原厂装潢")
+                    //{
+                    //    cmbAccessoryType.SelectedIndex =0;
+                    //    cmbAccessoryType.Enabled = false;
+                    //}
+
+
+
+                }
+                else
+                    cmbAccessoryType.SelectedIndex = -1;
+                dgAccessory.ReadOnly = true;
+
+                DelToolStripMenuItem.Enabled = false;
+                ModifyToolStripMenuItem.Enabled = false;
+            }
+
+            if (!string.IsNullOrEmpty(dH))
+            {
+                btnDemandSel.Visible = true;
+                listviewsel.Visible = true;
+
+            }
+
+            SetTButtonPng(toolStrip1);
+
+            List<Pair> lst = AssginToListOfQuery();
+            mLstE = CreateMedialSqlElement(lst);
+            DoQuery();
+        }
+
+        private void btnQuery_Click(object sender, EventArgs e)
+        {
+            List<Pair> lst = AssginToListOfQuery();
+            mLstE = CreateMedialSqlElement(lst);
+            DoQuery();
+        }
+
+        private void ModifyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dgAccessory.SelectedRows.Count != 0)
+            {
+                frmDlgAccesorry frm = new frmDlgAccesorry();
+                DataGridViewRow seldr = dgAccessory.SelectedRows[0];
+                string strid = seldr.Cells[0].Value.ToString();
+                frm.AccesorryCode = strid;
+                frm.Status = 1;
+                frm.setRefreshDelegate(delegate(bool isR)
+                {
+                    if (isR)
+                        DoQuery();
+                });
+                frm.ShowDialogEx();
+
+
+            }
+        }
+
+        private void dgAccessory_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+
+            if (!isSelect) return;
+            if (!string.IsNullOrEmpty(dH))
+            {
+
+                DemandSelect();
+                return;
+
+            }
+
+            if (dgAccessory.SelectedRows.Count != 0)
+            {
+
+                DataGridViewRow seldr = dgAccessory.SelectedRows[0];
+                string accessorycode = seldr.Cells[0].Value.ToString();
+                string price = seldr.Cells["SalePrice"].Value.ToString();
+
+                string inprice = mIAccessory.GetInPriceOfAcc(accessorycode).ToString();
+
+                string reslut = accessorycode + "," + price + "," + inprice + "," + seldr.Cells[1].Value.ToString();
+                //if (isCheckAcc)                                              
+                //{
+                //    if (!mIAccessory.CheckStore(accessorycode, 1))
+                //    {
+                //        ShowMessage("库存不足，无法选取");
+                //        return;
+                //    }
+                //}
+
+                //  AccessoryOfRep obj = new AccessoryOfRep();
+
+                Model.Accessory obj = mIAccessory.GetAccessoryByCode(accessorycode);
+                if (obj.IsEnabled == 1)
+                {
+                    ShowMessage("该配件已停用，无法选取");
+                    return;
+
+                }
+                if (m_del != null)
+                    m_del(reslut);
+                this.Close();
+            }
+        }
+
+        private void btnIn_Click(object sender, EventArgs e)
+        {
+            frmBatchIn frm = new frmBatchIn();
+            frm.TableName = "Accessory";
+            frm.ShowDialogEx();
+        }
+
+        private void bindingNavigatorMoveFirstItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bindingNavigatorMovePreviousItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bindingNavigatorMoveNextItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bindingNavigatorMoveLastItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void DelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dgAccessory.SelectedRows.Count != 0)
+            {
+                frmDlgAccesorry frm = new frmDlgAccesorry();
+                DataGridViewRow seldr = dgAccessory.SelectedRows[0];
+                string strid = seldr.Cells[0].Value.ToString();
+                if (ShowMessageOfWarning("删除配件资料会影响其它数据，确定删除吗？") == DialogResult.OK)
+                {
+                    mIAccessory.DelAccessory(strid);
+                    DoQuery();
+                }
+
+
+            }
+        }
+
+        private void btnDemandSel_Click(object sender, EventArgs e)
+        {
+            DemandSelect();
+        }
+
+
+        private void DemandSelect()
+        {
+            if (dgAccessory.SelectedRows.Count != 0)
+            {
+
+                DataGridViewRow seldr = dgAccessory.SelectedRows[0];
+                string accessorycode = seldr.Cells[0].Value.ToString();
+                string price = seldr.Cells["saleprice"].Value.ToString();
+
+                //if (!mIAccessory.CheckStore(accessorycode, 1))
+                //{
+                //    ShowMessage("库存不足，无法选取");
+                //    return;
+                //}
+
+                Model.Accessory obj1 = mIAccessory.GetAccessoryByCode(accessorycode);
+                if (obj1.IsEnabled == 1)
+                {
+                    ShowMessage("该配件已停用，无法选取");
+                    return;
+
+                }
+                AccessoryOfRep obj = new AccessoryOfRep();
+                obj.DH = dH;
+                obj.AccessoryCode = accessorycode;
+                obj.SalePrice = float.Parse(price);
+
+                if (!IsPresent)
+                    obj.FinalPrice = obj.SalePrice;
+                else
+                    obj.FinalPrice = 0;
+
+                obj.Amount = 1;
+                mIRepairAccessory.AddAccessoryOfRepair(obj);
+
+                listviewsel.Items.Add(seldr.Cells[1].Value.ToString());
+
+            }
+
+
+
+
+        }
+        private void dgAccessory_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgAccessory.SelectedRows.Count != 0)
+            {
+                DataGridViewRow seldr = dgAccessory.SelectedRows[0];
+                string accessorycode = seldr.Cells[0].Value.ToString();
+                txtKC.Text = mIAccessory.GetAccAmount(accessorycode).ToString();
+
+            }
+        }
+
+    }
+}

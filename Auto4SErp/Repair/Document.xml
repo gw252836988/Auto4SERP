@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XtraSerializer version="1.0">
+  <Items value="1">
+    <Item1 Size="800,600" ItemKind="DiagramRoot" Theme="Office" PageSize="800,600" CanvasSizeMode="None">
+      <Children value="3">
+        <Item1 Position="70,115" Size="130,70" Background="#FFFF8000" Shape="BasicShapes.Ellipse" ItemKind="DiagramShape" />
+        <Item2 Position="340,110" Size="100,75" Shape="BasicShapes.Rectangle" ItemKind="DiagramShape" />
+        <Item3 EndArrow="Filled90" BeginItemPointIndex="1" EndItemPointIndex="3" Points="325,150 325,148" ItemKind="DiagramConnector" BeginItem="0" EndItem="1" BeginPoint="200,150" EndPoint="340,147.5" />
+      </Children>
+    </Item1>
+  </Items>
+</XtraSerializer>

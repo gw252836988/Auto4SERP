@@ -1,0 +1,72 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using Bll;
+using Comm;
+using Model;
+using Auto4SErp.Cust;
+namespace Auto4SErp
+{
+    public partial class frmMobileOfCustomer : ifrmBase
+    {
+        public frmMobileOfCustomer()
+        {
+            InitializeComponent();
+        }
+
+
+
+
+
+
+        private bool AssginToModel()
+        {
+
+            List<Pair> lstPairs = new List<Pair>();
+            lstPairs.Add(new Pair() { Key = "Mobile", Value = txtMobile.Text + "_" + txtMobile.Tag });
+
+            return mFrmAssist.ValidIn(lstPairs);
+
+
+
+        }
+
+
+        private void btnOK_Click(object sender, EventArgs e)
+        {
+
+            if (!AssginToModel())
+            {
+                ICustomer icustomer = BllFactory.GetCustomerBll();
+
+
+                if (icustomer.AddCustomerOfCheckNone(txtMobile.Text))
+                {
+                    frmCustomerEdit frm = new frmCustomerEdit();
+                    frm.Mobile = txtMobile.Text;
+
+                    frm.Show();
+                    this.Close();
+
+                }
+                else
+                {
+                    ShowMessage("该客户的手机号码已存在");
+                }
+
+            }
+
+        }
+
+        private void frmMobileOfCustomer_Load(object sender, EventArgs e)
+        {
+            mLstControls.Add(txtMobile);
+        }
+    }
+}
