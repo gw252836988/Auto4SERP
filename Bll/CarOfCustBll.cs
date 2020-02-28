@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DBUtil;
 using Comm;
 using System.Data;
-using Model;
+
+//second trial
 namespace Bll
 {
     public class CarOfCustBll : IBatchIn, ICarOfCust

@@ -8,6 +8,7 @@ using Comm;
 using System.Data;
 using Model;
 
+//hello
 namespace Bll
 {
     public class CustomerBll : ICustomer, IBatchIn

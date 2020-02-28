@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using Model;
 using Bll;
+//hp
 namespace Auto4SErp
 {
     public partial class frmDlgUnit : ifrmBase
