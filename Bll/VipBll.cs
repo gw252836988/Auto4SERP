@@ -9,6 +9,8 @@ using Model;
 using System.Data;
 using System.Data.SqlClient;
 using System.Collections;
+
+//test master
 namespace Bll
 {
    public  class VipBll : Bll.IVip
