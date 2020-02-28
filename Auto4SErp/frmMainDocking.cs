@@ -29,6 +29,8 @@ using Auto4SErp.Cust;
 using Newtonsoft.Json;
 using DevComponents.DotNetBar.Controls;
 using Microsoft.VisualBasic.PowerPacks;
+
+//this is my first modify
 namespace Auto4SErp
 {
 
