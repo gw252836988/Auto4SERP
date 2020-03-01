@@ -10,7 +10,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Collections;
 
-//test master
+//test master  0301
 namespace Bll
 {
    public  class VipBll : Bll.IVip
