@@ -12,6 +12,8 @@ using DevComponents.DotNetBar.Controls;
 using Comm;
 using System.Windows.Forms;
 using Model;
+
+//change test
 namespace Auto4SErp
 {
     public delegate void ErrorInfoDelegate(string controlname, string infotext);
