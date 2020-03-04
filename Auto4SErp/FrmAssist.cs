@@ -13,7 +13,7 @@ using Comm;
 using System.Windows.Forms;
 using Model;
 
-//change test11
+//change test112
 namespace Auto4SErp
 {
     public delegate void ErrorInfoDelegate(string controlname, string infotext);
