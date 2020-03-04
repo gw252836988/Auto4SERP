@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Comm;
 using Bll.Repair;
 using Bll;
+//123
 namespace Auto4SErp
 {
     public partial class frmBatchIn : ifrmBase
