@@ -126,7 +126,7 @@ namespace Auto4SErp.Report
             //GInprice = Math.Round(GInprice / 1.17m, 2);
             //YQCost = Math.Round(YQCost / 1.17m, 2);
             //GProfit = Math.Round(GProfit / 1.17m, 2);
-            lblSum.Text = string.Format("结算金额合计:{0},项目费合计:{1},材料费合计:{2},材料成本合计:{3},油漆成本合计:{6},利润合计:{4},毛利率:{5}", gamout, ItemProfit, accprofit, GInprice, GProfit, rate, YQCost);
+            lblSum.Text = string.Format("结算金额合计:{0},工时费费合计:{1},材料费合计:{2},材料成本合计:{3},油漆成本合计:{6},利润合计:{4},毛利率:{5}", gamout, ItemProfit, accprofit, GInprice, GProfit, rate, YQCost);
         }
 
         private void tbtnQuery_Click(object sender, EventArgs e)
