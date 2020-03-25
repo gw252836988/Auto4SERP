@@ -448,7 +448,7 @@ namespace Bll.Repair
         {
             string IndexField = "ID";
             isPc = true;
-            string AllFields = "*,cast(inprice/1.13 as decimal(18,2)) as inprice1,cast(saleprice*amount as decimal(18,2)) as  saleamount,cast(inprice *amount as decimal(18,2)) as inamount, cast((inprice/1.17) *amount as decimal(18,2)) as je1,case when status=2 then '负出库' else ' ' end as status1 ";
+            string AllFields = "*,cast(inprice/1.13 as decimal(18,2)) as inprice1,cast(saleprice*amount as decimal(18,2)) as  saleamount,cast(inprice *amount as decimal(18,2)) as inamount, cast((inprice/1.13) *amount as decimal(18,2)) as je1,case when status=2 then '负出库' else ' ' end as status1 ";
             string Condition = "v_outwarerec1 where ";
             string OrderFields = "order by outdate desc";
 
