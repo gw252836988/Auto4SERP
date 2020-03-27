@@ -125,8 +125,7 @@
             this.界面ToolStripMenuItem});
             this.menuMain.Location = new System.Drawing.Point(0, 0);
             this.menuMain.Name = "menuMain";
-            this.menuMain.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
-            this.menuMain.Size = new System.Drawing.Size(1352, 28);
+            this.menuMain.Size = new System.Drawing.Size(977, 25);
             this.menuMain.TabIndex = 13;
             this.menuMain.Text = "menuStrip1";
             // 
@@ -137,28 +136,28 @@
             this.密码修改ToolStripMenuItem,
             this.testToolStripMenuItem});
             this.界面ToolStripMenuItem.Name = "界面ToolStripMenuItem";
-            this.界面ToolStripMenuItem.Size = new System.Drawing.Size(51, 24);
+            this.界面ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
             this.界面ToolStripMenuItem.Text = "界面";
             this.界面ToolStripMenuItem.Click += new System.EventHandler(this.界面ToolStripMenuItem_Click);
             // 
             // menuLogOut
             // 
             this.menuLogOut.Name = "menuLogOut";
-            this.menuLogOut.Size = new System.Drawing.Size(152, 24);
+            this.menuLogOut.Size = new System.Drawing.Size(124, 22);
             this.menuLogOut.Text = "注销";
             this.menuLogOut.Click += new System.EventHandler(this.menuLogOut_Click);
             // 
             // 密码修改ToolStripMenuItem
             // 
             this.密码修改ToolStripMenuItem.Name = "密码修改ToolStripMenuItem";
-            this.密码修改ToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
+            this.密码修改ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.密码修改ToolStripMenuItem.Text = "密码修改";
             this.密码修改ToolStripMenuItem.Click += new System.EventHandler(this.密码修改ToolStripMenuItem_Click);
             // 
             // testToolStripMenuItem
             // 
             this.testToolStripMenuItem.Name = "testToolStripMenuItem";
-            this.testToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
+            this.testToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.testToolStripMenuItem.Text = "Test";
             this.testToolStripMenuItem.Click += new System.EventHandler(this.testToolStripMenuItem_Click_1);
             // 
@@ -169,22 +168,16 @@
             this.panel2.Controls.Add(this.panel3);
             this.panel2.Controls.Add(this.pnlBoard);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 842);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel2.Location = new System.Drawing.Point(0, 605);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1352, 36);
+            this.panel2.Size = new System.Drawing.Size(977, 29);
             this.panel2.TabIndex = 34;
             // 
             // lblSelf
             // 
             this.lblSelf.AutoSize = true;
-            // 
-            // 
-            // 
-            this.lblSelf.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblSelf.Font = new System.Drawing.Font("楷体", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblSelf.Location = new System.Drawing.Point(363, 6);
-            this.lblSelf.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblSelf.Location = new System.Drawing.Point(272, 5);
             this.lblSelf.Name = "lblSelf";
             this.lblSelf.Size = new System.Drawing.Size(0, 0);
             this.lblSelf.TabIndex = 21;
@@ -194,22 +187,16 @@
             this.panel3.Controls.Add(this.lblVipC);
             this.panel3.Controls.Add(this.lblPersonC);
             this.panel3.Controls.Add(this.picnet);
-            this.panel3.Location = new System.Drawing.Point(3, 2);
-            this.panel3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel3.Location = new System.Drawing.Point(2, 2);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(352, 30);
+            this.panel3.Size = new System.Drawing.Size(264, 24);
             this.panel3.TabIndex = 20;
             // 
             // lblVipC
             // 
             this.lblVipC.AutoSize = true;
-            // 
-            // 
-            // 
-            this.lblVipC.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblVipC.Font = new System.Drawing.Font("楷体", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblVipC.Location = new System.Drawing.Point(189, 4);
-            this.lblVipC.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblVipC.Location = new System.Drawing.Point(142, 3);
             this.lblVipC.Name = "lblVipC";
             this.lblVipC.Size = new System.Drawing.Size(0, 0);
             this.lblVipC.TabIndex = 4;
@@ -217,13 +204,8 @@
             // lblPersonC
             // 
             this.lblPersonC.AutoSize = true;
-            // 
-            // 
-            // 
-            this.lblPersonC.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblPersonC.Font = new System.Drawing.Font("楷体", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblPersonC.Location = new System.Drawing.Point(40, 4);
-            this.lblPersonC.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblPersonC.Location = new System.Drawing.Point(30, 3);
             this.lblPersonC.Name = "lblPersonC";
             this.lblPersonC.Size = new System.Drawing.Size(0, 0);
             this.lblPersonC.TabIndex = 2;
@@ -232,10 +214,9 @@
             // 
             this.picnet.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picnet.BackgroundImage")));
             this.picnet.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.picnet.Location = new System.Drawing.Point(11, 5);
-            this.picnet.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.picnet.Location = new System.Drawing.Point(8, 4);
             this.picnet.Name = "picnet";
-            this.picnet.Size = new System.Drawing.Size(21, 20);
+            this.picnet.Size = new System.Drawing.Size(16, 16);
             this.picnet.TabIndex = 1;
             this.picnet.TabStop = false;
             // 
@@ -249,24 +230,18 @@
             this.pnlBoard.Controls.Add(this.picName);
             this.pnlBoard.Controls.Add(this.lblID);
             this.pnlBoard.Controls.Add(this.picID);
-            this.pnlBoard.Location = new System.Drawing.Point(718, 1);
-            this.pnlBoard.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlBoard.Location = new System.Drawing.Point(501, 1);
             this.pnlBoard.Name = "pnlBoard";
-            this.pnlBoard.Size = new System.Drawing.Size(636, 31);
+            this.pnlBoard.Size = new System.Drawing.Size(477, 25);
             this.pnlBoard.TabIndex = 19;
             // 
             // lblClientInfo
             // 
             this.lblClientInfo.AutoSize = true;
-            // 
-            // 
-            // 
-            this.lblClientInfo.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblClientInfo.Font = new System.Drawing.Font("楷体", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblClientInfo.Location = new System.Drawing.Point(28, 5);
-            this.lblClientInfo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblClientInfo.Location = new System.Drawing.Point(21, 4);
             this.lblClientInfo.Name = "lblClientInfo";
-            this.lblClientInfo.Size = new System.Drawing.Size(25, 23);
+            this.lblClientInfo.Size = new System.Drawing.Size(20, 19);
             this.lblClientInfo.TabIndex = 7;
             this.lblClientInfo.Text = "无";
             this.lblClientInfo.Click += new System.EventHandler(this.lblClientInfo_Click);
@@ -274,15 +249,10 @@
             // lblOrgan
             // 
             this.lblOrgan.AutoSize = true;
-            // 
-            // 
-            // 
-            this.lblOrgan.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblOrgan.Font = new System.Drawing.Font("楷体", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblOrgan.Location = new System.Drawing.Point(404, 6);
-            this.lblOrgan.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblOrgan.Location = new System.Drawing.Point(303, 5);
             this.lblOrgan.Name = "lblOrgan";
-            this.lblOrgan.Size = new System.Drawing.Size(41, 23);
+            this.lblOrgan.Size = new System.Drawing.Size(34, 19);
             this.lblOrgan.TabIndex = 5;
             this.lblOrgan.Text = "暂无";
             // 
@@ -290,25 +260,19 @@
             // 
             this.picOrgan.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picOrgan.BackgroundImage")));
             this.picOrgan.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.picOrgan.Location = new System.Drawing.Point(376, 6);
-            this.picOrgan.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.picOrgan.Location = new System.Drawing.Point(282, 5);
             this.picOrgan.Name = "picOrgan";
-            this.picOrgan.Size = new System.Drawing.Size(21, 20);
+            this.picOrgan.Size = new System.Drawing.Size(16, 16);
             this.picOrgan.TabIndex = 4;
             this.picOrgan.TabStop = false;
             // 
             // lblName
             // 
             this.lblName.AutoSize = true;
-            // 
-            // 
-            // 
-            this.lblName.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblName.Font = new System.Drawing.Font("楷体", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblName.Location = new System.Drawing.Point(307, 6);
-            this.lblName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblName.Location = new System.Drawing.Point(230, 5);
             this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(41, 23);
+            this.lblName.Size = new System.Drawing.Size(34, 19);
             this.lblName.TabIndex = 3;
             this.lblName.Text = "暂无";
             // 
@@ -316,25 +280,19 @@
             // 
             this.picName.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picName.BackgroundImage")));
             this.picName.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.picName.Location = new System.Drawing.Point(279, 6);
-            this.picName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.picName.Location = new System.Drawing.Point(209, 5);
             this.picName.Name = "picName";
-            this.picName.Size = new System.Drawing.Size(21, 20);
+            this.picName.Size = new System.Drawing.Size(16, 16);
             this.picName.TabIndex = 2;
             this.picName.TabStop = false;
             // 
             // lblID
             // 
             this.lblID.AutoSize = true;
-            // 
-            // 
-            // 
-            this.lblID.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblID.Font = new System.Drawing.Font("楷体", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblID.Location = new System.Drawing.Point(223, 6);
-            this.lblID.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblID.Location = new System.Drawing.Point(167, 5);
             this.lblID.Name = "lblID";
-            this.lblID.Size = new System.Drawing.Size(41, 23);
+            this.lblID.Size = new System.Drawing.Size(34, 19);
             this.lblID.TabIndex = 1;
             this.lblID.Text = "暂无";
             // 
@@ -342,10 +300,9 @@
             // 
             this.picID.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picID.BackgroundImage")));
             this.picID.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.picID.Location = new System.Drawing.Point(193, 6);
-            this.picID.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.picID.Location = new System.Drawing.Point(145, 5);
             this.picID.Name = "picID";
-            this.picID.Size = new System.Drawing.Size(21, 20);
+            this.picID.Size = new System.Drawing.Size(16, 16);
             this.picID.TabIndex = 0;
             this.picID.TabStop = false;
             // 
@@ -373,55 +330,42 @@
             this.panel1.Controls.Add(this.labelX1);
             this.panel1.Controls.Add(this.picWeiqi);
             this.panel1.Controls.Add(this.shapeContainer1);
-            this.panel1.Location = new System.Drawing.Point(299, 80);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Location = new System.Drawing.Point(224, 64);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1016, 822);
+            this.panel1.Size = new System.Drawing.Size(762, 658);
             this.panel1.TabIndex = 32;
             this.panel1.Tag = "0102  ";
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // llbllbM_Account_0_1
             // 
-            // 
-            // 
-            // 
-            this.llbllbM_Account_0_1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.llbllbM_Account_0_1.Font = new System.Drawing.Font("宋体", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.llbllbM_Account_0_1.Location = new System.Drawing.Point(376, 656);
-            this.llbllbM_Account_0_1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.llbllbM_Account_0_1.Location = new System.Drawing.Point(282, 525);
+            this.llbllbM_Account_0_1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.llbllbM_Account_0_1.Name = "llbllbM_Account_0_1";
-            this.llbllbM_Account_0_1.Size = new System.Drawing.Size(101, 58);
+            this.llbllbM_Account_0_1.Size = new System.Drawing.Size(76, 46);
             this.llbllbM_Account_0_1.TabIndex = 41;
             this.llbllbM_Account_0_1.Tag = "0601";
             this.llbllbM_Account_0_1.Text = "<b><font size=\"+6\"><i>财务</i><font color=\"#B02B2C\">收款</font></font></b>";
             // 
             // llbR_TakeAcc_0
             // 
-            // 
-            // 
-            // 
-            this.llbR_TakeAcc_0.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.llbR_TakeAcc_0.Font = new System.Drawing.Font("宋体", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.llbR_TakeAcc_0.Location = new System.Drawing.Point(376, 560);
-            this.llbR_TakeAcc_0.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.llbR_TakeAcc_0.Location = new System.Drawing.Point(282, 448);
+            this.llbR_TakeAcc_0.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.llbR_TakeAcc_0.Name = "llbR_TakeAcc_0";
-            this.llbR_TakeAcc_0.Size = new System.Drawing.Size(101, 58);
+            this.llbR_TakeAcc_0.Size = new System.Drawing.Size(76, 46);
             this.llbR_TakeAcc_0.TabIndex = 40;
             this.llbR_TakeAcc_0.Tag = "020202";
             this.llbR_TakeAcc_0.Text = "<b><font size=\"+6\"><i>维修</i><font color=\"#B02B2C\">领料</font></font></b>";
             // 
             // llbR_RepRecept_0
             // 
-            // 
-            // 
-            // 
-            this.llbR_RepRecept_0.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.llbR_RepRecept_0.Font = new System.Drawing.Font("宋体", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.llbR_RepRecept_0.Location = new System.Drawing.Point(376, 470);
-            this.llbR_RepRecept_0.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.llbR_RepRecept_0.Location = new System.Drawing.Point(282, 376);
+            this.llbR_RepRecept_0.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.llbR_RepRecept_0.Name = "llbR_RepRecept_0";
-            this.llbR_RepRecept_0.Size = new System.Drawing.Size(101, 58);
+            this.llbR_RepRecept_0.Size = new System.Drawing.Size(76, 46);
             this.llbR_RepRecept_0.TabIndex = 39;
             this.llbR_RepRecept_0.Tag = "0201";
             this.llbR_RepRecept_0.Text = "<b><font size=\"+6\"><i>维修</i><font color=\"#B02B2C\">接车</font></font></b>";
@@ -429,195 +373,143 @@
             // 
             // llbR_AccInQuery_0
             // 
-            // 
-            // 
-            // 
-            this.llbR_AccInQuery_0.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.llbR_AccInQuery_0.Font = new System.Drawing.Font("宋体", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.llbR_AccInQuery_0.Location = new System.Drawing.Point(109, 656);
-            this.llbR_AccInQuery_0.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.llbR_AccInQuery_0.Location = new System.Drawing.Point(82, 525);
+            this.llbR_AccInQuery_0.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.llbR_AccInQuery_0.Name = "llbR_AccInQuery_0";
-            this.llbR_AccInQuery_0.Size = new System.Drawing.Size(101, 58);
+            this.llbR_AccInQuery_0.Size = new System.Drawing.Size(76, 46);
             this.llbR_AccInQuery_0.TabIndex = 38;
             this.llbR_AccInQuery_0.Tag = "020201";
             this.llbR_AccInQuery_0.Text = "<b><font size=\"+6\"><i>配件</i><font color=\"#B02B2C\">入库</font></font></b>";
             // 
             // llbR_Accessory_0
             // 
-            // 
-            // 
-            // 
-            this.llbR_Accessory_0.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.llbR_Accessory_0.Font = new System.Drawing.Font("宋体", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.llbR_Accessory_0.Location = new System.Drawing.Point(109, 560);
-            this.llbR_Accessory_0.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.llbR_Accessory_0.Location = new System.Drawing.Point(82, 448);
+            this.llbR_Accessory_0.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.llbR_Accessory_0.Name = "llbR_Accessory_0";
-            this.llbR_Accessory_0.Size = new System.Drawing.Size(101, 58);
+            this.llbR_Accessory_0.Size = new System.Drawing.Size(76, 46);
             this.llbR_Accessory_0.TabIndex = 37;
             this.llbR_Accessory_0.Tag = "020302";
             this.llbR_Accessory_0.Text = "<b><font size=\"+6\"><i>配件</i><font color=\"#B02B2C\">资料</font></font></b>";
             // 
             // llbR_RepairItem_0
             // 
-            // 
-            // 
-            // 
-            this.llbR_RepairItem_0.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.llbR_RepairItem_0.Font = new System.Drawing.Font("宋体", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.llbR_RepairItem_0.Location = new System.Drawing.Point(109, 470);
-            this.llbR_RepairItem_0.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.llbR_RepairItem_0.Location = new System.Drawing.Point(82, 376);
+            this.llbR_RepairItem_0.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.llbR_RepairItem_0.Name = "llbR_RepairItem_0";
-            this.llbR_RepairItem_0.Size = new System.Drawing.Size(101, 58);
+            this.llbR_RepairItem_0.Size = new System.Drawing.Size(76, 46);
             this.llbR_RepairItem_0.TabIndex = 36;
             this.llbR_RepairItem_0.Tag = "020301";
             this.llbR_RepairItem_0.Text = "<b><font size=\"+6\"><i>服务</i><font color=\"#B02B2C\">项目</font></font></b>";
             // 
             // llbR_SaleDecorate_0
             // 
-            // 
-            // 
-            // 
-            this.llbR_SaleDecorate_0.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.llbR_SaleDecorate_0.Font = new System.Drawing.Font("宋体", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.llbR_SaleDecorate_0.Location = new System.Drawing.Point(648, 251);
-            this.llbR_SaleDecorate_0.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.llbR_SaleDecorate_0.Location = new System.Drawing.Point(486, 201);
+            this.llbR_SaleDecorate_0.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.llbR_SaleDecorate_0.Name = "llbR_SaleDecorate_0";
-            this.llbR_SaleDecorate_0.Size = new System.Drawing.Size(116, 55);
+            this.llbR_SaleDecorate_0.Size = new System.Drawing.Size(87, 44);
             this.llbR_SaleDecorate_0.TabIndex = 35;
             this.llbR_SaleDecorate_0.Tag = "0205";
             this.llbR_SaleDecorate_0.Text = "<b><font size=\"+6\"><i>销售</i><font color=\"#B02B2C\">装潢</font></font></b>";
             // 
             // llbM_Account_0_0
             // 
-            // 
-            // 
-            // 
-            this.llbM_Account_0_0.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.llbM_Account_0_0.Font = new System.Drawing.Font("宋体", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.llbM_Account_0_0.Location = new System.Drawing.Point(648, 350);
-            this.llbM_Account_0_0.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.llbM_Account_0_0.Location = new System.Drawing.Point(486, 280);
+            this.llbM_Account_0_0.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.llbM_Account_0_0.Name = "llbM_Account_0_0";
-            this.llbM_Account_0_0.Size = new System.Drawing.Size(101, 58);
+            this.llbM_Account_0_0.Size = new System.Drawing.Size(76, 46);
             this.llbM_Account_0_0.TabIndex = 34;
             this.llbM_Account_0_0.Tag = "0601";
             this.llbM_Account_0_0.Text = "<b><font size=\"+6\"><i>财务</i><font color=\"#B02B2C\">收款</font></font></b>";
             // 
             // llbS_CustInQuery_0
             // 
-            // 
-            // 
-            // 
-            this.llbS_CustInQuery_0.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.llbS_CustInQuery_0.Font = new System.Drawing.Font("宋体", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.llbS_CustInQuery_0.Location = new System.Drawing.Point(649, 64);
-            this.llbS_CustInQuery_0.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.llbS_CustInQuery_0.Location = new System.Drawing.Point(487, 51);
+            this.llbS_CustInQuery_0.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.llbS_CustInQuery_0.Name = "llbS_CustInQuery_0";
-            this.llbS_CustInQuery_0.Size = new System.Drawing.Size(101, 58);
+            this.llbS_CustInQuery_0.Size = new System.Drawing.Size(76, 46);
             this.llbS_CustInQuery_0.TabIndex = 33;
             this.llbS_CustInQuery_0.Tag = "010102";
             this.llbS_CustInQuery_0.Text = "<b><font size=\"+6\"><i>客户</i><font color=\"#B02B2C\">来访</font></font></b>";
             // 
             // llbS_CarSaleCheck_1
             // 
-            // 
-            // 
-            // 
-            this.llbS_CarSaleCheck_1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.llbS_CarSaleCheck_1.Font = new System.Drawing.Font("宋体", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.llbS_CarSaleCheck_1.Location = new System.Drawing.Point(376, 350);
-            this.llbS_CarSaleCheck_1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.llbS_CarSaleCheck_1.Location = new System.Drawing.Point(282, 280);
+            this.llbS_CarSaleCheck_1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.llbS_CarSaleCheck_1.Name = "llbS_CarSaleCheck_1";
-            this.llbS_CarSaleCheck_1.Size = new System.Drawing.Size(101, 58);
+            this.llbS_CarSaleCheck_1.Size = new System.Drawing.Size(76, 46);
             this.llbS_CarSaleCheck_1.TabIndex = 32;
             this.llbS_CarSaleCheck_1.Tag = "010303";
             this.llbS_CarSaleCheck_1.Text = "<b><font size=\"+6\"><i>销售</i><font color=\"#B02B2C\">审核</font></font></b>";
             // 
             // llbS_CarSaleQuery_0
             // 
-            // 
-            // 
-            // 
-            this.llbS_CarSaleQuery_0.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.llbS_CarSaleQuery_0.Font = new System.Drawing.Font("宋体", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.llbS_CarSaleQuery_0.Location = new System.Drawing.Point(376, 251);
-            this.llbS_CarSaleQuery_0.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.llbS_CarSaleQuery_0.Location = new System.Drawing.Point(282, 201);
+            this.llbS_CarSaleQuery_0.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.llbS_CarSaleQuery_0.Name = "llbS_CarSaleQuery_0";
-            this.llbS_CarSaleQuery_0.Size = new System.Drawing.Size(101, 58);
+            this.llbS_CarSaleQuery_0.Size = new System.Drawing.Size(76, 46);
             this.llbS_CarSaleQuery_0.TabIndex = 31;
             this.llbS_CarSaleQuery_0.Tag = "010302";
             this.llbS_CarSaleQuery_0.Text = "<b><font size=\"+6\"><i>整车</i><font color=\"#B02B2C\">销售</font></font></b>";
             // 
             // llbS_CarOrderQuery_0
             // 
-            // 
-            // 
-            // 
-            this.llbS_CarOrderQuery_0.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.llbS_CarOrderQuery_0.Font = new System.Drawing.Font("宋体", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.llbS_CarOrderQuery_0.Location = new System.Drawing.Point(376, 155);
-            this.llbS_CarOrderQuery_0.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.llbS_CarOrderQuery_0.Location = new System.Drawing.Point(282, 124);
+            this.llbS_CarOrderQuery_0.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.llbS_CarOrderQuery_0.Name = "llbS_CarOrderQuery_0";
-            this.llbS_CarOrderQuery_0.Size = new System.Drawing.Size(101, 58);
+            this.llbS_CarOrderQuery_0.Size = new System.Drawing.Size(76, 46);
             this.llbS_CarOrderQuery_0.TabIndex = 30;
             this.llbS_CarOrderQuery_0.Tag = "010301";
             this.llbS_CarOrderQuery_0.Text = "<b><font size=\"+6\"><i>销售</i><font color=\"#B02B2C\">订单</font></font></b>";
             // 
             // llbC_CustomerQuery_0
             // 
-            // 
-            // 
-            // 
-            this.llbC_CustomerQuery_0.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.llbC_CustomerQuery_0.Font = new System.Drawing.Font("宋体", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.llbC_CustomerQuery_0.Location = new System.Drawing.Point(376, 64);
-            this.llbC_CustomerQuery_0.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.llbC_CustomerQuery_0.Location = new System.Drawing.Point(282, 51);
+            this.llbC_CustomerQuery_0.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.llbC_CustomerQuery_0.Name = "llbC_CustomerQuery_0";
-            this.llbC_CustomerQuery_0.Size = new System.Drawing.Size(101, 58);
+            this.llbC_CustomerQuery_0.Size = new System.Drawing.Size(76, 46);
             this.llbC_CustomerQuery_0.TabIndex = 29;
             this.llbC_CustomerQuery_0.Tag = "0402";
             this.llbC_CustomerQuery_0.Text = "<b><font size=\"+6\"><i>客户</i><font color=\"#B02B2C\">资料</font></font></b>";
             // 
             // llbS_CarStock_0
             // 
-            // 
-            // 
-            // 
-            this.llbS_CarStock_0.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.llbS_CarStock_0.Font = new System.Drawing.Font("宋体", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.llbS_CarStock_0.Location = new System.Drawing.Point(109, 251);
-            this.llbS_CarStock_0.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.llbS_CarStock_0.Location = new System.Drawing.Point(82, 201);
+            this.llbS_CarStock_0.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.llbS_CarStock_0.Name = "llbS_CarStock_0";
-            this.llbS_CarStock_0.Size = new System.Drawing.Size(101, 58);
+            this.llbS_CarStock_0.Size = new System.Drawing.Size(76, 46);
             this.llbS_CarStock_0.TabIndex = 28;
             this.llbS_CarStock_0.Tag = "0102";
             this.llbS_CarStock_0.Text = "<b><font size=\"+6\"><i>车辆</i><font color=\"#B02B2C\">查询</font></font></b>";
             // 
             // llbS_CarInHQuery_0
             // 
-            // 
-            // 
-            // 
-            this.llbS_CarInHQuery_0.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.llbS_CarInHQuery_0.Font = new System.Drawing.Font("宋体", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.llbS_CarInHQuery_0.Location = new System.Drawing.Point(109, 155);
-            this.llbS_CarInHQuery_0.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.llbS_CarInHQuery_0.Location = new System.Drawing.Point(82, 124);
+            this.llbS_CarInHQuery_0.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.llbS_CarInHQuery_0.Name = "llbS_CarInHQuery_0";
-            this.llbS_CarInHQuery_0.Size = new System.Drawing.Size(101, 58);
+            this.llbS_CarInHQuery_0.Size = new System.Drawing.Size(76, 46);
             this.llbS_CarInHQuery_0.TabIndex = 27;
             this.llbS_CarInHQuery_0.Tag = "010201";
             this.llbS_CarInHQuery_0.Text = "<b><font size=\"+6\"><i>整车</i><font color=\"#B02B2C\">入库</font></font></b>";
             // 
             // llbS_CarDoc_0
             // 
-            // 
-            // 
-            // 
-            this.llbS_CarDoc_0.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.llbS_CarDoc_0.Font = new System.Drawing.Font("宋体", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.llbS_CarDoc_0.Location = new System.Drawing.Point(109, 64);
-            this.llbS_CarDoc_0.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.llbS_CarDoc_0.Location = new System.Drawing.Point(82, 51);
+            this.llbS_CarDoc_0.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.llbS_CarDoc_0.Name = "llbS_CarDoc_0";
-            this.llbS_CarDoc_0.Size = new System.Drawing.Size(101, 58);
+            this.llbS_CarDoc_0.Size = new System.Drawing.Size(76, 46);
             this.llbS_CarDoc_0.TabIndex = 26;
             this.llbS_CarDoc_0.Tag = "010401";
             this.llbS_CarDoc_0.Text = "<b><font size=\"+6\"><i>车辆</i><font color=\"#B02B2C\">资料</font></font></b>";
@@ -625,15 +517,10 @@
             // labelX2
             // 
             this.labelX2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            // 
-            // 
-            // 
-            this.labelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX2.ForeColor = System.Drawing.Color.Black;
-            this.labelX2.Location = new System.Drawing.Point(16, 788);
-            this.labelX2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelX2.Location = new System.Drawing.Point(12, 630);
             this.labelX2.Name = "labelX2";
-            this.labelX2.Size = new System.Drawing.Size(597, 29);
+            this.labelX2.Size = new System.Drawing.Size(448, 23);
             this.labelX2.TabIndex = 25;
             this.labelX2.Text = "注：流程图上可以点击打开相应功能,按F1可打开学习手册";
             // 
@@ -641,10 +528,9 @@
             // 
             this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.richTextBox1.Location = new System.Drawing.Point(621, 560);
-            this.richTextBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.richTextBox1.Location = new System.Drawing.Point(466, 448);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(129, 240);
+            this.richTextBox1.Size = new System.Drawing.Size(97, 192);
             this.richTextBox1.TabIndex = 24;
             this.richTextBox1.Text = "";
             this.richTextBox1.Visible = false;
@@ -653,14 +539,9 @@
             // 
             this.labelX1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.labelX1.AutoSize = true;
-            // 
-            // 
-            // 
-            this.labelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX1.Location = new System.Drawing.Point(764, 794);
-            this.labelX1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelX1.Location = new System.Drawing.Point(573, 635);
             this.labelX1.Name = "labelX1";
-            this.labelX1.Size = new System.Drawing.Size(231, 21);
+            this.labelX1.Size = new System.Drawing.Size(186, 18);
             this.labelX1.TabIndex = 18;
             this.labelX1.Text = "扫一扫，加QQ,随时为您解决问题";
             // 
@@ -668,10 +549,9 @@
             // 
             this.picWeiqi.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.picWeiqi.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.picWeiqi.Location = new System.Drawing.Point(819, 612);
-            this.picWeiqi.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.picWeiqi.Location = new System.Drawing.Point(614, 490);
             this.picWeiqi.Name = "picWeiqi";
-            this.picWeiqi.Size = new System.Drawing.Size(195, 174);
+            this.picWeiqi.Size = new System.Drawing.Size(146, 139);
             this.picWeiqi.TabIndex = 17;
             this.picWeiqi.TabStop = false;
             // 
@@ -682,7 +562,7 @@
             this.shapeContainer1.Name = "shapeContainer1";
             this.shapeContainer1.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
             this.lineShape1});
-            this.shapeContainer1.Size = new System.Drawing.Size(1016, 822);
+            this.shapeContainer1.Size = new System.Drawing.Size(762, 658);
             this.shapeContainer1.TabIndex = 42;
             this.shapeContainer1.TabStop = false;
             // 
@@ -702,12 +582,11 @@
             this.mainTabControls.CanReorderTabs = true;
             this.mainTabControls.CloseButtonOnTabsVisible = true;
             this.mainTabControls.CloseButtonVisible = true;
-            this.mainTabControls.Location = new System.Drawing.Point(328, 41);
-            this.mainTabControls.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.mainTabControls.Location = new System.Drawing.Point(246, 33);
             this.mainTabControls.Name = "mainTabControls";
             this.mainTabControls.SelectedTabFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold);
             this.mainTabControls.SelectedTabIndex = 0;
-            this.mainTabControls.Size = new System.Drawing.Size(436, 534);
+            this.mainTabControls.Size = new System.Drawing.Size(327, 427);
             this.mainTabControls.TabIndex = 17;
             this.mainTabControls.TabLayoutType = DevComponents.DotNetBar.eTabLayoutType.FixedWithNavigationBox;
             this.mainTabControls.Text = "tabControl1";
@@ -743,10 +622,10 @@
             this.dockSite4.AccessibleRole = System.Windows.Forms.AccessibleRole.Window;
             this.dockSite4.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dockSite4.DocumentDockContainer = new DevComponents.DotNetBar.DocumentDockContainer();
-            this.dockSite4.Location = new System.Drawing.Point(0, 878);
-            this.dockSite4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dockSite4.Location = new System.Drawing.Point(0, 634);
+            this.dockSite4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dockSite4.Name = "dockSite4";
-            this.dockSite4.Size = new System.Drawing.Size(1352, 0);
+            this.dockSite4.Size = new System.Drawing.Size(977, 0);
             this.dockSite4.TabIndex = 39;
             this.dockSite4.TabStop = false;
             // 
@@ -756,11 +635,11 @@
             this.dockSite1.Controls.Add(this.bar1);
             this.dockSite1.Dock = System.Windows.Forms.DockStyle.Left;
             this.dockSite1.DocumentDockContainer = new DevComponents.DotNetBar.DocumentDockContainer(new DevComponents.DotNetBar.DocumentBaseContainer[] {
-            ((DevComponents.DotNetBar.DocumentBaseContainer)(new DevComponents.DotNetBar.DocumentBarContainer(this.bar1, 174, 814)))}, DevComponents.DotNetBar.eOrientation.Horizontal);
-            this.dockSite1.Location = new System.Drawing.Point(0, 28);
-            this.dockSite1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            ((DevComponents.DotNetBar.DocumentBaseContainer)(new DevComponents.DotNetBar.DocumentBarContainer(this.bar1, 130, 580)))}, DevComponents.DotNetBar.eOrientation.Horizontal);
+            this.dockSite1.Location = new System.Drawing.Point(0, 25);
+            this.dockSite1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dockSite1.Name = "dockSite1";
-            this.dockSite1.Size = new System.Drawing.Size(177, 814);
+            this.dockSite1.Size = new System.Drawing.Size(133, 580);
             this.dockSite1.TabIndex = 36;
             this.dockSite1.TabStop = false;
             // 
@@ -768,20 +647,19 @@
             // 
             this.bar1.AccessibleDescription = "DotNetBar Bar (bar1)";
             this.bar1.AccessibleName = "DotNetBar Bar";
-            this.bar1.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
+            this.bar1.AccessibleRole = System.Windows.Forms.AccessibleRole.ToolBar;
             this.bar1.AutoSyncBarCaption = true;
             this.bar1.CloseSingleTab = true;
             this.bar1.Controls.Add(this.panelDockContainer1);
             this.bar1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.bar1.GrabHandleStyle = DevComponents.DotNetBar.eGrabHandleStyle.Caption;
-
             this.bar1.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.dockContainerItem2});
             this.bar1.LayoutType = DevComponents.DotNetBar.eLayoutType.DockContainer;
             this.bar1.Location = new System.Drawing.Point(0, 0);
-            this.bar1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.bar1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.bar1.Name = "bar1";
-            this.bar1.Size = new System.Drawing.Size(174, 814);
+            this.bar1.Size = new System.Drawing.Size(130, 580);
             this.bar1.Stretch = true;
             this.bar1.Style = DevComponents.DotNetBar.eDotNetBarStyle.Office2003;
             this.bar1.TabIndex = 0;
@@ -791,11 +669,10 @@
             // panelDockContainer1
             // 
             this.panelDockContainer1.Controls.Add(this.outlookBar);
-  
             this.panelDockContainer1.Location = new System.Drawing.Point(3, 23);
-            this.panelDockContainer1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panelDockContainer1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panelDockContainer1.Name = "panelDockContainer1";
-            this.panelDockContainer1.Size = new System.Drawing.Size(168, 788);
+            this.panelDockContainer1.Size = new System.Drawing.Size(124, 554);
             this.panelDockContainer1.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelDockContainer1.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground;
             this.panelDockContainer1.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground2;
@@ -810,10 +687,9 @@
             this.outlookBar.ButtonHeight = 25;
             this.outlookBar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.outlookBar.Location = new System.Drawing.Point(0, 0);
-            this.outlookBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.outlookBar.Name = "outlookBar";
             this.outlookBar.SelectedBand = 0;
-            this.outlookBar.Size = new System.Drawing.Size(168, 788);
+            this.outlookBar.Size = new System.Drawing.Size(124, 554);
             this.outlookBar.TabIndex = 0;
             // 
             // dockContainerItem2
@@ -827,10 +703,10 @@
             this.dockSite2.AccessibleRole = System.Windows.Forms.AccessibleRole.Window;
             this.dockSite2.Dock = System.Windows.Forms.DockStyle.Right;
             this.dockSite2.DocumentDockContainer = new DevComponents.DotNetBar.DocumentDockContainer();
-            this.dockSite2.Location = new System.Drawing.Point(1352, 28);
-            this.dockSite2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dockSite2.Location = new System.Drawing.Point(977, 25);
+            this.dockSite2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dockSite2.Name = "dockSite2";
-            this.dockSite2.Size = new System.Drawing.Size(0, 814);
+            this.dockSite2.Size = new System.Drawing.Size(0, 580);
             this.dockSite2.TabIndex = 37;
             this.dockSite2.TabStop = false;
             // 
@@ -838,10 +714,10 @@
             // 
             this.dockSite8.AccessibleRole = System.Windows.Forms.AccessibleRole.Window;
             this.dockSite8.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dockSite8.Location = new System.Drawing.Point(0, 878);
-            this.dockSite8.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dockSite8.Location = new System.Drawing.Point(0, 634);
+            this.dockSite8.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dockSite8.Name = "dockSite8";
-            this.dockSite8.Size = new System.Drawing.Size(1352, 0);
+            this.dockSite8.Size = new System.Drawing.Size(977, 0);
             this.dockSite8.TabIndex = 43;
             this.dockSite8.TabStop = false;
             // 
@@ -850,9 +726,9 @@
             this.dockSite5.AccessibleRole = System.Windows.Forms.AccessibleRole.Window;
             this.dockSite5.Dock = System.Windows.Forms.DockStyle.Left;
             this.dockSite5.Location = new System.Drawing.Point(0, 0);
-            this.dockSite5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dockSite5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dockSite5.Name = "dockSite5";
-            this.dockSite5.Size = new System.Drawing.Size(0, 878);
+            this.dockSite5.Size = new System.Drawing.Size(0, 634);
             this.dockSite5.TabIndex = 40;
             this.dockSite5.TabStop = false;
             // 
@@ -860,10 +736,10 @@
             // 
             this.dockSite6.AccessibleRole = System.Windows.Forms.AccessibleRole.Window;
             this.dockSite6.Dock = System.Windows.Forms.DockStyle.Right;
-            this.dockSite6.Location = new System.Drawing.Point(1352, 0);
-            this.dockSite6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dockSite6.Location = new System.Drawing.Point(977, 0);
+            this.dockSite6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dockSite6.Name = "dockSite6";
-            this.dockSite6.Size = new System.Drawing.Size(0, 878);
+            this.dockSite6.Size = new System.Drawing.Size(0, 634);
             this.dockSite6.TabIndex = 41;
             this.dockSite6.TabStop = false;
             // 
@@ -872,9 +748,9 @@
             this.dockSite7.AccessibleRole = System.Windows.Forms.AccessibleRole.Window;
             this.dockSite7.Dock = System.Windows.Forms.DockStyle.Top;
             this.dockSite7.Location = new System.Drawing.Point(0, 0);
-            this.dockSite7.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dockSite7.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dockSite7.Name = "dockSite7";
-            this.dockSite7.Size = new System.Drawing.Size(1352, 0);
+            this.dockSite7.Size = new System.Drawing.Size(977, 0);
             this.dockSite7.TabIndex = 42;
             this.dockSite7.TabStop = false;
             // 
@@ -884,17 +760,17 @@
             this.dockSite3.Dock = System.Windows.Forms.DockStyle.Top;
             this.dockSite3.DocumentDockContainer = new DevComponents.DotNetBar.DocumentDockContainer();
             this.dockSite3.Location = new System.Drawing.Point(0, 0);
-            this.dockSite3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dockSite3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dockSite3.Name = "dockSite3";
-            this.dockSite3.Size = new System.Drawing.Size(1352, 0);
+            this.dockSite3.Size = new System.Drawing.Size(977, 0);
             this.dockSite3.TabIndex = 38;
             this.dockSite3.TabStop = false;
             // 
             // frmMainDocking
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1352, 878);
+            this.ClientSize = new System.Drawing.Size(977, 634);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.mainTabControls);
             this.Controls.Add(this.dockSite2);
@@ -910,7 +786,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
             this.KeyPreview = true;
-            this.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "frmMainDocking";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "  汽车ERP管理系统";

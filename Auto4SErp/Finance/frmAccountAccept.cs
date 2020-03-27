@@ -225,6 +225,21 @@ namespace Auto4SErp
 
             if (isSC == true)
                 dbiSC.Enabled = false;
+
+            //在宝马门店增加优惠券
+            {
+
+                //* 14 续保维保抵用券300元 300
+                //* 8 续保油漆抵用券200元 200
+                //* 2 续保工时抵用券100元 100
+                cmbMyQuan.Items.Add("* 2 【宝马】保养抵用券 200");
+                cmbMyQuan.Items.Add("* 2 【宝马】四轮定位券 1200");
+                cmbMyQuan.Items.Add("* 8 【宝马】油漆券 1500");
+                cmbMyQuan.Items.Add("* 8 【宝马】油漆券 1000");
+           
+            }
+
+
             
         }
 
